@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>TG Casino Mini App</title>
+    
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Общие стили и обнуление */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent; /* Убираем синий синий клик на мобилках */
+        }
+
+        body {
+            background-color: #0f0c1b; /* Глубокий темный фон */
+            color: #ffffff;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Шапка профиля */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 15px;
+            background: linear-gradient(180deg, rgba(31,23,54,1) 0%, rgba(15,12,27,1) 100%);
+            border-bottom: 1px solid #2e1f4d;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #ffaa00;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+            border: 2px solid #ffaa00;
+            box-shadow: 0 0 10px rgba(255, 170, 0, 0.3);
+        }
+
+        .username {
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        /* Баланс игрока */
+        .balance-container {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 170, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .balance-amount {
+            color: #ffaa00;
+            font-weight: bold;
+            font-size: 16px;
+            text-shadow: 0 0 8px rgba(255, 170, 0, 0.4);
+        }
+
+        /* Контейнер для игр */
+        .main-container {
+            flex: 1;
+            padding: 15px;
+            padding-bottom: 90px; /* Отступ снизу, чтобы футер не перекрывал контент */
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #b3a2df;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Сетка для 6 игр (2 колонки) */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        /* Карточка игры */
+        .game-card {
+            background: linear-gradient(135deg, #1b1437 0%, #120c24 100%);
+            border-radius: 16px;
+            border: 1px solid #2d1f54;
+            padding: 20px 15px;
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        /* Эффект при нажатии на карточку */
+        .game-card:active {
+            transform: scale(0.95);
+            border-color: #9d4edd;
+            box-shadow: 0 0 15px rgba(157, 78, 221, 0.4);
+        }
+
+        .game-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        /* Легкая анимация покачивания иконок при загрузке */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .game-card:hover .game-icon {
+            animation: float 1.5s ease-in-out infinite;
+        }
+
+        .game-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+
+        .game-status {
+            font-size: 11px;
+            color: #8c7ba6;
+        }
+
+        /* Кастомные стили для разных игр (неоновые акценты) */
+        .slots { border-bottom: 3px solid #ff4d6d; }
+        .slots .game-icon { color: #ff4d6d; }
+        
+        .roulette { border-bottom: 3px solid #38b000; }
+        .roulette .game-icon { color: #38b000; }
+
+        .blackjack { border-bottom: 3px solid #3a86c8; }
+        .blackjack .game-icon { color: #3a86c8; }
+
+        .dice { border-bottom: 3px solid #ffaa00; }
+        .dice .game-icon { color: #ffaa00; }
+
+        .mines { border-bottom: 3px solid #9d4edd; }
+        .mines .game-icon { color: #9d4edd; }
+
+        .crash { border-bottom: 3px solid #ff0055; }
+        .crash .game-icon { color: #ff0055; }
+
+        /* Нижнее меню (навеивает структуру полноценного приложения) */
+        .footer-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background: #130d29;
+            border-top: 1px solid #251b47;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            color: #7b6f93;
+            text-decoration: none;
+            font-size: 12px;
+            transition: color 0.2s;
+            cursor: pointer;
+        }
+
+        .nav-item.active {
+            color: #ffaa00;
+        }
+
+        .nav-item i {
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="user-info">
+            <div class="user-avatar" id="user-avatar">?</div>
+            <span class="username" id="username">Игрок</span>
+        </div>
+        <div class="balance-container">
+            <i class="fa-solid fa-coins" style="color: #ffaa00;"></i>
+            <span class="balance-amount" id="balance">1,500</span>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <h2 class="section-title">Выберите игру</h2>
+        
+        <div class="games-grid">
+            
+            <div class="game-card slots" onclick="playGame('Slots')">
+                <div class="game-icon"><i class="fa-solid fa-calculator"></i></div>
+                <div class="game-name">Слоты</div>
+                <div class="game-status">Играть</div>
+            </div>
+
+            <div class="game-card roulette" onclick="playGame('Roulette')">
+                <div class="game-icon"><i class="fa-solid fa-circle-notch"></i></div>
+                <div class="game-name">Рулетка</div>
+                <div class="game-status">Играть</div>
+            </div>
+
+            <div class="game-card blackjack" onclick="playGame('Blackjack')">
+                <div class="game-icon"><i class="fa-solid fa-clone"></i></div>
+                <div class="game-name">Блекджек</div>
+                <div class="game-status">Играть</div>
+            </div>
+
+            <div class="game-card dice" onclick="playGame('Dice')">
+                <div class="game-icon"><i class="fa-solid fa-dice"></i></div>
+                <div class="game-name">Кости</div>
+                <div class="game-status">Играть</div>
+            </div>
+
+            <div class="game-card mines" onclick="playGame('Mines')">
+                <div class="game-icon"><i class="fa-solid fa-bomb"></i></div>
+                <div class="game-name">Мины</div>
+                <div class="game-status">Играть</div>
+            </div>
+
+            <div class="game-card crash" onclick="playGame('Crash')">
+                <div class="game-icon"><i class="fa-solid fa-chart-line"></i></div>
+                <div class="game-name">Краш</div>
+                <div class="game-status">Играть</div>
+            </div>
+
+        </div>
+    </main>
+
+    <nav class="footer-nav">
+        <div class="nav-item active">
+            <i class="fa-solid fa-gamepad"></i>
+            <span>Игры</span>
+        </div>
+        <div class="nav-item" onclick="showSection('Wallet')">
+            <i class="fa-solid fa-wallet"></i>
+            <span>Кошелек</span>
+        </div>
+        <div class="nav-item" onclick="showSection('Tasks')">
+            <i class="fa-solid fa-list-check"></i>
+            <span>Задания</span>
+        </div>
+    </nav>
+
+    <script>
+        // Инициализируем Telegram WebApp SDK
+        const tg = window.Telegram.WebApp;
+
+        // Сообщаем Telegram, что приложение готово к работе (уберет лоадер)
+        tg.ready();
+        
+        // Расширяем приложение на весь доступный экран
+        tg.expand();
+
+        // Попробуем получить реальные данные пользователя из Telegram
+        try {
+            const user = tg.initDataUnsafe ? tg.initDataUnsafe.user : null;
+            if (user) {
+                // Устанавливаем юзернейм или имя игрока
+                document.getElementById('username').innerText = user.first_name || user.username || 'Игрок';
+                
+                // Делаем аватарку из первой буквы имени
+                const firstLetter = (user.first_name || 'U').charAt(0).toUpperCase();
+                document.getElementById('user-avatar').innerText = firstLetter;
+            }
+        } catch (e) {
+            console.error("Не удалось загрузить данные из TG SDK. Запущено вне Telegram?", e);
+        }
+
+        // Функция обработки клика по игре
+        function playGame(gameName) {
+            // Вызываем легкую вибрацию на телефоне при клике (фишка TG WebApp)
+            if (tg.HapticFeedback) {
+                tg.HapticFeedback.impactOccurred('medium');
+            }
+            
+            alert(`Запуск игры: ${gameName}. Сюда ты позже встроишь переход на экран игры.`);
+            // Пример перехода: window.location.href = `games/${gameName.toLowerCase()}.html`;
+        }
+
+        // Функция переключения вкладок (Кошелек, Задания)
+        function showSection(sectionName) {
+            if (tg.HapticFeedback) {
+                tg.HapticFeedback.impactOccurred('light');
+            }
+            alert(`Открытие вкладки: ${sectionName}`);
+        }
+    </script>
+</body>
+</html>
