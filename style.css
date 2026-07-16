@@ -1,0 +1,191 @@
+/* === 1. CSS ПЕРЕМЕННЫЕ (Цветовая палитра) === */
+:root {
+    --bg-main: #0B0914;      /* Очень темный фон (оттенок индиго) */
+    --bg-card: rgba(30, 24, 50, 0.6); /* Полупрозрачный фон для эффекта стекла */
+    --text-main: #FFFFFF;
+    --text-muted: #8E8A9F;
+    --accent: #00FF88;       /* Неоновый зеленый */
+    --primary: #8A2BE2;      /* Главный фиолетовый */
+    --primary-glow: rgba(138, 43, 226, 0.5); /* Свечение */
+}
+
+/* === 2. БАЗОВЫЕ НАСТРОЙКИ === */
+* {
+    margin: 0; padding: 0; box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    -webkit-tap-highlight-color: transparent; /* Убирает синий квадрат при тапе */
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+.hidden { display: none !important; }
+
+/* Эффект Glassmorphism (матовое стекло) */
+.glass-effect {
+    background: var(--bg-card);
+    backdrop-filter: blur(12px); /* Размытие того, что позади блока */
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* === 3. АНИМАЦИИ === */
+@keyframes spin { 100% { transform: rotate(360deg); } }
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulseGlow {
+    0% { transform: scale(0.95); opacity: 0.5; }
+    50% { transform: scale(1.05); opacity: 1; }
+    100% { transform: scale(0.95); opacity: 0.5; }
+}
+@keyframes popIn {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* === 4. ПРЕЛОАДЕР === */
+.preloader {
+    position: fixed; inset: 0; z-index: 9999;
+    background-color: var(--bg-main);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+}
+
+.loader-spinner {
+    width: 50px; height: 50px;
+    border: 4px solid rgba(255,255,255,0.1);
+    border-top: 4px solid var(--primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+/* === 5. ШАПКА === */
+.header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 15px 20px; position: sticky; top: 0; z-index: 100;
+}
+
+.user-profile { display: flex; align-items: center; gap: 12px; }
+
+.avatar {
+    width: 42px; height: 42px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), #FF3366);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: bold;
+    box-shadow: 0 0 15px var(--primary-glow);
+}
+
+.user-info { display: flex; flex-direction: column; }
+.greeting { font-size: 12px; color: var(--text-muted); }
+.username { font-size: 15px; font-weight: 600; }
+
+.balance-badge {
+    background: rgba(0, 255, 136, 0.1);
+    border: 1px solid rgba(0, 255, 136, 0.3);
+    padding: 8px 16px; border-radius: 20px;
+    display: flex; align-items: center; gap: 8px;
+    font-weight: bold; color: var(--accent);
+    cursor: pointer; transition: transform 0.2s;
+}
+.balance-badge:active { transform: scale(0.92); }
+
+/* === 6. ОСНОВНОЙ КОНТЕНТ === */
+.app-container { padding-bottom: 90px; }
+.tab-content { display: none; padding: 0 20px; }
+.tab-content.active { display: block; animation: fadeIn 0.4s ease-out; }
+
+.section-title { font-size: 18px; font-weight: 700; margin: 25px 0 15px; color: #fff; }
+
+/* ПРОМО БАННЕР */
+.promo-banner {
+    margin-top: 20px; border-radius: 16px; padding: 20px;
+    background: linear-gradient(45deg, #1A0B2E, var(--primary));
+    display: flex; justify-content: space-between; align-items: center;
+    box-shadow: 0 5px 20px var(--primary-glow);
+    position: relative; overflow: hidden;
+}
+
+.promo-banner::after {
+    content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+    animation: pulseGlow 4s infinite;
+}
+
+.promo-text { z-index: 1; position: relative; }
+.promo-btn {
+    background: #fff; color: var(--primary);
+    border: none; padding: 8px 16px; border-radius: 20px;
+    font-weight: bold; z-index: 1; position: relative;
+}
+
+/* === 7. СЕТКА ИГР === */
+.games-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+
+.game-card {
+    background: var(--bg-card); border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 16px; padding: 20px 10px; text-align: center;
+    transition: all 0.2s ease; cursor: pointer;
+}
+.game-card:active { transform: scale(0.95); border-color: rgba(255,255,255,0.2); }
+
+.game-icon-wrapper {
+    width: 60px; height: 60px; border-radius: 14px; margin: 0 auto 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; color: #fff; transition: transform 0.3s;
+}
+.game-card:hover .game-icon-wrapper { transform: translateY(-5px); }
+
+/* Градиенты для иконок игр */
+.slots-bg { background: linear-gradient(135deg, #FF3366, #990033); }
+.roulette-bg { background: linear-gradient(135deg, #20E3B2, #009977); }
+.blackjack-bg { background: linear-gradient(135deg, #3399FF, #004499); }
+.dice-bg { background: linear-gradient(135deg, #FFD700, #B38F00); }
+.mines-bg { background: linear-gradient(135deg, #9933FF, #440099); }
+.crash-bg { background: linear-gradient(135deg, #FF4444, #990000); }
+
+.game-name { font-weight: 600; font-size: 14px; }
+
+/* === 8. КНОПКИ И МОДАЛЬНЫЕ ОКНА === */
+.wallet-card { padding: 30px 20px; border-radius: 20px; text-align: center; margin-top: 20px; }
+.wallet-card h1 { font-size: 36px; margin: 15px 0 25px; color: var(--accent); }
+
+.wallet-actions { display: flex; gap: 15px; }
+.btn { flex: 1; padding: 14px; border-radius: 12px; border: none; font-weight: bold; cursor: pointer; transition: transform 0.2s; }
+.btn:active { transform: scale(0.95); }
+.btn-primary { background: var(--primary); color: #fff; box-shadow: 0 4px 15px var(--primary-glow); }
+.btn-secondary { background: rgba(255,255,255,0.1); color: #fff; }
+.full-width { width: 100%; margin-top: 15px; }
+
+/* Затемнение фона для попапа */
+.modal-overlay {
+    position: fixed; inset: 0; background: rgba(0, 0, 0, 0.85);
+    display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 20px;
+}
+.modal-content {
+    background: var(--bg-main); width: 100%; max-width: 350px;
+    border-radius: 24px; padding: 30px 20px; text-align: center;
+    position: relative; animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.close-btn { position: absolute; top: 15px; right: 15px; background: none; border: none; color: var(--text-muted); font-size: 20px; }
+.modal-icon { font-size: 50px; color: var(--primary); margin-bottom: 15px; }
+
+/* === 9. НИЖНЯЯ НАВИГАЦИЯ === */
+.bottom-nav {
+    position: fixed; bottom: 0; left: 0; right: 0; height: 75px;
+    display: flex; justify-content: space-around; align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.05); z-index: 100;
+}
+.nav-item {
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    text-decoration: none; color: var(--text-muted); font-size: 12px; transition: color 0.3s;
+}
+.nav-item i { font-size: 22px; transition: transform 0.3s; }
+.nav-item.active { color: var(--primary); }
+.nav-item.active i { transform: translateY(-3px) scale(1.1); }
