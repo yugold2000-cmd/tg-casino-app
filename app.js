@@ -56,7 +56,7 @@ function updateBalanceDisplay() {
     document.getElementById('balance').innerText = formattedBalance;
     
     const walletBalance = document.getElementById('wallet-balance-display');
-    if(walletBalance) walletBalance.innerText = formattedBalance + ' 🪙';
+    if(walletBalance) walletBalance.innerText = formattedBalance + ' ₽';
 }
 
 // Пасхалка (тестовое пополнение)
@@ -64,7 +64,7 @@ window.addMockBalance = function() {
     triggerHaptic('heavy');
     currentBalance += 500;
     updateBalanceDisplay();
-    tg.showAlert('Вы нашли секрет! Получено +500 монет.');
+    tg.showAlert('+500.');
 }
 
 // 6. Переключение вкладок меню
@@ -110,7 +110,7 @@ window.playMockGame = function() {
         currentBalance -= betAmount;
         updateBalanceDisplay();
         closeGameModal();
-        tg.showAlert('Ставка 100 🪙 принята! Подключи сюда логику мини-игры.');
+        tg.showAlert('Ставка 100 ₽ принята!');
     } else {
         tg.showAlert('Недостаточно средств!');
     }
@@ -122,3 +122,4 @@ window.triggerHaptic = function(style = 'medium') {
         tg.HapticFeedback.impactOccurred(style); // Возможные варианты: light, medium, heavy, rigid, soft
     }
 }
+

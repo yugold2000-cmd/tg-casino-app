@@ -20,7 +20,7 @@
     <!-- Скрывает процесс подгрузки картинок и стилей. Исчезает через 1.5 секунды -->
     <div id="preloader" class="preloader">
         <div class="loader-spinner"></div>
-        <p>Загрузка казино...</p>
+        <p>Загрузка...</p>
     </div>
 
     <!-- 2. Основной контейнер приложения (Скрыт до окончания загрузки) -->
@@ -55,39 +55,58 @@
                 <button class="promo-btn" onclick="triggerHaptic('heavy')">Забрать</button>
             </section>
 
-            <h2 class="section-title">Популярные игры</h2>
+            <h2 class="section-title">Все игры</h2>
             
             <!-- Сетка игр (CSS Grid Layout) -->
             <div class="games-grid">
-                <div class="game-card" onclick="openGameModal('Слоты', 'fa-calculator')">
-                    <div class="game-icon-wrapper slots-bg"><i class="fa-solid fa-calculator"></i></div>
-                    <span class="game-name">Слоты</span>
+                <!-- 1. Crush Game (Иконка: Ракета, Фон: crash-bg) -->
+                <div class="game-card" onclick="openGameModal('Crush Game', 'fa-rocket')">
+                    <div class="game-icon-wrapper crash-bg">
+                        <i class="fa-solid fa-rocket"></i>
+                    </div>
+                    <span class="game-name">Crush Game</span>
                 </div>
-                
-                <div class="game-card" onclick="openGameModal('Рулетка', 'fa-circle-notch')">
-                    <div class="game-icon-wrapper roulette-bg"><i class="fa-solid fa-circle-notch"></i></div>
-                    <span class="game-name">Рулетка</span>
+            
+                <!-- 2. Plinko (Иконка: Пирамида пинов, Фон: plinko-bg) -->
+                <div class="game-card" onclick="openGameModal('Plinko', 'fa-sitemap')">
+                    <div class="game-icon-wrapper plinko-bg">
+                        <i class="fa-solid fa-sitemap"></i>
+                    </div>
+                    <span class="game-name">Plinko</span>
                 </div>
-                
-                <div class="game-card" onclick="openGameModal('Блекджек', 'fa-clone')">
-                    <div class="game-icon-wrapper blackjack-bg"><i class="fa-solid fa-clone"></i></div>
-                    <span class="game-name">Блекджек</span>
+
+                <!-- 3. Roulette (Иконка: Кручение, Фон: roulette-bg) -->
+                <div class="game-card" onclick="openGameModal('Roulette', 'fa-arrows-spin')">
+                    <div class="game-icon-wrapper roulette-bg">
+                        <i class="fa-solid fa-arrows-spin"></i>
+                    </div>
+                    <span class="game-name">Roulette</span>
                 </div>
-                
-                <div class="game-card" onclick="openGameModal('Кости', 'fa-dice')">
-                    <div class="game-icon-wrapper dice-bg"><i class="fa-solid fa-dice"></i></div>
-                    <span class="game-name">Кости</span>
+
+                <!-- 4. Blackjack (Иконка: Колода карт, Фон: blackjack-bg) -->
+                <div class="game-card" onclick="openGameModal('Blackjack', 'fa-layer-group')">
+                    <div class="game-icon-wrapper blackjack-bg">
+                        <i class="fa-solid fa-layer-group"></i>
+                    </div>
+                    <span class="game-name">Blackjack</span>
                 </div>
-                
-                <div class="game-card" onclick="openGameModal('Мины', 'fa-bomb')">
-                    <div class="game-icon-wrapper mines-bg"><i class="fa-solid fa-bomb"></i></div>
-                    <span class="game-name">Мины</span>
+
+                <!-- 5. Dice (Иконка: Кости, Фон: dice-bg) -->
+                <div class="game-card" onclick="openGameModal('Dice', 'fa-dice')">
+                    <div class="game-icon-wrapper dice-bg">
+                        <i class="fa-solid fa-dice"></i>
+                    </div>
+                    <span class="game-name">Dice</span>
                 </div>
-                
-                <div class="game-card" onclick="openGameModal('Краш', 'fa-chart-line')">
-                    <div class="game-icon-wrapper crash-bg"><i class="fa-solid fa-chart-line"></i></div>
-                    <span class="game-name">Краш</span>
+
+                <!-- 6. Tickets (Иконка: Лотерейный билет, Фон: tickets-bg) -->
+                <div class="game-card" onclick="openGameModal('Tickets', 'fa-ticket')">
+                    <div class="game-icon-wrapper tickets-bg">
+                        <i class="fa-solid fa-ticket"></i>
+                    </div>
+                    <span class="game-name">Tickets</span>
                 </div>
+
             </div>
         </main>
 
@@ -96,7 +115,7 @@
             <h2 class="section-title">Ваш кошелек</h2>
             <div class="wallet-card glass-effect">
                 <p>Доступный баланс</p>
-                <h1 id="wallet-balance-display">0 🪙</h1>
+                <h1 id="wallet-balance-display">0 ₽</h1>
                 <div class="wallet-actions">
                     <button class="btn btn-primary" onclick="triggerHaptic('medium')">Пополнить</button>
                     <button class="btn btn-secondary" onclick="triggerHaptic('light')">Вывести</button>
@@ -116,7 +135,7 @@
                 <div class="modal-icon" id="modal-game-icon"><i class="fa-solid fa-gamepad"></i></div>
                 <h2 id="modal-game-title">Название игры</h2>
                 <p class="modal-desc">Для демонстрации сейчас спишется 100 тестовых монет.</p>
-                <button class="btn btn-primary full-width" onclick="playMockGame()">Сделать ставку (100 🪙)</button>
+                <button class="btn btn-primary full-width" onclick="playMockGame()">Сделать ставку (100₽)</button>
             </div>
         </div>
 

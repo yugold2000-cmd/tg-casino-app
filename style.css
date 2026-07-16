@@ -1,19 +1,19 @@
 /* === 1. CSS ПЕРЕМЕННЫЕ (Цветовая палитра) === */
 :root {
-    --bg-main: #0B0914;      /* Очень темный фон (оттенок индиго) */
+    --bg-main: #000000;      
     --bg-card: rgba(30, 24, 50, 0.6); /* Полупрозрачный фон для эффекта стекла */
     --text-main: #FFFFFF;
     --text-muted: #8E8A9F;
-    --accent: #00FF88;       /* Неоновый зеленый */
-    --primary: #8A2BE2;      /* Главный фиолетовый */
-    --primary-glow: rgba(138, 43, 226, 0.5); /* Свечение */
+    --accent: #25ec90;       /* Неоновый зеленый */
+    --primary: #8e24f1;      /* Главный фиолетовый */
+    --primary-glow: rgba(115, 39, 185, 0.5); /* Свечение */
 }
 
 /* === 2. БАЗОВЫЕ НАСТРОЙКИ === */
 * {
     margin: 0; padding: 0; box-sizing: border-box;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    -webkit-tap-highlight-color: transparent; /* Убирает синий квадрат при тапе */
+    -webkit-tap-highlight-color: transparent; 
 }
 
 body {
@@ -143,12 +143,36 @@ body {
 .game-card:hover .game-icon-wrapper { transform: translateY(-5px); }
 
 /* Градиенты для иконок игр */
-.slots-bg { background: linear-gradient(135deg, #FF3366, #990033); }
-.roulette-bg { background: linear-gradient(135deg, #20E3B2, #009977); }
-.blackjack-bg { background: linear-gradient(135deg, #3399FF, #004499); }
-.dice-bg { background: linear-gradient(135deg, #FFD700, #B38F00); }
-.mines-bg { background: linear-gradient(135deg, #9933FF, #440099); }
-.crash-bg { background: linear-gradient(135deg, #FF4444, #990000); }
+/* Градиенты и неоновое свечение для каждой игры */
+.crash-bg { 
+    background: linear-gradient(135deg, #FF4444, #990000); 
+    box-shadow: 0 5px 15px rgba(255, 68, 68, 0.4); 
+}
+
+.plinko-bg { 
+    background: linear-gradient(135deg, #FF3366, #990033); 
+    box-shadow: 0 5px 15px rgba(255, 51, 102, 0.4); 
+}
+
+.roulette-bg { 
+    background: linear-gradient(135deg, #20E3B2, #009977); 
+    box-shadow: 0 5px 15px rgba(32, 227, 178, 0.4); 
+}
+
+.blackjack-bg { 
+    background: linear-gradient(135deg, #3399FF, #004499); 
+    box-shadow: 0 5px 15px rgba(51, 153, 255, 0.4); 
+}
+
+.dice-bg { 
+    background: linear-gradient(135deg, #FFD700, #B38F00); 
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4); 
+}
+
+.tickets-bg { 
+    background: linear-gradient(135deg, #9933FF, #440099); 
+    box-shadow: 0 5px 15px rgba(153, 51, 255, 0.4); 
+}
 
 .game-name { font-weight: 600; font-size: 14px; }
 
