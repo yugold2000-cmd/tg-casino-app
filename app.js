@@ -32,6 +32,7 @@ let currentLang = 'en';
 let currentTheme = 'dark'; 
 
 // Словарь переводов для локализации (RU / EN)
+// Словарь переводов для локализации (RU / EN)
 const translations = {
     ru: {
         games_title: "Игры",
@@ -50,13 +51,16 @@ const translations = {
         menu_bonuses: "Бонусы и промокоды",
         menu_settings: "Настройки аккаунта",
         menu_support: "Техподдержка",
+        
+        menu_fairness: "Проверка честности", // <-- ВОТ ЭТУ СТРОЧКУ ДОБАВЬ
+        
         menu_responsible: "Ответственная игра",
         menu_channel_short: "Канал",
         menu_language: "Язык",
         menu_theme_short: "Тема",
         nav_wallet: "Кошелек",
         nav_main: "Главная",
-        nav_menu: "Меню"
+        nav_menu: "Menu"
     },
     en: {
         games_title: "Games",
@@ -75,6 +79,9 @@ const translations = {
         menu_bonuses: "Bonuses & Promos",
         menu_settings: "Account Settings",
         menu_support: "Support Chat",
+        
+        menu_fairness: "Provably Fair",     // <-- И ВОТ ЭТУ СТРОЧКУ ДОБАВЬ
+        
         menu_responsible: "Responsible Gaming",
         menu_channel_short: "Channel",
         menu_language: "Language",
