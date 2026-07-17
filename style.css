@@ -30,7 +30,6 @@ body.theme-light {
 * { 
     box-sizing: border-box; 
     -webkit-tap-highlight-color: transparent; 
-    transition: background-color var(--transition-speed), color var(--transition-speed), border-color var(--transition-speed);
 }
 
 body {
@@ -109,8 +108,13 @@ body.theme-light .main-logo-svg text { fill: #1a1a1f; }
 
 /* === РЕКЛАМНЫЙ БАННЕР === */
 .promo-banner {
-    width: 100%; height: 110px; border-radius: 16px; overflow: hidden; 
-    margin: 15px 0 25px 0; border: 1px solid var(--border-color); cursor: pointer;
+    width: 100%; 
+    height: 160px; /* Увеличили со 110px до 160px */
+    border-radius: 16px; 
+    overflow: hidden; 
+    margin: 15px 0 25px 0; 
+    border: 1px solid var(--border-color); 
+    cursor: pointer;
 }
 .promo-banner:active { transform: scale(0.98); }
 .promo-banner img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -205,13 +209,13 @@ body.theme-light .main-logo-svg text { fill: #1a1a1f; }
     min-height: calc(100vh - 90px); /* Высота экрана минус размер нижнего меню навигации */
 }
 
-/* === МЕНЮ: КВАДРАТНЫЕ ПЛИТКИ (ПРИЖАТЫЕ К НИЗУ СЛЕВА) === */
+/* === МЕНЮ: КВАДРАТНЫЕ ПЛИТКИ === */
 .menu-grid {
-    display: flex;           /* Делаем их в один ряд, а не растянутой сеткой */
-    justify-content: flex-start; /* Прижимаем к левому краю */
+    display: flex;
+    justify-content: center; /* Поставили по центру (было flex-start) */
     gap: 12px;
-    margin-top: auto;        /* Магия: автоматически отталкивает этот блок в самый низ экрана! */
-    padding-bottom: 15px;    /* Небольшой отступ от нижней панели */
+    margin-top: auto;
+    padding-bottom: 15px;
 }
 
 .menu-square {
