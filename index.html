@@ -12,47 +12,56 @@
 
 <div class="app-container">
     
-    <!-- ВЕРХНЯЯ ПАНЕЛЬ (Теперь скрывается в кошельке) -->
+    <!-- ВЕРХНЯЯ ПАНЕЛЬ -->
     <header class="top-header" id="main-top-header">
+        
+        <!-- СЛЕВА: Логотип -->
         <div class="header-left">
-            <!-- Кнопка баланса -->
-            <div class="balance-pill" id="balance-btn" onclick="toggleBalanceDropdown(event)">
-                <div class="currency-icon" id="active-currency-icon">
-                    <i class="fa-solid fa-ruble-sign" style="color: #ffffff;"></i>
-                </div>
-                <span class="balance-amount" id="active-balance-amount">1.25</span>
-                <i class="fa-solid fa-chevron-down down-arrow"></i>
-            </div>
-            
-            <!-- Кнопка пополнения -->
-            <button class="deposit-btn" onclick="switchTab('wallet')">Пополнить</button>
-
-            <!-- Выпадающий список -->
-            <div class="balance-dropdown" id="balance-dropdown">
-                <div class="crypto-item" onclick="selectCurrency('RUB', '1.25', 'fa-solid fa-ruble-sign', '#a855f7')">
-                    <div class="dropdown-icon" style="background: #a855f7;"><i class="fa-solid fa-ruble-sign"></i></div> 
-                    <span>RUB</span>
-                </div>
-                <div class="crypto-item" onclick="selectCurrency('TON', '14.50', 'fa-regular fa-gem', '#0088cc')">
-                    <div class="dropdown-icon" style="background: #0088cc;"><i class="fa-regular fa-gem"></i></div> 
-                    <span>Toncoin</span>
-                </div>
-                <div class="crypto-item" onclick="selectCurrency('USDT', '150.00', 'fa-solid fa-dollar-sign', '#26a69a')">
-                    <div class="dropdown-icon" style="background: #26a69a;"><i class="fa-solid fa-dollar-sign"></i></div> 
-                    <span>USDT</span>
-                </div>
-                <div class="crypto-item" onclick="selectCurrency('STARS', '500', 'fa-solid fa-star', '#ffb800')">
-                    <div class="dropdown-icon" style="background: #ffb800;"><i class="fa-solid fa-star"></i></div> 
-                    <span>Telegram Stars</span>
-                </div>
+            <div class="logo-container">
+                <!-- Сюда вставишь свой логотип в папку images -->
+                <img src="images/logo.svg" alt="Logo" class="main-logo" onerror="this.src='https://via.placeholder.com/100x30/9d4edd/ffffff?text=ЛОГОТИП'">
             </div>
         </div>
         
-        <!-- Аватарка -->
+        <!-- СПРАВА: Баланс и Аватарка -->
         <div class="header-right">
+            
+            <!-- Обертка баланса (нужна для правильного позиционирования менюшки) -->
+            <div class="balance-container">
+                <div class="balance-pill" id="balance-btn" onclick="toggleBalanceDropdown(event)">
+                    <div class="currency-icon" id="active-currency-icon">
+                        <i class="fa-solid fa-ruble-sign" style="color: #ffffff;"></i>
+                    </div>
+                    <span class="balance-amount" id="active-balance-amount">1.25</span>
+                    <i class="fa-solid fa-chevron-down down-arrow"></i>
+                </div>
+                
+                <!-- Выпадающий список (каждому элементу задана очередь анимации) -->
+                <div class="balance-dropdown" id="balance-dropdown">
+                    <div class="crypto-item" style="--anim-order: 1;" onclick="selectCurrency('RUB', '1.25', 'fa-solid fa-ruble-sign', '#a855f7')">
+                        <div class="dropdown-icon" style="background: #a855f7;"><i class="fa-solid fa-ruble-sign"></i></div> 
+                        <span>RUB</span>
+                    </div>
+                    <div class="crypto-item" style="--anim-order: 2;" onclick="selectCurrency('TON', '14.50', 'fa-regular fa-gem', '#0088cc')">
+                        <div class="dropdown-icon" style="background: #0088cc;"><i class="fa-regular fa-gem"></i></div> 
+                        <span>Toncoin</span>
+                    </div>
+                    <div class="crypto-item" style="--anim-order: 3;" onclick="selectCurrency('USDT', '150.00', 'fa-solid fa-dollar-sign', '#26a69a')">
+                        <div class="dropdown-icon" style="background: #26a69a;"><i class="fa-solid fa-dollar-sign"></i></div> 
+                        <span>USDT</span>
+                    </div>
+                    <div class="crypto-item" style="--anim-order: 4;" onclick="selectCurrency('STARS', '500', 'fa-solid fa-star', '#ffb800')">
+                        <div class="dropdown-icon" style="background: #ffb800;"><i class="fa-solid fa-star"></i></div> 
+                        <span>Telegram Stars</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Аватарка профиля -->
             <div class="profile-icon" id="user-avatar-container">
                 <div class="avatar-placeholder" id="user-avatar">?</div>
             </div>
+            
         </div>
     </header>
 
@@ -66,7 +75,6 @@
 
         <h2 class="section-title">Игры</h2>
         
-        <!-- СЕТКА ИГР (БЕЗ КНОПОК) -->
         <div class="games-grid-compact">
             <div class="game-card-small" onclick="openGame('Crush Game')">
                 <img src="images/crash-bg.png" class="game-bg" alt="Crush">
@@ -75,7 +83,6 @@
                     <h3 class="game-title">Crush</h3>
                 </div>
             </div>
-
             <div class="game-card-small" onclick="openGame('Plinko')">
                 <img src="images/plinko-bg.png" class="game-bg" alt="Plinko">
                 <div class="game-overlay"></div>
@@ -83,7 +90,6 @@
                     <h3 class="game-title">Plinko</h3>
                 </div>
             </div>
-
             <div class="game-card-small" onclick="openGame('Roulette')">
                 <img src="images/roulette-bg.png" class="game-bg" alt="Roulette">
                 <div class="game-overlay"></div>
@@ -91,7 +97,6 @@
                     <h3 class="game-title">Roulette</h3>
                 </div>
             </div>
-
             <div class="game-card-small" onclick="openGame('Blackjack')">
                 <img src="images/blackjack-bg.png" class="game-bg" alt="Blackjack">
                 <div class="game-overlay"></div>
@@ -99,7 +104,6 @@
                     <h3 class="game-title">Blackjack</h3>
                 </div>
             </div>
-
             <div class="game-card-small" onclick="openGame('Dice')">
                 <img src="images/dice-bg.png" class="game-bg" alt="Dice">
                 <div class="game-overlay"></div>
@@ -107,7 +111,6 @@
                     <h3 class="game-title">Dice</h3>
                 </div>
             </div>
-
             <div class="game-card-small" onclick="openGame('Tickets')">
                 <img src="images/tickets-bg.png" class="game-bg" alt="Tickets">
                 <div class="game-overlay"></div>
@@ -126,46 +129,35 @@
                 <span class="align-right">Ставка</span>
                 <span class="align-right">Выигрыш</span>
             </div>
-            
             <div class="bet-table-row">
                 <span class="bet-game-name">Crush</span>
                 <span class="bet-player">@ivan_pro</span>
                 <span class="align-right">50 RUB</span>
                 <span class="bet-win positive align-right">120 RUB <span class="multiplier">(x2.4)</span></span>
             </div>
-            
             <div class="bet-table-row">
                 <span class="bet-game-name">Plinko</span>
                 <span class="bet-player">@crypto_god</span>
                 <span class="align-right">10 TON</span>
                 <span class="bet-win negative align-right">0 TON <span class="multiplier">(x0.0)</span></span>
             </div>
-            
             <div class="bet-table-row">
                 <span class="bet-game-name">Dice</span>
                 <span class="bet-player">@lucky777</span>
                 <span class="align-right">100 USDT</span>
                 <span class="bet-win positive align-right">200 USDT <span class="multiplier">(x2.0)</span></span>
             </div>
-            
             <div class="bet-table-row">
                 <span class="bet-game-name">Tickets</span>
                 <span class="bet-player">@anon_user</span>
                 <span class="align-right">500 STARS</span>
                 <span class="bet-win negative align-right">0 STARS <span class="multiplier">(x0.0)</span></span>
             </div>
-            
-            <div class="bet-table-row">
-                <span class="bet-game-name">Roulette</span>
-                <span class="bet-player">@big_win</span>
-                <span class="align-right">250 RUB</span>
-                <span class="bet-win positive align-right">3500 RUB <span class="multiplier">(x14.0)</span></span>
-            </div>
         </div>
 
     </main>
 
-    <!-- ВКЛАДКА 2: КОШЕЛЕК (Без верхней плашки) -->
+    <!-- ВКЛАДКА 2: КОШЕЛЕК -->
     <main id="view-wallet" class="view-section" style="padding-top: 20px;">
         <h2 class="section-title" style="margin-top: 0;">Активы</h2>
         
@@ -244,7 +236,6 @@
                 <span>Настройки аккаунта</span>
                 <i class="fa-solid fa-chevron-right arrow"></i>
             </div>
-            <!-- Новая кнопка Техподдержка -->
             <div class="menu-item" onclick="tg.showAlert('Открытие чата с поддержкой')">
                 <div class="menu-icon"><i class="fa-solid fa-headset"></i></div>
                 <span>Техподдержка</span>
@@ -261,7 +252,7 @@
         </a>
         <a href="#" class="nav-item active" id="nav-casino" onclick="switchTab('casino')">
             <i class="fa-solid fa-layer-group"></i>
-            <span>Главная</span> <!-- Переименовали с Казино на Главная -->
+            <span>Главная</span>
         </a>
         <a href="#" class="nav-item" id="nav-menu" onclick="switchTab('menu')">
             <i class="fa-solid fa-bars"></i>

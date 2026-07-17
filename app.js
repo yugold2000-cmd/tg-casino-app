@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     tg.setHeaderColor('#0f0f13');
     tg.setBackgroundColor('#0f0f13');
 
-    // 1. Аватарка из Телеграм
+    // 1. Аватарка
     try {
         const user = tg.initDataUnsafe?.user;
         const avatarContainer = document.getElementById('user-avatar-container');
@@ -22,24 +22,21 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error("Ошибка загрузки профиля", e);
     }
 
-    // 2. Переключение вкладок
+    // 2. Вкладки
     window.switchTab = function(tabName) {
         if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
 
-        // Скрываем все секции и убираем активный цвет у кнопок
         document.querySelectorAll('.view-section').forEach(sec => sec.classList.remove('active'));
         document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
 
-        // Показываем нужную вкладку
         document.getElementById(`view-${tabName}`).classList.add('active');
         document.getElementById(`nav-${tabName}`).classList.add('active');
 
-        // Логика скрытия верхней панели
         const topHeader = document.getElementById('main-top-header');
         if (tabName === 'wallet' || tabName === 'menu') {
-            topHeader.style.display = 'none'; // Скрываем верхнюю панель в кошельке и меню
+            topHeader.style.display = 'none';
         } else {
-            topHeader.style.display = 'flex'; // Возвращаем на Главной странице
+            topHeader.style.display = 'flex';
         }
     };
 
@@ -60,6 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
         iconContainer.style.background = iconBgColor;
         iconContainer.innerHTML = `<i class="${iconClass}" style="color: #ffffff;"></i>`;
         
+        // Убираем меню. Анимация отработает в обратную сторону.
         document.getElementById('balance-dropdown').classList.remove('show');
     };
 
@@ -70,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 4. Открытие игры
+    // 4. Запуск игры
     window.openGame = function(gameName) {
         if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
         tg.showAlert(`Запуск игры: ${gameName}`);

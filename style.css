@@ -22,13 +22,20 @@ body {
 
 .section-title { font-size: 22px; font-weight: 800; margin: 15px 0; }
 
-/* === ШАПКА === */
+/* === НОВАЯ ШАПКА === */
 .top-header {
     display: flex; justify-content: space-between; align-items: center;
     padding: 15px 16px; background-color: var(--bg-dark);
     position: sticky; top: 0; z-index: 100;
 }
-.header-left { display: flex; align-items: center; gap: 8px; position: relative; }
+.header-left { display: flex; align-items: center; }
+.header-right { display: flex; align-items: center; gap: 10px; }
+
+/* Логотип */
+.main-logo { height: 32px; object-fit: contain; }
+
+/* Контейнер баланса (чтобы меню выпадало ровно под ним справа) */
+.balance-container { position: relative; }
 
 .balance-pill {
     display: flex; align-items: center; background: var(--bg-panel); 
@@ -42,36 +49,47 @@ body {
 .balance-amount { font-weight: 700; font-size: 15px; margin-right: 4px; }
 .down-arrow { font-size: 10px; color: var(--text-muted); }
 
-.deposit-btn {
-    background: var(--purple-main); color: #fff; border: none;
-    height: 38px; padding: 0 14px; border-radius: 10px; font-size: 14px;
-    font-weight: bold; cursor: pointer; box-shadow: 0 0 12px rgba(157, 78, 221, 0.4);
-    display: flex; align-items: center; justify-content: center;
-}
-
-.balance-dropdown {
-    position: absolute; top: 55px; left: 0; background: var(--bg-panel);
-    border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px;
-    width: 180px; box-shadow: 0 10px 25px rgba(0,0,0,0.8);
-    display: flex; flex-direction: column; overflow: hidden; z-index: 101;
-    opacity: 0; transform: translateY(-15px); visibility: hidden; transition: all 0.3s ease;
-}
-.balance-dropdown.show { opacity: 1; transform: translateY(0); visibility: visible; }
-
-.crypto-item {
-    padding: 12px 15px; display: flex; align-items: center; gap: 10px;
-    font-weight: 600; font-size: 14px; border-bottom: 1px solid rgba(255,255,255,0.03); cursor: pointer;
-}
-.dropdown-icon {
-    width: 24px; height: 24px; border-radius: 50%; display: flex; 
-    align-items: center; justify-content: center; font-size: 12px; color: #fff;
-}
-
+/* Аватарка */
 .profile-icon { width: 38px; height: 38px; border-radius: 50%; overflow: hidden; }
 .avatar-placeholder {
     width: 100%; height: 100%; background: linear-gradient(135deg, var(--purple-main), #3c096c);
     display: flex; align-items: center; justify-content: center;
     font-weight: bold; font-size: 16px; color: #fff; border: 2px solid var(--purple-light); border-radius: 50%;
+}
+
+/* === КАСКАДНАЯ АНИМАЦИЯ ВЫПАДАЮЩЕГО МЕНЮ === */
+.balance-dropdown {
+    position: absolute; top: 50px; right: 0; background: var(--bg-panel);
+    border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px;
+    width: 180px; box-shadow: 0 10px 25px rgba(0,0,0,0.8);
+    display: flex; flex-direction: column; overflow: hidden; z-index: 101;
+    
+    /* Контейнер появляется плавно */
+    opacity: 0; visibility: hidden; transition: opacity 0.2s ease, visibility 0.2s;
+}
+
+.balance-dropdown.show { opacity: 1; visibility: visible; }
+
+.crypto-item {
+    padding: 12px 15px; display: flex; align-items: center; gap: 10px;
+    font-weight: 600; font-size: 14px; border-bottom: 1px solid rgba(255,255,255,0.03); cursor: pointer;
+    
+    /* Сами элементы выезжают сверху с задержкой, зависящей от их порядка */
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.balance-dropdown.show .crypto-item {
+    opacity: 1;
+    transform: translateY(0);
+    /* Умножаем порядковый номер (из HTML) на 50мс задержки */
+    transition-delay: calc(var(--anim-order) * 0.06s);
+}
+
+.dropdown-icon {
+    width: 24px; height: 24px; border-radius: 50%; display: flex; 
+    align-items: center; justify-content: center; font-size: 12px; color: #fff;
 }
 
 /* === РЕКЛАМНЫЙ БАННЕР === */
@@ -82,7 +100,7 @@ body {
 .promo-banner:active { transform: scale(0.98); }
 .promo-banner img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-/* === ИГРЫ (БЕЗ КНОПОК) === */
+/* === ИГРЫ === */
 .games-grid-compact { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
 
 .game-card-small {
@@ -103,38 +121,24 @@ body {
     text-shadow: 0 2px 4px rgba(0,0,0,0.8);
 }
 
-/* === ЖЕСТКОЕ ВЫРАВНИВАНИЕ ТАБЛИЦЫ СТАВОК (GRID) === */
+/* === ТАБЛИЦА СТАВОК === */
 .live-bets-table {
     background: var(--bg-panel); border-radius: 16px; 
     border: 1px solid rgba(255,255,255,0.05); overflow: hidden;
 }
-
-/* Настраиваем 4 колонки: 1. Игра (25%), 2. Игрок (30%), 3. Ставка (20%), 4. Выигрыш (25%) */
 .bet-table-header, .bet-table-row {
-    display: grid;
-    grid-template-columns: 1.2fr 1.5fr 1fr 1.5fr; 
-    align-items: center;
-    padding: 12px 15px;
+    display: grid; grid-template-columns: 1.2fr 1.5fr 1fr 1.5fr; align-items: center; padding: 12px 15px;
 }
-
-.bet-table-header {
-    background: rgba(0,0,0,0.2); font-size: 11px; 
-    color: var(--text-muted); text-transform: uppercase; font-weight: bold;
-}
-.bet-table-row {
-    border-bottom: 1px solid rgba(255,255,255,0.03);
-    font-size: 13px; font-weight: 600;
-}
+.bet-table-header { background: rgba(0,0,0,0.2); font-size: 11px; color: var(--text-muted); text-transform: uppercase; font-weight: bold; }
+.bet-table-row { border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 13px; font-weight: 600; }
 .bet-table-row:last-child { border-bottom: none; }
 
 .align-right { text-align: right; }
 .bet-game-name { color: var(--text-muted); }
-.bet-player { color: #fff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } /* Режет длинные ники */
+.bet-player { color: #fff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 .bet-win.positive { color: var(--purple-light); }
 .bet-win.negative { color: #fff; opacity: 0.5; }
-
-/* Стиль для множителя (x) */
 .multiplier { font-size: 11px; opacity: 0.8; margin-left: 2px; }
 
 /* === КОШЕЛЕК И АКТИВЫ === */
@@ -142,27 +146,17 @@ body {
     background: var(--bg-panel); border-radius: 16px; padding: 10px 15px; 
     border: 1px solid rgba(255,255,255,0.05); margin-bottom: 15px;
 }
-.balance-list-item {
-    display: flex; justify-content: space-between; align-items: center; 
-    padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.03);
-}
+.balance-list-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.03); }
 .balance-list-item:last-child { border-bottom: none; }
 .balance-left { display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: 15px; }
 .balance-right { font-weight: 700; font-size: 16px; }
 
 .wallet-actions { display: flex; gap: 10px; }
-.wallet-action-btn {
-    flex: 1; padding: 12px; border-radius: 10px; border: none; font-weight: bold; 
-    font-size: 14px; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px;
-}
+.wallet-action-btn { flex: 1; padding: 12px; border-radius: 10px; border: none; font-weight: bold; font-size: 14px; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; }
 .wallet-action-btn.deposit { background: var(--purple-main); color: #fff; }
 .wallet-action-btn.withdraw { background: rgba(255,255,255,0.1); color: #fff; }
 
-/* === ИСТОРИЯ ТРАНЗАКЦИЙ === */
-.transaction-history {
-    background: var(--bg-panel); border-radius: 16px; padding: 10px 15px; 
-    border: 1px solid rgba(255,255,255,0.05);
-}
+.transaction-history { background: var(--bg-panel); border-radius: 16px; padding: 10px 15px; border: 1px solid rgba(255,255,255,0.05); }
 .tx-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.03); }
 .tx-item:last-child { border-bottom: none; }
 .tx-info { display: flex; align-items: center; gap: 12px; }
@@ -181,6 +175,7 @@ body {
 .menu-item { background: var(--bg-panel); padding: 14px; border-radius: 12px; display: flex; align-items: center; gap: 15px; cursor: pointer; }
 .menu-icon { width: 32px; height: 32px; border-radius: 8px; background: rgba(157, 78, 221, 0.2); display: flex; align-items: center; justify-content: center; color: var(--purple-main); font-size: 16px; }
 .menu-item span { flex-grow: 1; font-weight: 600; font-size: 15px; }
+.menu-item .arrow { color: var(--text-muted); font-size: 14px; }
 
 .bottom-nav {
     position: fixed; bottom: 0; left: 0; width: 100%; background: #111115; 
