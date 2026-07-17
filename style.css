@@ -121,7 +121,7 @@ body {
 .promo-text { z-index: 1; position: relative; }
 .promo-btn {
     background: #fff; color: var(--primary);
-    border: none; padding: 8px 16px; border-radius: 20px;
+    border: none; padding: 16px 32px; border-radius: 35px;
     font-weight: bold; z-index: 1; position: relative;
 }
 
@@ -182,25 +182,6 @@ body {
     align-items: flex-start;
 }
 
-/* Зеленая плашка Original */
-.badge-original {
-    background: #73b925; /* Приятный салатовый цвет */
-    color: #fff;
-    font-size: 11px;
-    font-weight: 700;
-    padding: 4px 10px;
-    border-radius: 6px;
-    text-transform: uppercase;
-    box-shadow: 0 2px 8px rgba(115, 185, 37, 0.3);
-}
-
-/* Блок с названием и онлайном */
-.banner-info {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
 .banner-title {
     font-size: 20px;
     font-weight: 700;
@@ -227,7 +208,7 @@ body {
     bottom: 28px;
     right: 28px;
     background: #a215a7; 
-    color: #0b0914;
+    color: #ffffff;
     border: none;
     border-radius: 10px;
     padding: 10px 18px;
