@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Crash Game</title>
+    <!-- Подключаем стили -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Подключаем Pixi.js для графики -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/7.3.2/pixi.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Шапка с кнопкой назад -->
+    <header class="game-header">
+        <button class="back-btn" onclick="window.location.href='../../index.html'">
+            <i class="fa-solid fa-chevron-left"></i> Назад
+        </button>
+        <div class="balance-display">
+            <span>42 222.18 ₽</span>
+        </div>
+    </header>
+
+    <!-- История множителей (верхняя плашка) -->
+    <div class="history-bar" id="history-bar">
+        <div class="history-item blue">1.02x</div>
+        <div class="history-item purple">2.48x</div>
+        <div class="history-item blue">1.61x</div>
+        <div class="history-item blue">1.13x</div>
+        <div class="history-item blue">1.60x</div>
+        <div class="history-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+    </div>
+
+    <!-- Область для Pixi.js (Сам график) -->
+    <div id="game-canvas-container"></div>
+
+    <!-- Блок контроллеров ставок (Две панели) -->
+    <!-- Блок контроллеров ставок -->
+    <div class="controls-container">
+        
+        <!-- ПАНЕЛЬ 1 -->
+        <div class="bet-panel">
+            <div class="panel-header">
+                <label class="checkbox-label">
+                    <input type="checkbox"> <span class="checkmark"></span> Автоставка
+                </label>
+                <div class="auto-cashout">
+                    <label class="checkbox-label">
+                        <input type="checkbox" checked id="auto-cashout-check-1"> <span class="checkmark"></span> Автовывод
+                    </label>
+                    <div class="cashout-input-wrapper">
+                        <span>x</span>
+                        <input type="number" step="0.1" class="cashout-input" id="cashout-target-1" value="2.00">
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <!-- Монолитный тёмный блок слева -->
+                <div class="bet-input-section">
+                    <div class="bet-input-top">
+                        <button class="adjust-btn" onclick="adjustBet(1, -100)"><i class="fa-solid fa-minus"></i></button>
+                        <input type="number" id="bet-amount-1" value="6006">
+                        <button class="adjust-btn" onclick="adjustBet(1, 100)"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                    <div class="bet-input-bottom">
+                        <button onclick="addBet(1, 50)">+50</button>
+                        <button onclick="addBet(1, 100)">+100</button>
+                        <button onclick="addBet(1, 200)">+200</button>
+                        <button onclick="addBet(1, 500)">+500</button>
+                    </div>
+                </div>
+                <!-- Оранжевая кнопка -->
+                <button class="action-btn cashout" id="action-btn-1">
+                    <span class="btn-amount">42 222.18 ₽</span>
+                    <span class="btn-text">ЗАБРАТЬ</span>
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+        <!-- ПАНЕЛЬ 2 (Копия первой для двойной ставки) -->
+        <div class="bet-panel">
+            <div class="panel-header">
+                <label class="checkbox-label">
+                    <input type="checkbox"> <span class="checkmark"></span> Автоставка
+                </label>
+                <div class="auto-cashout">
+                    <label class="checkbox-label">
+                        <input type="checkbox" checked> <span class="checkmark"></span> Автовывод
+                    </label>
+                    <input type="text" class="cashout-input" value="x 10.10">
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="bet-input-section">
+                    <div class="bet-input-wrapper">
+                        <button class="adjust-btn" onclick="adjustBet(2, -100)"><i class="fa-solid fa-minus"></i></button>
+                        <input type="number" id="bet-amount-2" value="6006">
+                        <button class="adjust-btn" onclick="adjustBet(2, 100)"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                    <div class="quick-bets">
+                        <button onclick="addBet(2, 50)">+50</button>
+                        <button onclick="addBet(2, 100)">+100</button>
+                        <button onclick="addBet(2, 200)">+200</button>
+                        <button onclick="addBet(2, 500)">+500</button>
+                    </div>
+                </div>
+                <!-- Кнопка в состоянии ожидания ставки -->
+                <button class="action-btn place-bet" id="action-btn-2">
+                    <span class="btn-text" style="font-size: 18px;">СТАВКА</span>
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Подключаем игровую логику -->
+    <script src="game.js"></script>
+</body>
+</html>
