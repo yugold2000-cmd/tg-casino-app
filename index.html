@@ -190,7 +190,6 @@
         </div>
     </main>
 
-    <!-- ВКЛАДКА 3: МЕНЮ -->
 <!-- ВКЛАДКА 3: МЕНЮ -->
     <main id="view-menu" class="view-section" style="padding-top: 20px;">
         <h2 class="section-title" style="margin-top: 0;" data-i18n="menu_title">Меню</h2>
@@ -207,11 +206,14 @@
                 <span data-i18n="menu_settings">Настройки аккаунта</span>
                 <i class="fa-solid fa-chevron-right arrow"></i>
             </div>
-            <div class="menu-item" onclick="tg.openTelegramLink('https://t.me/sup_chillmfo')""">
+            
+            <!-- Безопасная Техподдержка -->
+            <div class="menu-item" onclick="openExternalLink('https://t.me/sup_chillmfo')">
                 <div class="menu-icon"><i class="fa-solid fa-headset"></i></div>
                 <span data-i18n="menu_support">Техподдержка</span>
                 <i class="fa-solid fa-chevron-right arrow"></i>
             </div>
+            
             <div class="menu-item" onclick="tg.showAlert('Responsible Gaming Policy')">
                 <div class="menu-icon" style="color: #ff4444; background: rgba(255, 68, 68, 0.15);"><i class="fa-solid fa-shield-heart"></i></div>
                 <span style="color: #ff4444;" data-i18n="menu_responsible">Ответственная игра</span>
@@ -219,10 +221,11 @@
             </div>
         </div>
 
-        <!-- НИЖНИЙ БЛОК: Маленькие квадратные плитки слева внизу -->
-        <div class="menu-grid">
-            <!-- Канал Telegram -->
-            <div class="menu-square" onclick="tg.openTelegramLink('https:/t.me/csosdgtrrhy')">
+        <!-- НИЖНИЙ БЛОК: Маленькие квадратные плитки -->
+        <div class="menu-grid" style="margin-top: 20px;">
+            
+            <!-- Безопасный Канал Telegram (не забудь заменить ссылку на свой канал!) -->
+            <div class="menu-square" onclick="openExternalLink('https://t.me/your_channel')">
                 <i class="fa-brands fa-telegram" style="color: #0088cc;"></i>
                 <span data-i18n="menu_channel_short">Канал</span>
             </div>
@@ -238,8 +241,8 @@
                 <i class="fa-solid fa-sun" id="theme-icon-square" style="color: #ffb800;"></i>
                 <span data-i18n="menu_theme_short">Тема</span>
             </div>
+            
         </div>
-    </main>
     </main>
 
     <!-- НИЖНЕЕ МЕНЮ НАВИГАЦИИ -->

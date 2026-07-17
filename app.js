@@ -1,8 +1,31 @@
-// ==========================================
-// 1. ГЛОБАЛЬНЫЕ НАСТРОЙКИ TELEGRAM SDK
-// ==========================================
-const tg = window.Telegram.WebApp;
-window.tg = tg; // Делаем tg доступным для HTML-кнопок напрямую
+// =========================================================================
+// 1. УМНЫЙ ДИНАМИЧЕСКИЙ ДОСТУП К TG SDK (Защита от крашей и race conditions)
+// =========================================================================
+Object.defineProperty(window, 'tg', {
+    get: function() {
+        // Если мы внутри Telegram — возвращаем реальный WebApp
+        if (window.Telegram && window.Telegram.WebApp) {
+            return window.Telegram.WebApp;
+        }
+        // Если мы на Live Server / в обычном браузере — возвращаем умный муляж (mock)
+        return {
+            HapticFeedback: { 
+                impactOccurred: (type) => console.log(`[Haptic Mock]: ${type}`) 
+            },
+            showAlert: (msg) => alert(msg),
+            showConfirm: (msg) => confirm(msg),
+            ready: () => console.log("[Telegram SDK Mock]: Ready called"),
+            expand: () => console.log("[Telegram SDK Mock]: Expand called"),
+            setHeaderColor: (color) => console.log(`[Telegram SDK Mock]: Header color -> ${color}`),
+            setBackgroundColor: (color) => console.log(`[Telegram SDK Mock]: BG color -> ${color}`),
+            openTelegramLink: (url) => window.open(url, '_blank'),
+            openLink: (url) => window.open(url, '_blank'),
+            initDataUnsafe: { 
+                user: { language_code: 'ru', first_name: 'User' } 
+            }
+        };
+    }
+});
 
 // Глобальные переменные состояния приложения
 let currentLang = 'en'; 
@@ -62,11 +85,35 @@ const translations = {
     }
 };
 
-// ==========================================
-// 2. ИНИЦИАЛИЗАЦИЯ ПРИ ЗАГРУЗКЕ СТРАНИЦЫ
-// ==========================================
+// =========================================================================
+// 2. БЕЗОПАСНАЯ ФУНКЦИЯ ОТКРЫТИЯ ССЫЛОК (Для Telegram и обычного браузера)
+// =========================================================================
+window.openExternalLink = function(url) {
+    // Вызываем вибрацию на телефоне при клике
+    if (tg.HapticFeedback) {
+        tg.HapticFeedback.impactOccurred('medium');
+    }
+
+    // Если мы запущены внутри Telegram Mini App
+    if (window.Telegram && window.Telegram.WebApp) {
+        // Если ссылка ведет на Telegram (канал, поддержка, чат)
+        if (url.includes('t.me/') || url.startsWith('tg:')) {
+            tg.openTelegramLink(url);
+        } else {
+            // Для всех обычных сайтов
+            tg.openLink(url);
+        }
+    } else {
+        // Запасной вариант для Live Server (ПК браузер)
+        window.open(url, '_blank');
+    }
+};
+
+// =========================================================================
+// 3. ИНИЦИАЛИЗАЦИЯ ПРИ ЗАГРУЗКЕ СТРАНИЦЫ
+// =========================================================================
 document.addEventListener('DOMContentLoaded', () => {
-    // Говорим Телеграму, что мы готовы
+    // Инициализируем WebApp
     tg.ready();
     tg.expand();
     tg.setHeaderColor('#0f0f13');
@@ -98,9 +145,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// ==========================================
-// 3. ГЛОБАЛЬНЫЕ ФУНКЦИИ ИНТЕРФЕЙСА
-// ==========================================
+// =========================================================================
+// 4. ГЛОБАЛЬНЫЕ ФУНКЦИИ ИНТЕРФЕЙСА
+// =========================================================================
 
 // Переключение вкладок нижнего меню
 window.switchTab = function(tabName) {
@@ -161,7 +208,9 @@ function applyLanguage(lang) {
     });
 
     const flagIcon = document.getElementById('language-flag');
-    flagIcon.innerText = (lang === 'ru') ? '🇷🇺' : '🇬🇧';
+    if (flagIcon) {
+        flagIcon.innerText = (lang === 'ru') ? '🇷🇺' : '🇬🇧';
+    }
 }
 
 // Переключение Темы (Мгновенное)
@@ -175,8 +224,10 @@ window.toggleTheme = function() {
         body.classList.remove('theme-dark');
         body.classList.add('theme-light');
         
-        themeIconSquare.className = "fa-solid fa-moon";
-        themeIconSquare.style.color = "#6200ea"; 
+        if (themeIconSquare) {
+            themeIconSquare.className = "fa-solid fa-moon";
+            themeIconSquare.style.color = "#6200ea"; 
+        }
         
         tg.setHeaderColor('#f4f4f6');
         tg.setBackgroundColor('#f4f4f6');
@@ -185,8 +236,10 @@ window.toggleTheme = function() {
         body.classList.remove('theme-light');
         body.classList.add('theme-dark');
         
-        themeIconSquare.className = "fa-solid fa-sun";
-        themeIconSquare.style.color = "#ffb800";
+        if (themeIconSquare) {
+            themeIconSquare.className = "fa-solid fa-sun";
+            themeIconSquare.style.color = "#ffb800";
+        }
         
         tg.setHeaderColor('#0f0f13');
         tg.setBackgroundColor('#0f0f13');
