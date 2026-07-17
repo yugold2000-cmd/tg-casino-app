@@ -5,52 +5,65 @@ tg.expand();
 tg.setHeaderColor('#0f0f13');
 tg.setBackgroundColor('#0f0f13');
 
-// 1. Логика выпадающего списка баланса
-function toggleBalanceDropdown(event) {
-    // Предотвращаем всплытие клика, чтобы меню не закрылось сразу же
-    event.stopPropagation();
-    
-    // Легкая вибрация при открытии
-    if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('light'); 
-    
-    const dropdown = document.getElementById('balance-dropdown');
-    dropdown.classList.toggle('hidden');
+// Получаем первую букву имени пользователя для аватарки
+try {
+    const user = tg.initDataUnsafe?.user;
+    if (user) {
+        const firstLetter = (user.first_name || user.username || 'U').charAt(0).toUpperCase();
+        document.getElementById('user-avatar').innerText = firstLetter;
+    }
+} catch (e) {}
+
+// --- Логика переключения Вкладок ---
+function switchTab(tabName) {
+    if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
+
+    // 1. Скрываем все секции (Казино, Кошелек, Меню)
+    document.querySelectorAll('.view-section').forEach(section => {
+        section.classList.remove('active');
+    });
+
+    // 2. Убираем активный цвет у всех кнопок нижнего меню
+    document.querySelectorAll('.nav-item').forEach(nav => {
+        nav.classList.remove('active');
+    });
+
+    // 3. Показываем нужную секцию и подсвечиваем кнопку
+    document.getElementById(`view-${tabName}`).classList.add('active');
+    document.getElementById(`nav-${tabName}`).classList.add('active');
 }
 
-// 2. Выбор валюты из списка
+// --- Логика Баланса ---
+function toggleBalanceDropdown(event) {
+    event.stopPropagation();
+    if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('light'); 
+    document.getElementById('balance-dropdown').classList.toggle('hidden');
+}
+
 function selectCurrency(currencyName, amount, iconClass, iconBgColor) {
     if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
     
-    // Меняем текст баланса
+    // Обновляем шапку
     document.getElementById('active-balance-amount').innerText = amount;
-    
-    // Меняем иконку баланса
     const iconContainer = document.getElementById('active-currency-icon');
     iconContainer.style.background = iconBgColor;
     iconContainer.innerHTML = `<i class="${iconClass}" style="color: #ffffff;"></i>`;
     
-    // Прячем меню
+    // Обновляем большой баланс во вкладке кошелька
+    document.getElementById('wallet-balance-big').innerText = `${amount} ${currencyName}`;
+    
     document.getElementById('balance-dropdown').classList.add('hidden');
 }
 
-// 3. Закрытие меню при клике в любое пустое место экрана
+// Закрытие меню баланса при клике мимо
 document.addEventListener('click', function(event) {
     const dropdown = document.getElementById('balance-dropdown');
-    
-    // Если меню открыто и клик был НЕ по меню - закрываем его
     if (!dropdown.classList.contains('hidden') && !dropdown.contains(event.target)) {
         dropdown.classList.add('hidden');
     }
 });
 
-// 4. Кнопка ПЛЮС (Переход в кошелек)
-function openWallet() {
-    if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('heavy');
-    // Позже здесь будет логика открытия экрана депозита
-    tg.showAlert('Перенаправление в кошелек для пополнения счета...');
-}
-
-// 5. Запуск Игры
+// Запуск Игры
 function openGame(gameName) {
     if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
     tg.showAlert(`Запуск игры: ${gameName}`);

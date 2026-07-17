@@ -1,9 +1,8 @@
 :root {
-    --bg-dark: #0f0f13;       /* Основной темный фон */
-    --bg-panel: #1a1b22;      /* Фон для плашек */
-    --neon-lime: #c5ff00;     /* Лаймовый цвет для верхних кнопок и меню */
-    --btn-orange: #ffa502;    /* Желто-оранжевый цвет кнопок "Играть" */
-    --badge-green: #73b925;   /* Зеленый цвет для бейджа Original */
+    --bg-dark: #0f0f13;       /* Основной фон */
+    --bg-panel: #1a1b22;      /* Фон карточек */
+    --purple-main: #9d4edd;   /* Основной фиолетовый */
+    --purple-light: #c77dff;  /* Светло-фиолетовый для ховера/актива */
     --text-main: #ffffff;
     --text-muted: #888992;
 }
@@ -11,12 +10,21 @@
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
 body {
-    background-color: var(--bg-dark);
-    color: var(--text-main);
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-dark); color: var(--text-main);
+    margin: 0; font-family: -apple-system, BlinkMacSystemFont, sans-serif;
     padding-bottom: 90px; 
 }
+
+/* === СЕКЦИИ ВКЛАДОК === */
+.view-section { display: none; padding: 0 16px; animation: fadeIn 0.3s ease-in-out; }
+.view-section.active { display: block; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.section-title { font-size: 24px; font-weight: 800; margin: 20px 0 15px; }
 
 /* === ВЕРХНЯЯ ПАНЕЛЬ === */
 .top-header {
@@ -25,125 +33,117 @@ body {
     position: sticky; top: 0; z-index: 100;
 }
 
-.header-left, .header-right { width: 80px; display: flex; align-items: center; gap: 12px; }
-.header-right { justify-content: flex-end; }
-.header-center { flex-grow: 1; display: flex; justify-content: center; position: relative; }
+.header-left { display: flex; align-items: center; gap: 10px; position: relative; }
+.header-right { display: flex; align-items: center; }
 
-/* Кнопка баланса */
+/* Баланс и Плюс */
 .balance-pill {
     display: flex; align-items: center;
     background: var(--bg-panel); padding: 6px 12px 6px 6px;
     border-radius: 12px; gap: 8px; border: 1px solid rgba(255, 255, 255, 0.05);
     cursor: pointer;
 }
-
 .currency-icon {
     width: 26px; height: 26px; border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    font-size: 14px; background: #26a69a;
+    font-size: 14px; background: var(--purple-main);
 }
-
 .balance-amount { font-weight: 700; font-size: 15px; margin-right: 4px; }
 .down-arrow { font-size: 10px; color: var(--text-muted); }
 
+.deposit-btn {
+    background: var(--purple-main); color: #fff; border: none;
+    width: 38px; height: 38px; border-radius: 10px; font-size: 16px;
+    font-weight: bold; cursor: pointer; box-shadow: 0 0 12px rgba(157, 78, 221, 0.4);
+}
+
 /* Выпадающий список валют */
 .balance-dropdown {
-    position: absolute; top: 50px; background: var(--bg-panel);
+    position: absolute; top: 55px; left: 0; background: var(--bg-panel);
     border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px;
     width: 180px; box-shadow: 0 10px 25px rgba(0,0,0,0.8);
     display: flex; flex-direction: column; overflow: hidden; z-index: 101;
 }
 .balance-dropdown.hidden { display: none; }
-
 .crypto-item {
     padding: 10px 15px; display: flex; align-items: center; gap: 10px;
-    font-weight: 600; font-size: 14px; border-bottom: 1px solid rgba(255,255,255,0.03);
-    cursor: pointer;
+    font-weight: 600; font-size: 14px; border-bottom: 1px solid rgba(255,255,255,0.03); cursor: pointer;
 }
-.crypto-item:active { background: rgba(255,255,255,0.05); }
 .dropdown-icon {
     width: 24px; height: 24px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; font-size: 12px; color: #fff;
 }
 
-/* Кнопка + и Аватар */
-.deposit-btn {
-    background: var(--neon-lime); color: #000; border: none;
-    width: 34px; height: 34px; border-radius: 8px; font-size: 16px;
-    font-weight: bold; cursor: pointer; box-shadow: 0 0 10px rgba(197, 255, 0, 0.2);
+/* Аватарка */
+.avatar-placeholder {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--purple-main), #3c096c);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: bold; font-size: 16px; border: 2px solid var(--purple-light);
 }
-.profile-icon img { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; }
 
-/* === ОСНОВНОЙ КОНТЕНТ И СЕТКА ИГР === */
-.main-content { padding: 0 16px; }
-.section-title { font-size: 20px; font-weight: 700; margin: 15px 0; }
-
+/* === КАРТОЧКИ ИГР === */
 .games-layout { display: flex; flex-direction: column; gap: 12px; }
 
-/* Карточки игр */
 .game-banner-card {
     position: relative; height: 160px; border-radius: 16px;
-    overflow: hidden; cursor: pointer;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    overflow: hidden; cursor: pointer; border: 1px solid rgba(255, 255, 255, 0.05);
 }
 .game-banner-card:active { transform: scale(0.98); }
 
 .banner-bg { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 1; }
 .banner-overlay {
     position: absolute; inset: 0;
-    background: linear-gradient(90deg, rgba(11,9,20,0.95) 0%, rgba(11,9,20,0.2) 50%, rgba(11,9,20,0.6) 100%);
+    background: linear-gradient(90deg, rgba(11,9,20,0.95) 0%, rgba(11,9,20,0.2) 60%, transparent 100%);
     z-index: 2;
 }
 
 .banner-content {
-    position: relative; z-index: 3; height: 100%; padding: 16px;
-    display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start;
+    position: relative; z-index: 3; height: 100%; padding: 20px;
+    display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 15px;
 }
-
-.badge-original {
-    background: var(--badge-green); color: #fff; font-size: 11px;
-    font-weight: 700; padding: 4px 8px; border-radius: 6px;
-}
-
-.banner-title { font-size: 22px; font-weight: 800; color: #fff; margin: 0 0 4px 0; }
-.players-online { font-size: 13px; color: rgba(255,255,255,0.7); display: flex; align-items: center; gap: 6px; }
-.players-online i { color: var(--badge-green); }
+.banner-title { font-size: 26px; font-weight: 800; color: #fff; margin: 0; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
 
 .play-banner-btn {
-    position: absolute; bottom: 16px; right: 16px;
-    background: var(--btn-orange); color: #000; border: none; border-radius: 10px;
-    padding: 10px 20px; font-size: 14px; font-weight: 700;
-    display: flex; align-items: center; gap: 8px; cursor: pointer;
+    background: var(--purple-main); color: #fff; border: none; border-radius: 10px;
+    padding: 10px 24px; font-size: 14px; font-weight: 700;
+    display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(157, 78, 221, 0.4);
 }
 
-/* === ПОСЛЕДНИЕ СТАВКИ === */
-.recent-bets-container {
-    background: var(--bg-panel); border-radius: 16px; padding: 15px;
-    border: 1px solid rgba(255,255,255,0.05);
+/* === КОШЕЛЕК И МЕНЮ === */
+.wallet-card {
+    background: var(--bg-panel); padding: 30px 20px; border-radius: 16px;
+    text-align: center; border: 1px solid rgba(255,255,255,0.05);
 }
-.bet-row {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 13px;
+.wallet-card p { color: var(--text-muted); margin: 0 0 10px 0; font-size: 14px; }
+.wallet-balance-big { font-size: 36px; margin: 0 0 25px 0; color: var(--purple-light); }
+.wallet-actions { display: flex; gap: 10px; }
+.wallet-btn {
+    flex: 1; padding: 12px; border-radius: 10px; border: none; font-weight: bold; font-size: 14px; cursor: pointer;
+    display: flex; justify-content: center; align-items: center; gap: 8px;
 }
-.bet-row:last-child { border-bottom: none; padding-bottom: 0; }
+.wallet-btn.deposit { background: var(--purple-main); color: #fff; }
+.wallet-btn.withdraw { background: rgba(255,255,255,0.1); color: #fff; }
 
-.bet-user { display: flex; align-items: center; gap: 6px; color: #fff; width: 30%; }
-.bet-user i { color: var(--text-muted); }
-.bet-game { color: var(--text-muted); width: 25%; text-align: left; }
-.bet-amount { color: #fff; font-weight: 600; width: 20%; text-align: right; }
-.bet-win { font-weight: bold; width: 25%; text-align: right; }
-.bet-win.positive { color: var(--badge-green); }
-.bet-win.negative { color: #ff4444; }
+.menu-list { display: flex; flex-direction: column; gap: 10px; }
+.menu-item {
+    background: var(--bg-panel); padding: 16px; border-radius: 12px;
+    display: flex; align-items: center; gap: 15px; cursor: pointer; border: 1px solid rgba(255,255,255,0.05);
+}
+.menu-item i:first-child { color: var(--purple-main); font-size: 20px; }
+.menu-item span { flex-grow: 1; font-weight: 600; }
+.menu-item .arrow { color: var(--text-muted); font-size: 14px; }
 
 /* === КНОПКА ПОДДЕРЖКИ === */
 .support-fab {
     position: fixed; bottom: 90px; right: 16px;
-    background: var(--neon-lime); color: #000; border: none;
-    width: 45px; height: 45px; border-radius: 12px; font-size: 20px;
+    background: var(--purple-main); color: #fff; border: none;
+    width: 48px; height: 48px; border-radius: 14px; font-size: 20px;
     display: flex; align-items: center; justify-content: center; z-index: 99;
+    box-shadow: 0 4px 15px rgba(157, 78, 221, 0.4);
 }
 
-/* === НИЖНЕЕ МЕНЮ (3 кнопки) === */
+/* === НИЖНЕЕ МЕНЮ === */
 .bottom-nav {
     position: fixed; bottom: 0; left: 0; width: 100%;
     background: #111115; display: flex; justify-content: space-around;
@@ -154,4 +154,4 @@ body {
     text-decoration: none; color: var(--text-muted); font-size: 11px; font-weight: 500;
 }
 .nav-item i { font-size: 20px; }
-.nav-item.active { color: var(--neon-lime); }
+.nav-item.active { color: var(--purple-light); }
