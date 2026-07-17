@@ -2,103 +2,145 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Telegram Casino</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>TG Casino</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link rel="stylesheet" href="style.css">
-    <!-- Подключение иконок FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="dark-theme">
+<body>
 
-    <div class="app-container">
+<div class="app-container">
     
     <!-- ВЕРХНЯЯ ПАНЕЛЬ -->
     <header class="top-header">
-        <div class="header-left">
-            <!-- Пусто, убрали лишние кнопки и полоски -->
-        </div>
+        <div class="header-left"></div> <!-- Пустота для центрирования баланса -->
         
         <div class="header-center">
-            <!-- Увеличенная кнопка баланса -->
-            <div class="balance-pill" onclick="toggleBalanceDropdown()">
-                <div class="currency-icon"><i class="fa-brands fa-bitcoin"></i></div>
-                <span class="balance-amount">0.045 BTC</span>
+            <!-- Кнопка баланса -->
+            <div class="balance-pill" id="balance-btn" onclick="toggleBalanceDropdown(event)">
+                <div class="currency-icon" id="active-currency-icon">
+                    <i class="fa-solid fa-ruble-sign" style="color: #ffffff;"></i>
+                </div>
+                <span class="balance-amount" id="active-balance-amount">1.25</span>
                 <i class="fa-solid fa-chevron-down down-arrow"></i>
             </div>
             
-            <!-- Выпадающий список криптовалют (скрыт по умолчанию) -->
+            <!-- Выпадающий список валют -->
             <div class="balance-dropdown hidden" id="balance-dropdown">
-                <div class="crypto-item">
-                    <i class="fa-brands fa-ethereum" style="color: #627eea;"></i> 
-                    <span>1.25 ETH</span>
+                <div class="crypto-item" onclick="selectCurrency('RUB', '1.25', 'fa-solid fa-ruble-sign', '#26a69a')">
+                    <div class="dropdown-icon" style="background: #26a69a;"><i class="fa-solid fa-ruble-sign"></i></div> 
+                    <span>RUB</span>
                 </div>
-                <div class="crypto-item">
-                    <i class="fa-solid fa-ruble-sign" style="color: #26a69a;"></i> 
-                    <span>15 000 RUB</span>
+                <div class="crypto-item" onclick="selectCurrency('TON', '14.50', 'fa-regular fa-gem', '#0088cc')">
+                    <div class="dropdown-icon" style="background: #0088cc;"><i class="fa-regular fa-gem"></i></div> 
+                    <span>Toncoin</span>
                 </div>
-                <div class="crypto-item">
-                    <i class="fa-brands fa-usdt" style="color: #26a69a;"></i> 
-                    <span>150 USDT</span>
+                <div class="crypto-item" onclick="selectCurrency('USDT', '150.00', 'fa-solid fa-dollar-sign', '#26a69a')">
+                    <div class="dropdown-icon" style="background: #26a69a;"><i class="fa-solid fa-dollar-sign"></i></div> 
+                    <span>USDT</span>
+                </div>
+                <div class="crypto-item" onclick="selectCurrency('STARS', '500', 'fa-solid fa-star', '#ffb800')">
+                    <div class="dropdown-icon" style="background: #ffb800;"><i class="fa-solid fa-star"></i></div> 
+                    <span>Telegram Stars</span>
                 </div>
             </div>
         </div>
         
         <div class="header-right">
-            <!-- Кнопка аккаунта (теперь содержит бонусы) -->
-            <div class="profile-icon" onclick="openAccountModal()">
-                <img src="images/avatar.jpg" alt="Profile" onerror="this.src='https://via.placeholder.com/40'">
-                <span class="notification-dot"></span>
+            <!-- Кнопка пополнения -->
+            <button class="deposit-btn" onclick="openWallet()"><i class="fa-solid fa-plus"></i></button>
+            <!-- Аватарка (пока не трогаем, просто висит) -->
+            <div class="profile-icon">
+                <img src="https://via.placeholder.com/40" alt="Profile">
             </div>
         </div>
     </header>
 
-    <!-- ГЛАВНЫЙ ЭКРАН (Блоки игр) -->
+    <!-- ГЛАВНЫЙ ЭКРАН -->
     <main class="main-content">
-        <h2 class="section-title">Популярное</h2>
         
+        <!-- БЛОК 1: ИГРЫ -->
+        <h2 class="section-title">Игры</h2>
         <div class="games-layout">
-            <!-- Блок игры 1 -->
-            <div class="game-banner-card" onclick="openGameModal('Crush Game', 'images/crash-bg.png')">
+            <!-- Crush Game -->
+            <div class="game-banner-card" onclick="openGame('Crush Game')">
                 <img src="images/crash-bg.png" class="banner-bg" alt="Crush">
                 <div class="banner-overlay"></div>
                 <div class="banner-content">
                     <span class="badge-original">Original</span>
                     <div class="banner-info">
-                        <h3 class="banner-title">Crush Game</h3>
-                        <span class="players-online"><i class="fa-solid fa-user-group"></i> 202 игрока</span>
+                        <h3 class="banner-title">Crush game</h3>
+                        <span class="players-online"><i class="fa-solid fa-user-group"></i> 178 игроков</span>
                     </div>
                     <button class="play-banner-btn">Играть <i class="fa-solid fa-arrow-right"></i></button>
                 </div>
             </div>
 
-            <!-- Блок игры 2 -->
-            <div class="game-banner-card" onclick="openGameModal('Plinko', 'images/plinko-bg.png')">
+            <!-- Plinko -->
+            <div class="game-banner-card" onclick="openGame('Plinko')">
                 <img src="images/plinko-bg.png" class="banner-bg" alt="Plinko">
                 <div class="banner-overlay"></div>
                 <div class="banner-content">
                     <span class="badge-original">Original</span>
                     <div class="banner-info">
                         <h3 class="banner-title">Plinko</h3>
-                        <span class="players-online"><i class="fa-solid fa-user-group"></i> 187 игроков</span>
+                        <span class="players-online"><i class="fa-solid fa-user-group"></i> 160 игроков</span>
                     </div>
                     <button class="play-banner-btn">Играть <i class="fa-solid fa-arrow-right"></i></button>
                 </div>
             </div>
             
-            <!-- Остальные игры добавляй по такому же шаблону -->
+            <!-- Добавляй остальные игры по аналогии -->
         </div>
+
+        <!-- БЛОК 2: ПОСЛЕДНИЕ СТАВКИ -->
+        <h2 class="section-title" style="margin-top: 30px;">Последние ставки</h2>
+        <div class="recent-bets-container">
+            <!-- Заглушка 1 -->
+            <div class="bet-row">
+                <div class="bet-user">
+                    <i class="fa-solid fa-user-ninja"></i>
+                    <span>@player_one</span>
+                </div>
+                <div class="bet-game">Plinko</div>
+                <div class="bet-amount">50 RUB</div>
+                <div class="bet-win positive">+120 RUB</div>
+            </div>
+            <!-- Заглушка 2 -->
+            <div class="bet-row">
+                <div class="bet-user">
+                    <i class="fa-solid fa-user-astronaut"></i>
+                    <span>@crypto_king</span>
+                </div>
+                <div class="bet-game">Crush game</div>
+                <div class="bet-amount">10 TON</div>
+                <div class="bet-win negative">-10 TON</div>
+            </div>
+            <!-- Заглушка 3 -->
+            <div class="bet-row">
+                <div class="bet-user">
+                    <i class="fa-solid fa-user-secret"></i>
+                    <span>@lucky_guy</span>
+                </div>
+                <div class="bet-game">Double game</div>
+                <div class="bet-amount">500 STARS</div>
+                <div class="bet-win positive">+1000 STARS</div>
+            </div>
+        </div>
+        
     </main>
 
-    <!-- ПЛАВАЮЩАЯ КНОПКА ПОДДЕРЖКИ -->
-    <button class="support-fab">
+    <!-- ПЛАВАЮЩАЯ КНОПКА ПОДДЕРЖКИ (Оставляем пока как есть) -->
+    <button class="support-fab" onclick="tg.showAlert('Служба поддержки откроется здесь')">
         <i class="fa-solid fa-headset"></i>
     </button>
 
-    <!-- НИЖНЕЕ МЕНЮ (3 кнопки на русском) -->
+    <!-- НИЖНЕЕ МЕНЮ (Только 3 кнопки) -->
     <nav class="bottom-nav">
         <a href="#" class="nav-item">
             <i class="fa-solid fa-wallet"></i>
-            <span>Баланс</span>
+            <span>Кошелек</span>
         </a>
         <a href="#" class="nav-item active">
             <i class="fa-solid fa-layer-group"></i>
@@ -111,5 +153,7 @@
     </nav>
 
 </div>
+
+<script src="app.js"></script>
 </body>
 </html>

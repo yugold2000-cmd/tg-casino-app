@@ -1,145 +1,157 @@
-/* === БАЗОВЫЕ НАСТРОЙКИ И ФИОЛЕТОВЫЙ ЦВЕТ === */
 :root {
-    --bg-dark: #0f0f13;
-    --bg-panel: #1a1b22;
-    --accent-color: #a855f7; /* Красивый неоновый фиолетовый */
+    --bg-dark: #0f0f13;       /* Основной темный фон */
+    --bg-panel: #1a1b22;      /* Фон для плашек */
+    --neon-lime: #c5ff00;     /* Лаймовый цвет для верхних кнопок и меню */
+    --btn-orange: #ffa502;    /* Желто-оранжевый цвет кнопок "Играть" */
+    --badge-green: #73b925;   /* Зеленый цвет для бейджа Original */
     --text-main: #ffffff;
     --text-muted: #888992;
-    --bitcoin-color: #f7931a;
 }
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
 body {
     background-color: var(--bg-dark);
     color: var(--text-main);
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    padding-bottom: 80px; 
+    padding-bottom: 90px; 
 }
 
 /* === ВЕРХНЯЯ ПАНЕЛЬ === */
 .top-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 16px;
-    background-color: var(--bg-dark);
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 15px 16px; background-color: var(--bg-dark);
+    position: sticky; top: 0; z-index: 100;
 }
 
-.header-left { width: 36px; /* Пустое место для симметрии */ }
+.header-left, .header-right { width: 80px; display: flex; align-items: center; gap: 12px; }
+.header-right { justify-content: flex-end; }
+.header-center { flex-grow: 1; display: flex; justify-content: center; position: relative; }
 
-.header-center {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    position: relative;
-}
-
-/* Увеличенный баланс */
+/* Кнопка баланса */
 .balance-pill {
-    display: flex;
-    align-items: center;
-    background: var(--bg-panel);
-    padding: 8px 16px 8px 8px; /* Сделали больше */
-    border-radius: 12px;
-    gap: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex; align-items: center;
+    background: var(--bg-panel); padding: 6px 12px 6px 6px;
+    border-radius: 12px; gap: 8px; border: 1px solid rgba(255, 255, 255, 0.05);
     cursor: pointer;
-    transition: background 0.2s;
-}
-
-.balance-pill:active {
-    background: #23242c;
 }
 
 .currency-icon {
-    background: rgba(247, 147, 26, 0.2);
-    color: var(--bitcoin-color);
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
+    width: 26px; height: 26px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; background: #26a69a;
 }
 
-.balance-amount {
-    font-weight: 700;
-    font-size: 16px; /* Увеличили шрифт */
-}
+.balance-amount { font-weight: 700; font-size: 15px; margin-right: 4px; }
+.down-arrow { font-size: 10px; color: var(--text-muted); }
 
-/* Выпадающий список балансов */
+/* Выпадающий список валют */
 .balance-dropdown {
-    position: absolute;
-    top: 55px;
-    background: var(--bg-panel);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
-    width: 200px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    z-index: 101;
+    position: absolute; top: 50px; background: var(--bg-panel);
+    border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px;
+    width: 180px; box-shadow: 0 10px 25px rgba(0,0,0,0.8);
+    display: flex; flex-direction: column; overflow: hidden; z-index: 101;
 }
-
-.balance-dropdown.hidden {
-    display: none;
-}
+.balance-dropdown.hidden { display: none; }
 
 .crypto-item {
-    padding: 12px 16px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-weight: 600;
-    font-size: 14px;
-    border-bottom: 1px solid rgba(255,255,255,0.03);
-}
-
-.crypto-item:last-child {
-    border-bottom: none;
-}
-
-.crypto-item i {
-    font-size: 18px;
-}
-
-/* Профиль аккаунта */
-.profile-icon {
-    position: relative;
-    width: 40px;
-    height: 40px;
+    padding: 10px 15px; display: flex; align-items: center; gap: 10px;
+    font-weight: 600; font-size: 14px; border-bottom: 1px solid rgba(255,255,255,0.03);
     cursor: pointer;
 }
-
-.profile-icon img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid var(--accent-color); /* Фиолетовая обводка профиля */
+.crypto-item:active { background: rgba(255,255,255,0.05); }
+.dropdown-icon {
+    width: 24px; height: 24px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; font-size: 12px;
 }
 
-/* === ИЗМЕНЕНИЯ ЦВЕТОВ === */
-/* Фиолетовая кнопка играть на блоках */
+/* Кнопка + и Аватар */
+.deposit-btn {
+    background: var(--neon-lime); color: #000; border: none;
+    width: 34px; height: 34px; border-radius: 8px; font-size: 16px;
+    font-weight: bold; cursor: pointer; box-shadow: 0 0 10px rgba(197, 255, 0, 0.2);
+}
+.profile-icon img { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; }
+
+/* === ОСНОВНОЙ КОНТЕНТ И СЕТКА ИГР === */
+.main-content { padding: 0 16px; }
+.section-title { font-size: 20px; font-weight: 700; margin: 15px 0; }
+
+.games-layout { display: flex; flex-direction: column; gap: 12px; }
+
+/* Карточки игр */
+.game-banner-card {
+    position: relative; height: 160px; border-radius: 16px;
+    overflow: hidden; cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+.game-banner-card:active { transform: scale(0.98); }
+
+.banner-bg { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 1; }
+.banner-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(90deg, rgba(11,9,20,0.95) 0%, rgba(11,9,20,0.2) 50%, rgba(11,9,20,0.6) 100%);
+    z-index: 2;
+}
+
+.banner-content {
+    position: relative; z-index: 3; height: 100%; padding: 16px;
+    display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start;
+}
+
+.badge-original {
+    background: var(--badge-green); color: #fff; font-size: 11px;
+    font-weight: 700; padding: 4px 8px; border-radius: 6px;
+}
+
+.banner-title { font-size: 22px; font-weight: 800; color: #fff; margin: 0 0 4px 0; }
+.players-online { font-size: 13px; color: rgba(255,255,255,0.7); display: flex; align-items: center; gap: 6px; }
+.players-online i { color: var(--badge-green); }
+
 .play-banner-btn {
-    background: var(--accent-color) !important;
-    color: #fff !important;
-    box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4) !important;
+    position: absolute; bottom: 16px; right: 16px;
+    background: var(--btn-orange); color: #000; border: none; border-radius: 10px;
+    padding: 10px 20px; font-size: 14px; font-weight: 700;
+    display: flex; align-items: center; gap: 8px; cursor: pointer;
 }
 
-/* Фиолетовая кнопка поддержки */
+/* === ПОСЛЕДНИЕ СТАВКИ === */
+.recent-bets-container {
+    background: var(--bg-panel); border-radius: 16px; padding: 15px;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+.bet-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 13px;
+}
+.bet-row:last-child { border-bottom: none; padding-bottom: 0; }
+
+.bet-user { display: flex; align-items: center; gap: 6px; color: #fff; width: 30%; }
+.bet-user i { color: var(--text-muted); }
+.bet-game { color: var(--text-muted); width: 25%; text-align: left; }
+.bet-amount { color: #fff; font-weight: 600; width: 20%; text-align: right; }
+.bet-win { font-weight: bold; width: 25%; text-align: right; }
+.bet-win.positive { color: var(--badge-green); }
+.bet-win.negative { color: #ff4444; }
+
+/* === КНОПКА ПОДДЕРЖКИ === */
 .support-fab {
-    background: var(--accent-color);
-    color: #fff;
-    box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+    position: fixed; bottom: 90px; right: 16px;
+    background: var(--neon-lime); color: #000; border: none;
+    width: 45px; height: 45px; border-radius: 12px; font-size: 20px;
+    display: flex; align-items: center; justify-content: center; z-index: 99;
 }
 
-/* Активный пункт меню */
-.nav-item.active {
-    color: var(--accent-color);
+/* === НИЖНЕЕ МЕНЮ (3 кнопки) === */
+.bottom-nav {
+    position: fixed; bottom: 0; left: 0; width: 100%;
+    background: #111115; display: flex; justify-content: space-around;
+    padding: 12px 0; border-top: 1px solid rgba(255,255,255,0.05); z-index: 100;
 }
+.nav-item {
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    text-decoration: none; color: var(--text-muted); font-size: 11px; font-weight: 500;
+}
+.nav-item i { font-size: 20px; }
+.nav-item.active { color: var(--neon-lime); }
