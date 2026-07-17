@@ -210,12 +210,49 @@ body.theme-light .main-logo-svg text { fill: #1a1a1f; }
 }
 
 /* === МЕНЮ: КВАДРАТНЫЕ ПЛИТКИ === */
+/* === МЕНЮ: КВАДРАТНЫЕ ПЛИТКИ === */
 .menu-grid {
     display: flex;
-    justify-content: center; /* Поставили по центру (было flex-start) */
+    justify-content: center;
     gap: 12px;
-    margin-top: auto;
-    padding-bottom: 15px;
+    margin-top: auto;        /* Выталкивает блоки вниз */
+    padding-bottom: 6px;     /* Уменьшили отступ до зеленой кнопки (было 10px) */
+}
+
+/* === КНОПКА ЧЕСТНОСТИ ПОД КВАДРАТИКАМИ === */
+.fairness-footer-btn {
+    background: rgba(0, 230, 118, 0.07);      
+    border: 1px solid rgba(0, 230, 118, 0.15); 
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px 12px;       /* Сделали саму кнопку чуть компактнее по высоте */
+    width: 250px;             
+    margin: 0 auto 5px auto;  /* Прижали ближе к нижнему меню навигации (было 15px снизу) */
+    cursor: pointer;
+}
+
+/* Эффект нажатия на телефоне */
+.fairness-footer-btn:active { 
+    transform: scale(0.96); 
+}
+
+/* Защита мобильной верстки от ложных сбросов клика */
+.fairness-footer-btn > * { 
+    pointer-events: none; 
+}
+
+/* Стили текста и иконки */
+.fairness-footer-btn span {
+    font-size: 13px;
+    font-weight: 700;
+    color: #00e676; 
+}
+.fairness-footer-btn i {
+    font-size: 14px;
+    color: #00e676; 
 }
 
 .menu-square {
