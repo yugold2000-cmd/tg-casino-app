@@ -58,55 +58,94 @@
             <h2 class="section-title">Все игры</h2>
             
             <!-- Сетка игр (CSS Grid Layout) -->
-            <div class="games-grid">
-                <!-- 1. Crush Game (Иконка: Ракета, Фон: crash-bg) -->
-                <div class="game-card" onclick="openGameModal('Crush Game', 'fa-rocket')">
-                    <div class="game-icon-wrapper crash-bg">
-                        <i class="fa-solid fa-rocket"></i>
+            <!-- Новая сетка игр в виде полноценных карточек-баннеров -->
+            <div class="games-layout">
+                    <!-- 1. Crush Game -->
+                <div class="game-banner-card" onclick="openGameModal('Crush Game', 'images/crash-bg.png')">
+                    <!-- Твоя фоновая картинка (PNG) -->
+                    <img src="images/crash-bg.png" class="banner-bg" alt="Crush Game">
+                    <div class="banner-overlay"></div>
+                    <div class="banner-content">
+                        <span class="badge-original">Original</span>
+                        <div class="banner-info">
+                            <h3 class="banner-title">Crush Game</h3>
+                            <span class="players-online"><i class="fa-solid fa-user-group"></i> 202 игроков</span>
+                        </div>
+                        <button class="play-banner-btn">Играть <i class="fa-solid fa-arrow-right"></i></button>
                     </div>
-                    <span class="game-name">Crush Game</span>
                 </div>
             
-                <!-- 2. Plinko (Иконка: Пирамида пинов, Фон: plinko-bg) -->
-                <div class="game-card" onclick="openGameModal('Plinko', 'fa-sitemap')">
-                    <div class="game-icon-wrapper plinko-bg">
-                        <i class="fa-solid fa-sitemap"></i>
+                <!-- 2. Plinko -->
+                <div class="game-banner-card" onclick="openGameModal('Plinko', 'images/plinko-bg.png')">
+                    <img src="images/plinko-bg.png" class="banner-bg" alt="Plinko">
+                    <div class="banner-overlay"></div>
+                    <div class="banner-content">
+                        <span class="badge-original">Original</span>
+                        <div class="banner-info">
+                            <h3 class="banner-title">Plinko</h3>
+                            <span class="players-online"><i class="fa-solid fa-user-group"></i> 187 игроков</span>
+                        </div>
+                        <button class="play-banner-btn">Играть <i class="fa-solid fa-arrow-right"></i></button>
                     </div>
-                    <span class="game-name">Plinko</span>
                 </div>
-
-                <!-- 3. Roulette (Иконка: Кручение, Фон: roulette-bg) -->
-                <div class="game-card" onclick="openGameModal('Roulette', 'fa-arrows-spin')">
-                    <div class="game-icon-wrapper roulette-bg">
-                        <i class="fa-solid fa-arrows-spin"></i>
+            
+                <!-- 3. Roulette (Double game) -->
+                <div class="game-banner-card" onclick="openGameModal('Roulette', 'images/roulette-bg.png')">
+                    <img src="images/roulette-bg.png" class="banner-bg" alt="Roulette">
+                    <div class="banner-overlay"></div>
+                    <div class="banner-content">
+                        <span class="badge-original">Original</span>
+                        <div class="banner-info">
+                            <h3 class="banner-title">Roulette</h3>
+                            <span class="players-online"><i class="fa-solid fa-user-group"></i> 192 игроков</span>
+                        </div>
+                        <button class="play-banner-btn">Играть <i class="fa-solid fa-arrow-right"></i></button>
                     </div>
-                    <span class="game-name">Roulette</span>
                 </div>
-
-                <!-- 4. Blackjack (Иконка: Колода карт, Фон: blackjack-bg) -->
-                <div class="game-card" onclick="openGameModal('Blackjack', 'fa-layer-group')">
-                    <div class="game-icon-wrapper blackjack-bg">
-                        <i class="fa-solid fa-layer-group"></i>
+            
+                <!-- 4. Blackjack -->
+                <div class="game-banner-card" onclick="openGameModal('Blackjack', 'images/blackjack-bg.png')">
+                    <img src="images/blackjack-bg.png" class="banner-bg" alt="Blackjack">
+                    <div class="banner-overlay"></div>
+                    <div class="banner-content">
+                        <span class="badge-original">Original</span>
+                        <div class="banner-info">
+                            <h3 class="banner-title">Blackjack</h3>
+                            <span class="players-online"><i class="fa-solid fa-user-group"></i> 180 игроков</span>
+                        </div>
+                        <button class="play-banner-btn">Играть <i class="fa-solid fa-arrow-right"></i></button>
                     </div>
-                    <span class="game-name">Blackjack</span>
                 </div>
-
-                <!-- 5. Dice (Иконка: Кости, Фон: dice-bg) -->
-                <div class="game-card" onclick="openGameModal('Dice', 'fa-dice')">
-                    <div class="game-icon-wrapper dice-bg">
-                        <i class="fa-solid fa-dice"></i>
+            
+                <!-- 5. Dice -->
+                <div class="game-banner-card" onclick="openGameModal('Dice', 'images/dice-bg.png')">
+                    <img src="images/dice-bg.png" class="banner-bg" alt="Dice">
+                    <div class="banner-overlay"></div>
+                    <div class="banner-content">
+                        <span class="badge-original">Original</span>
+                        <div class="banner-info">
+                            <h3 class="banner-title">Dice</h3>
+                            <span class="players-online"><i class="fa-solid fa-user-group"></i> 183 игроков</span>
+                        </div>
+                        <button class="play-banner-btn">Играть <i class="fa-solid fa-arrow-right"></i></button>
                     </div>
-                    <span class="game-name">Dice</span>
                 </div>
+                
+                    <!-- 6. Tickets -->
+                <div class="game-banner-card" onclick="openGameModal('Tickets', 'images/tickets-bg.png')">
+                    <img src="images/tickets-bg.png" class="banner-bg" alt="Tickets">
+                    <div class="banner-overlay"></div>
 
-                <!-- 6. Tickets (Иконка: Лотерейный билет, Фон: tickets-bg) -->
-                <div class="game-card" onclick="openGameModal('Tickets', 'fa-ticket')">
-                    <div class="game-icon-wrapper tickets-bg">
-                        <i class="fa-solid fa-ticket"></i>
+                    <div class="banner-content">
+                        <span class="badge-original">Original</span>
+                        <div class="banner-info">
+                            <h3 class="banner-title">Tickets</h3>
+                            <span class="players-online"><i class="fa-solid fa-user-group"></i> 182 игроков</span>
+                        </div>
+                        <button class="play-banner-btn">Играть <i class="fa-solid fa-arrow-right"></i></button>
                     </div>
-                    <span class="game-name">Tickets</span>
                 </div>
-
+                
             </div>
         </main>
 

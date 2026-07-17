@@ -125,80 +125,129 @@ body {
     font-weight: bold; z-index: 1; position: relative;
 }
 
-/* === 7. СЕТКА ИГР === */
-.games-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+/* === НОВЫЙ ДИЗАЙН: КАРТОЧКИ-БАННЕРЫ === */
 
-.game-card {
-    background: var(--bg-card); border: 1px solid rgba(255,255,255,0.05);
-    border-radius: 16px; padding: 20px 10px; text-align: center;
-    transition: all 0.2s ease; cursor: pointer;
-}
-.game-card:active { transform: scale(0.95); border-color: rgba(255,255,255,0.2); }
-
-.game-icon-wrapper {
-    width: 60px; height: 60px; border-radius: 14px; margin: 0 auto 12px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 28px; color: #fff; transition: transform 0.3s;
-}
-.game-card:hover .game-icon-wrapper { transform: translateY(-5px); }
-
-/* Градиенты для иконок игр */
-/* Градиенты и неоновое свечение для каждой игры */
-.crash-bg { 
-    background: linear-gradient(135deg, #FF4444, #990000); 
-    box-shadow: 0 5px 15px rgba(255, 68, 68, 0.4); 
+/* Сетка для баннеров (автоматически переносится на мобилках) */
+.games-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-top: 15px;
 }
 
-.plinko-bg { 
-    background: linear-gradient(135deg, #FF3366, #990033); 
-    box-shadow: 0 5px 15px rgba(255, 51, 102, 0.4); 
+/* Сама карточка */
+.game-banner-card {
+    position: relative;
+    height: 155px; /* Высота баннера как на скриншоте */
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.2s;
 }
 
-.roulette-bg { 
-    background: linear-gradient(135deg, #20E3B2, #009977); 
-    box-shadow: 0 5px 15px rgba(32, 227, 178, 0.4); 
+/* Эффект легкого увеличения и свечения при нажатии */
+.game-banner-card:active {
+    transform: scale(0.97);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
 }
 
-.blackjack-bg { 
-    background: linear-gradient(135deg, #3399FF, #004499); 
-    box-shadow: 0 5px 15px rgba(51, 153, 255, 0.4); 
+/* Фоновое изображение (твоя PNG) */
+.banner-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Растягивает картинку без искажений */
+    position: absolute;
+    top: 0; left: 0;
+    z-index: 1;
 }
 
-.dice-bg { 
-    background: linear-gradient(135deg, #FFD700, #B38F00); 
-    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4); 
+/* Затемнение поверх картинки (Overlay), чтобы белый текст всегда читался */
+.banner-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(11, 9, 20, 0.95) 0%, rgba(11, 9, 20, 0.4) 50%, rgba(11, 9, 20, 0.7) 100%);
+    z-index: 2;
 }
 
-.tickets-bg { 
-    background: linear-gradient(135deg, #9933FF, #440099); 
-    box-shadow: 0 5px 15px rgba(153, 51, 255, 0.4); 
+/* Контент внутри баннера */
+.banner-content {
+    position: relative;
+    z-index: 3;
+    height: 100%;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Распределяет плашку Original наверх, а инфо — вниз */
+    align-items: flex-start;
 }
 
-.game-name { font-weight: 600; font-size: 14px; }
-
-/* === 8. КНОПКИ И МОДАЛЬНЫЕ ОКНА === */
-.wallet-card { padding: 30px 20px; border-radius: 20px; text-align: center; margin-top: 20px; }
-.wallet-card h1 { font-size: 36px; margin: 15px 0 25px; color: var(--accent); }
-
-.wallet-actions { display: flex; gap: 15px; }
-.btn { flex: 1; padding: 14px; border-radius: 12px; border: none; font-weight: bold; cursor: pointer; transition: transform 0.2s; }
-.btn:active { transform: scale(0.95); }
-.btn-primary { background: var(--primary); color: #fff; box-shadow: 0 4px 15px var(--primary-glow); }
-.btn-secondary { background: rgba(255,255,255,0.1); color: #fff; }
-.full-width { width: 100%; margin-top: 15px; }
-
-/* Затемнение фона для попапа */
-.modal-overlay {
-    position: fixed; inset: 0; background: rgba(0, 0, 0, 0.85);
-    display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 20px;
+/* Зеленая плашка Original */
+.badge-original {
+    background: #73b925; /* Приятный салатовый цвет */
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    box-shadow: 0 2px 8px rgba(115, 185, 37, 0.3);
 }
-.modal-content {
-    background: var(--bg-main); width: 100%; max-width: 350px;
-    border-radius: 24px; padding: 30px 20px; text-align: center;
-    position: relative; animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+/* Блок с названием и онлайном */
+.banner-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
-.close-btn { position: absolute; top: 15px; right: 15px; background: none; border: none; color: var(--text-muted); font-size: 20px; }
-.modal-icon { font-size: 50px; color: var(--primary); margin-bottom: 15px; }
+
+.banner-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.players-online {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.players-online i {
+    color: #73b925; /* Зеленая иконка человечков */
+    font-size: 12px;
+}
+
+/* Фирменная желтая кнопка "Играть ->" */
+.play-banner-btn {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    background: #ffa502; /* Сочный оранжево-желтый */
+    color: #0b0914;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(255, 165, 2, 0.3);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.play-banner-btn i {
+    font-size: 12px;
+}
+
+.play-banner-btn:active {
+    background: #ff7f50;
+}
 
 /* === 9. НИЖНЯЯ НАВИГАЦИЯ === */
 .bottom-nav {

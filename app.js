@@ -87,13 +87,19 @@ window.switchTab = function(tabId, element) {
     element.classList.add('active');
 }
 
-// 7. Работа с модальным окном игры (Попап)
-window.openGameModal = function(gameTitle, iconClass) {
+// Открытие модального окна игры
+window.openGameModal = function(gameTitle, imagePath) {
     triggerHaptic('medium'); 
     
+    // Подставляем название игры
     document.getElementById('modal-game-title').innerText = gameTitle;
-    document.getElementById('modal-game-icon').innerHTML = `<i class="fa-solid ${iconClass}"></i>`;
     
+    // Вместо иконки шрифта вставляем красивое фоновое превью картинки в модалку
+    document.getElementById('modal-game-icon').innerHTML = `
+        <img src="${imagePath}" alt="${gameTitle}" style="width: 120px; height: 75px; object-fit: cover; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 4px 10px rgba(0,0,0,0.5);">
+    `;
+    
+    // Показываем модалку
     document.getElementById('game-modal').classList.remove('hidden');
 }
 
