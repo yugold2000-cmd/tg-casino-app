@@ -224,14 +224,14 @@ body {
 /* Фирменная желтая кнопка "Играть ->" */
 .play-banner-btn {
     position: absolute;
-    bottom: 16px;
-    right: 16px;
-    background: #ffa502; /* Сочный оранжево-желтый */
+    bottom: 28px;
+    right: 28px;
+    background: #a215a7; 
     color: #0b0914;
     border: none;
     border-radius: 10px;
     padding: 10px 18px;
-    font-size: 14px;
+    font-size: 20px;
     font-weight: 700;
     display: flex;
     align-items: center;
