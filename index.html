@@ -10,122 +10,106 @@
 </head>
 <body class="dark-theme">
 
-    <!-- === ШАПКА (HEADER) === -->
-    <header class="app-header">
+    <div class="app-container">
+    
+    <!-- ВЕРХНЯЯ ПАНЕЛЬ -->
+    <header class="top-header">
         <div class="header-left">
-            <!-- Можно поставить логотип или иконку меню -->
-            <i class="fa-solid fa-bars menu-toggle"></i>
+            <!-- Пусто, убрали лишние кнопки и полоски -->
         </div>
         
-        <!-- Плашка баланса и кнопка пополнения -->
         <div class="header-center">
-            <div class="balance-pill">
-                <span class="currency-badge">₽</span>
-                <span class="balance-amount">1 250.00</span>
-                <i class="fa-solid fa-chevron-down arrow-icon"></i>
+            <!-- Увеличенная кнопка баланса -->
+            <div class="balance-pill" onclick="toggleBalanceDropdown()">
+                <div class="currency-icon"><i class="fa-brands fa-bitcoin"></i></div>
+                <span class="balance-amount">0.045 BTC</span>
+                <i class="fa-solid fa-chevron-down down-arrow"></i>
             </div>
-            <button class="deposit-btn">+</button>
+            
+            <!-- Выпадающий список криптовалют (скрыт по умолчанию) -->
+            <div class="balance-dropdown hidden" id="balance-dropdown">
+                <div class="crypto-item">
+                    <i class="fa-brands fa-ethereum" style="color: #627eea;"></i> 
+                    <span>1.25 ETH</span>
+                </div>
+                <div class="crypto-item">
+                    <i class="fa-solid fa-ruble-sign" style="color: #26a69a;"></i> 
+                    <span>15 000 RUB</span>
+                </div>
+                <div class="crypto-item">
+                    <i class="fa-brands fa-usdt" style="color: #26a69a;"></i> 
+                    <span>150 USDT</span>
+                </div>
+            </div>
         </div>
-
-        <!-- Аватарка профиля справа -->
+        
         <div class="header-right">
-            <div class="profile-avatar">
-                <i class="fa-solid fa-user"></i>
+            <!-- Кнопка аккаунта (теперь содержит бонусы) -->
+            <div class="profile-icon" onclick="openAccountModal()">
+                <img src="images/avatar.jpg" alt="Profile" onerror="this.src='https://via.placeholder.com/40'">
+                <span class="notification-dot"></span>
             </div>
         </div>
     </header>
 
-    <!-- === ОСНОВНОЙ КОНТЕНТ === -->
+    <!-- ГЛАВНЫЙ ЭКРАН (Блоки игр) -->
     <main class="main-content">
+        <h2 class="section-title">Популярное</h2>
         
-        <!-- Заголовок секции игр -->
-        <div class="section-header">
-            <h2 class="section-title">Popular</h2>
-            <button class="see-all-btn">All</button>
-        </div>
+        <div class="games-layout">
+            <!-- Блок игры 1 -->
+            <div class="game-banner-card" onclick="openGameModal('Crush Game', 'images/crash-bg.png')">
+                <img src="images/crash-bg.png" class="banner-bg" alt="Crush">
+                <div class="banner-overlay"></div>
+                <div class="banner-content">
+                    <span class="badge-original">Original</span>
+                    <div class="banner-info">
+                        <h3 class="banner-title">Crush Game</h3>
+                        <span class="players-online"><i class="fa-solid fa-user-group"></i> 202 игрока</span>
+                    </div>
+                    <button class="play-banner-btn">Играть <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
 
-        <!-- Сетка игр (Вертикальные карточки как на фото) -->
-        <div class="games-grid-modern">
+            <!-- Блок игры 2 -->
+            <div class="game-banner-card" onclick="openGameModal('Plinko', 'images/plinko-bg.png')">
+                <img src="images/plinko-bg.png" class="banner-bg" alt="Plinko">
+                <div class="banner-overlay"></div>
+                <div class="banner-content">
+                    <span class="badge-original">Original</span>
+                    <div class="banner-info">
+                        <h3 class="banner-title">Plinko</h3>
+                        <span class="players-online"><i class="fa-solid fa-user-group"></i> 187 игроков</span>
+                    </div>
+                    <button class="play-banner-btn">Играть <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
             
-            <!-- 1. Crush Game -->
-            <div class="game-card-mini" onclick="openGameModal('Crush Game', 'images/crash-bg.png')">
-                <img src="images/crash-bg.png" class="game-bg-img" alt="Crush Game">
-                <div class="game-shadow-overlay"></div>
-                <span class="game-title">CRUSH GAME</span>
-            </div>
-
-            <!-- 2. Plinko -->
-            <div class="game-card-mini" onclick="openGameModal('Plinko', 'images/plinko-bg.png')">
-                <img src="images/plinko-bg.png" class="game-bg-img" alt="Plinko">
-                <div class="game-shadow-overlay"></div>
-                <span class="game-title">PLINKO</span>
-            </div>
-
-            <!-- 3. Roulette -->
-            <div class="game-card-mini" onclick="openGameModal('Roulette', 'images/roulette-bg.png')">
-                <img src="images/roulette-bg.png" class="game-bg-img" alt="Roulette">
-                <div class="game-shadow-overlay"></div>
-                <span class="game-title">ROULETTE</span>
-            </div>
-
-            <!-- 4. Blackjack -->
-            <div class="game-card-mini" onclick="openGameModal('Blackjack', 'images/blackjack-bg.png')">
-                <img src="images/blackjack-bg.png" class="game-bg-img" alt="Blackjack">
-                <div class="game-shadow-overlay"></div>
-                <span class="game-title">BLACKJACK</span>
-            </div>
-
-            <!-- 5. Dice -->
-            <div class="game-card-mini" onclick="openGameModal('Dice', 'images/dice-bg.png')">
-                <img src="images/dice-bg.png" class="game-bg-img" alt="Dice">
-                <div class="game-shadow-overlay"></div>
-                <span class="game-title">DICE</span>
-            </div>
-
-            <!-- 6. Tickets -->
-            <div class="game-card-mini" onclick="openGameModal('Tickets', 'images/tickets-bg.png')">
-                <img src="images/tickets-bg.png" class="game-bg-img" alt="Tickets">
-                <div class="game-shadow-overlay"></div>
-                <span class="game-title">TICKETS</span>
-            </div>
-
+            <!-- Остальные игры добавляй по такому же шаблону -->
         </div>
     </main>
 
-    <!-- === НИЖНЕЕ НАВИГАЦИОННОЕ МЕНЮ (BOTTOM NAV) === -->
+    <!-- ПЛАВАЮЩАЯ КНОПКА ПОДДЕРЖКИ -->
+    <button class="support-fab">
+        <i class="fa-solid fa-headset"></i>
+    </button>
+
+    <!-- НИЖНЕЕ МЕНЮ (3 кнопки на русском) -->
     <nav class="bottom-nav">
         <a href="#" class="nav-item">
             <i class="fa-solid fa-wallet"></i>
-            <span>Cashier</span>
-        </a>
-        <a href="#" class="nav-item">
-            <i class="fa-solid fa-futbol"></i>
-            <span>Sports</span>
-        </a>
-        <a href="#" class="nav-item">
-            <i class="fa-solid fa-gift"></i>
-            <span>Bonuses</span>
+            <span>Баланс</span>
         </a>
         <a href="#" class="nav-item active">
             <i class="fa-solid fa-layer-group"></i>
-            <span>Casino</span>
+            <span>Казино</span>
         </a>
         <a href="#" class="nav-item">
             <i class="fa-solid fa-bars"></i>
-            <span>Menu</span>
+            <span>Меню</span>
         </a>
     </nav>
 
-    <!-- Модальное окно игры (оставь своё или используй это) -->
-    <div id="game-modal" class="modal hidden">
-        <div class="modal-content">
-            <span class="close-btn" onclick="document.getElementById('game-modal').classList.add('hidden')">&times;</span>
-            <div id="modal-game-icon"></div>
-            <h3 id="modal-game-title">Game Title</h3>
-            <button class="play-btn-modal">Начать игру</button>
-        </div>
-    </div>
-
-    <script src="app.js"></script>
+</div>
 </body>
 </html>

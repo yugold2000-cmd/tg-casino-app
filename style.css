@@ -1,249 +1,145 @@
-/* === ОБЩИЕ НАСТРОЙКИ И ФОН === */
-* {
+/* === БАЗОВЫЕ НАСТРОЙКИ И ФИОЛЕТОВЫЙ ЦВЕТ === */
+:root {
+    --bg-dark: #0f0f13;
+    --bg-panel: #1a1b22;
+    --accent-color: #a855f7; /* Красивый неоновый фиолетовый */
+    --text-main: #ffffff;
+    --text-muted: #888992;
+    --bitcoin-color: #f7931a;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
     margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    -webkit-tap-highlight-color: transparent;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    padding-bottom: 80px; 
 }
 
-body.dark-theme {
-    background-color: #0b0e14; /* Глубокий тёмный фон как на скрине */
-    color: #ffffff;
-    padding-bottom: 80px; /* Отступ снизу, чтобы нижнее меню не перекрывало игры */
-}
-
-/* === ШАПКА (HEADER) === */
-.app-header {
+/* === ВЕРХНЯЯ ПАНЕЛЬ === */
+.top-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 16px;
-    background-color: #0b0e14;
+    padding: 15px 16px;
+    background-color: var(--bg-dark);
     position: sticky;
     top: 0;
     z-index: 100;
 }
 
-.menu-toggle {
-    font-size: 20px;
-    color: #8a91a0;
-    cursor: pointer;
-}
+.header-left { width: 36px; /* Пустое место для симметрии */ }
 
 .header-center {
+    flex-grow: 1;
     display: flex;
-    align-items: center;
-    gap: 8px;
+    justify-content: center;
+    position: relative;
 }
 
-/* Плашка баланса */
+/* Увеличенный баланс */
 .balance-pill {
-    background-color: #161b26;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 6px 12px;
-    border-radius: 20px;
     display: flex;
     align-items: center;
-    gap: 8px;
+    background: var(--bg-panel);
+    padding: 8px 16px 8px 8px; /* Сделали больше */
+    border-radius: 12px;
+    gap: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
     cursor: pointer;
+    transition: background 0.2s;
 }
 
-.currency-badge {
-    background-color: #1a75ff; /* Синий кружочек валюты */
-    color: #fff;
-    font-size: 11px;
-    font-weight: 800;
-    width: 18px;
-    height: 18px;
+.balance-pill:active {
+    background: #23242c;
+}
+
+.currency-icon {
+    background: rgba(247, 147, 26, 0.2);
+    color: var(--bitcoin-color);
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 16px;
 }
 
 .balance-amount {
-    font-size: 14px;
     font-weight: 700;
-    color: #ffffff;
+    font-size: 16px; /* Увеличили шрифт */
 }
 
-.arrow-icon {
-    font-size: 10px;
-    color: #8a91a0;
-}
-
-/* Кислотно-зелёная кнопка "+" */
-.deposit-btn {
-    background-color: #baff00; /* Тот самый зелёный цвет со скрина */
-    color: #000000;
-    border: none;
-    width: 34px;
-    height: 34px;
-    border-radius: 10px;
-    font-size: 20px;
-    font-weight: 800;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 0 10px rgba(186, 255, 0, 0.3);
-    transition: transform 0.1s, background-color 0.2s;
-}
-
-.deposit-btn:active {
-    transform: scale(0.92);
-    background-color: #9ecc00;
-}
-
-/* Аватарка пользователя */
-.profile-avatar {
-    width: 34px;
-    height: 34px;
-    background: #161b26;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #baff00; /* Иконка в цвет акцента */
-    cursor: pointer;
-}
-
-/* === ОСНОВНОЙ КОНТЕНТ И СЕТКА ИГР === */
-.main-content {
-    padding: 10px 16px;
-}
-
-.section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
-    margin-top: 10px;
-}
-
-.section-title {
-    font-size: 20px;
-    font-weight: 800;
-    color: #ffffff;
-}
-
-.see-all-btn {
-    background: #161b26;
-    color: #8a91a0;
-    border: none;
-    padding: 6px 14px;
-    border-radius: 8px;
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-/* Сетка карточек (3 колонки как на скрине) */
-.games-grid-modern {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 карточки в ряд на телефоне */
-    gap: 10px;
-}
-
-/* Вертикальная карточка игры */
-.game-card-mini {
-    position: relative;
-    aspect-ratio: 3 / 4; /* Делает карточку вертикальной (высокая) */
+/* Выпадающий список балансов */
+.balance-dropdown {
+    position: absolute;
+    top: 55px;
+    background: var(--bg-panel);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 12px;
-    overflow: hidden;
-    background-color: #161b26;
-    cursor: pointer;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    transition: transform 0.15s;
-}
-
-.game-card-mini:active {
-    transform: scale(0.95);
-}
-
-.game-bg-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-}
-
-/* Тёмный градиент снизу, чтобы белые буквы названия хорошо читались */
-.game-shadow-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(11,14,20,0.9) 100%);
-    z-index: 2;
-}
-
-/* Название игры внизу карточки */
-.game-title {
-    position: absolute;
-    bottom: 8px;
-    left: 4px;
-    right: 4px;
-    z-index: 3;
-    text-align: center;
-    font-size: 11px;
-    font-weight: 800;
-    color: #ffffff;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.8);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-/* === НИЖНЕЕ НАВИГАЦИОННОЕ МЕНЮ (BOTTOM NAV) === */
-.bottom-nav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 65px;
-    background-color: #121620;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    z-index: 1000;
-    padding-bottom: 5px; /* Под Икс/Айфоны с полосой внизу */
-}
-
-.nav-item {
+    width: 200px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    text-decoration: none;
-    color: #6c7486;
-    font-size: 11px;
-    font-weight: 600;
-    transition: color 0.2s;
+    overflow: hidden;
+    z-index: 101;
 }
 
-.nav-item i {
+.balance-dropdown.hidden {
+    display: none;
+}
+
+.crypto-item {
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 600;
+    font-size: 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+
+.crypto-item:last-child {
+    border-bottom: none;
+}
+
+.crypto-item i {
     font-size: 18px;
 }
 
-/* Активная вкладка (Casino) горит зелёным */
+/* Профиль аккаунта */
+.profile-icon {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.profile-icon img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--accent-color); /* Фиолетовая обводка профиля */
+}
+
+/* === ИЗМЕНЕНИЯ ЦВЕТОВ === */
+/* Фиолетовая кнопка играть на блоках */
+.play-banner-btn {
+    background: var(--accent-color) !important;
+    color: #fff !important;
+    box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4) !important;
+}
+
+/* Фиолетовая кнопка поддержки */
+.support-fab {
+    background: var(--accent-color);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+}
+
+/* Активный пункт меню */
 .nav-item.active {
-    color: #baff00;
+    color: var(--accent-color);
 }
-
-.nav-item.active i {
-    text-shadow: 0 0 10px rgba(186, 255, 0, 0.5);
-}
-
-/* Модальное окно (стили по умолчанию если нужны) */
-.hidden { display: none !important; }
-.modal { position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 2000; display: flex; align-items: center; justify-content: center; }
-.modal-content { background: #161b26; padding: 20px; border-radius: 16px; text-align: center; width: 80%; max-width: 300px; position: relative; border: 1px solid rgba(255,255,255,0.1); }
-.close-btn { position: absolute; top: 10px; right: 15px; font-size: 24px; cursor: pointer; color: #8a91a0; }
-.play-btn-modal { background: #baff00; color: #000; border: none; padding: 10px 20px; border-radius: 10px; font-weight: bold; margin-top: 15px; width: 100%; cursor: pointer; }
