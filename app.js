@@ -89,22 +89,29 @@ const translations = {
 // 2. БЕЗОПАСНАЯ ФУНКЦИЯ ОТКРЫТИЯ ССЫЛОК (Для Telegram и обычного браузера)
 // =========================================================================
 window.openExternalLink = function(url) {
-    // Вызываем вибрацию на телефоне при клике
+    // Включаем моментальную haptic-вибрацию, чтобы юзер понял, что клик прошёл
     if (tg.HapticFeedback) {
         tg.HapticFeedback.impactOccurred('medium');
     }
 
-    // Если мы запущены внутри Telegram Mini App
-    if (window.Telegram && window.Telegram.WebApp) {
-        // Если ссылка ведет на Telegram (канал, поддержка, чат)
-        if (url.includes('t.me/') || url.startsWith('tg:')) {
-            tg.openTelegramLink(url);
+    try {
+        // Если мы внутри реального Telegram Mini App
+        if (window.Telegram && window.Telegram.WebApp) {
+            // Очищаем ссылку от лишних пробелов, которые мобилка может не переварить
+            const cleanUrl = url.trim();
+            
+            if (cleanUrl.includes('t.me/')) {
+                tg.openTelegramLink(cleanUrl);
+            } else {
+                tg.openLink(cleanUrl);
+            }
         } else {
-            // Для всех обычных сайтов
-            tg.openLink(url);
+            // Обычный браузер на ПК (Live Server)
+            window.open(url, '_blank');
         }
-    } else {
-        // Запасной вариант для Live Server (ПК браузер)
+    } catch (error) {
+        console.error("Ошибка открытия ссылки:", error);
+        // Резервный бэкап, если мобильный SDK выдал ошибку
         window.open(url, '_blank');
     }
 };

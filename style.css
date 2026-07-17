@@ -276,3 +276,8 @@ body.theme-light .main-logo-svg text { fill: #1a1a1f; }
 .nav-item.active { 
     color: var(--purple-light); 
 }
+
+.menu-item > *, 
+.menu-square > * {
+    pointer-events: none; 
+}
