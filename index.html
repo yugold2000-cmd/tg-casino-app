@@ -8,25 +8,22 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
+<body class="theme-dark">
 
 <div class="app-container">
     
     <!-- ВЕРХНЯЯ ПАНЕЛЬ -->
     <header class="top-header" id="main-top-header">
-        
-        <!-- СЛЕВА: Логотип -->
         <div class="header-left">
             <div class="logo-container">
-                <!-- Сюда вставишь свой логотип в папку images -->
-                <img src="images/logo.svg" alt="Logo" class="main-logo" onerror="this.src='https://via.placeholder.com/100x30/9d4edd/ffffff?text=ЛОГОТИП'">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 40" class="main-logo-svg" style="height: 28px; width: auto; display: block;">
+                    <rect width="30" height="30" rx="8" fill="#9d4edd" y="5"/>
+                    <text x="40" y="27" fill="#ffffff" font-family="'San Francisco', sans-serif" font-weight="800" font-size="20">CASINO</text>
+                </svg>
             </div>
         </div>
         
-        <!-- СПРАВА: Баланс и Аватарка -->
         <div class="header-right">
-            
-            <!-- Обертка баланса (нужна для правильного позиционирования менюшки) -->
             <div class="balance-container">
                 <div class="balance-pill" id="balance-btn" onclick="toggleBalanceDropdown(event)">
                     <div class="currency-icon" id="active-currency-icon">
@@ -36,7 +33,6 @@
                     <i class="fa-solid fa-chevron-down down-arrow"></i>
                 </div>
                 
-                <!-- Выпадающий список (каждому элементу задана очередь анимации) -->
                 <div class="balance-dropdown" id="balance-dropdown">
                     <div class="crypto-item" style="--anim-order: 1;" onclick="selectCurrency('RUB', '1.25', 'fa-solid fa-ruble-sign', '#a855f7')">
                         <div class="dropdown-icon" style="background: #a855f7;"><i class="fa-solid fa-ruble-sign"></i></div> 
@@ -57,77 +53,72 @@
                 </div>
             </div>
 
-            <!-- Аватарка профиля -->
             <div class="profile-icon" id="user-avatar-container">
                 <div class="avatar-placeholder" id="user-avatar">?</div>
             </div>
-            
         </div>
     </header>
 
-    <!-- ВКЛАДКА 1: ГЛАВНАЯ (ИГРЫ + СТАВКИ) -->
+    <!-- ВКЛАДКА 1: ГЛАВНАЯ (ИГРЫ) -->
     <main id="view-casino" class="view-section active">
-        
-        <!-- РЕКЛАМНЫЙ БАННЕР -->
-        <div class="promo-banner" onclick="tg.showAlert('Переход к бонусу!')">
+        <div class="promo-banner" onclick="tg.showAlert('Promo!')">
             <img src="images/promo-banner.png" alt="Promo" onerror="this.src='https://via.placeholder.com/600x200/9d4edd/ffffff?text=Рекламный+Баннер'">
         </div>
 
-        <h2 class="section-title">Игры</h2>
+        <h2 class="section-title" data-i18n="games_title">Игры</h2>
         
         <div class="games-grid-compact">
             <div class="game-card-small" onclick="openGame('Crush Game')">
                 <img src="images/crash-bg.png" class="game-bg" alt="Crush">
                 <div class="game-overlay"></div>
                 <div class="game-content">
-                    <h3 class="game-title">Crush</h3>
+                    <h3 class="game-title" data-i18n="game_crush">Crush</h3>
                 </div>
             </div>
             <div class="game-card-small" onclick="openGame('Plinko')">
                 <img src="images/plinko-bg.png" class="game-bg" alt="Plinko">
                 <div class="game-overlay"></div>
                 <div class="game-content">
-                    <h3 class="game-title">Plinko</h3>
+                    <h3 class="game-title" data-i18n="game_plinko">Plinko</h3>
                 </div>
             </div>
             <div class="game-card-small" onclick="openGame('Roulette')">
                 <img src="images/roulette-bg.png" class="game-bg" alt="Roulette">
                 <div class="game-overlay"></div>
                 <div class="game-content">
-                    <h3 class="game-title">Roulette</h3>
+                    <h3 class="game-title" data-i18n="game_roulette">Roulette</h3>
                 </div>
             </div>
             <div class="game-card-small" onclick="openGame('Blackjack')">
                 <img src="images/blackjack-bg.png" class="game-bg" alt="Blackjack">
                 <div class="game-overlay"></div>
                 <div class="game-content">
-                    <h3 class="game-title">Blackjack</h3>
+                    <h3 class="game-title" data-i18n="game_blackjack">Blackjack</h3>
                 </div>
             </div>
             <div class="game-card-small" onclick="openGame('Dice')">
                 <img src="images/dice-bg.png" class="game-bg" alt="Dice">
                 <div class="game-overlay"></div>
                 <div class="game-content">
-                    <h3 class="game-title">Dice</h3>
+                    <h3 class="game-title" data-i18n="game_dice">Dice</h3>
                 </div>
             </div>
             <div class="game-card-small" onclick="openGame('Tickets')">
                 <img src="images/tickets-bg.png" class="game-bg" alt="Tickets">
                 <div class="game-overlay"></div>
                 <div class="game-content">
-                    <h3 class="game-title">Tickets</h3>
+                    <h3 class="game-title" data-i18n="game_tickets">Tickets</h3>
                 </div>
             </div>
         </div>
 
-        <!-- ТАБЛИЦА СТАВОК (LIVE) -->
-        <h2 class="section-title" style="margin-top: 30px;">Live ставки</h2>
+        <h2 class="section-title" style="margin-top: 30px;" data-i18n="live_bets_title">Live ставки</h2>
         <div class="live-bets-table">
             <div class="bet-table-header">
-                <span>Игра</span>
-                <span>Игрок</span>
-                <span class="align-right">Ставка</span>
-                <span class="align-right">Выигрыш</span>
+                <span data-i18n="th_game">Игра</span>
+                <span data-i18n="th_player">Игрок</span>
+                <span class="align-right" data-i18n="th_bet">Ставка</span>
+                <span class="align-right" data-i18n="th_win">Выигрыш</span>
             </div>
             <div class="bet-table-row">
                 <span class="bet-game-name">Crush</span>
@@ -141,25 +132,12 @@
                 <span class="align-right">10 TON</span>
                 <span class="bet-win negative align-right">0 TON <span class="multiplier">(x0.0)</span></span>
             </div>
-            <div class="bet-table-row">
-                <span class="bet-game-name">Dice</span>
-                <span class="bet-player">@lucky777</span>
-                <span class="align-right">100 USDT</span>
-                <span class="bet-win positive align-right">200 USDT <span class="multiplier">(x2.0)</span></span>
-            </div>
-            <div class="bet-table-row">
-                <span class="bet-game-name">Tickets</span>
-                <span class="bet-player">@anon_user</span>
-                <span class="align-right">500 STARS</span>
-                <span class="bet-win negative align-right">0 STARS <span class="multiplier">(x0.0)</span></span>
-            </div>
         </div>
-
     </main>
 
     <!-- ВКЛАДКА 2: КОШЕЛЕК -->
     <main id="view-wallet" class="view-section" style="padding-top: 20px;">
-        <h2 class="section-title" style="margin-top: 0;">Активы</h2>
+        <h2 class="section-title" style="margin-top: 0;" data-i18n="assets_title">Активы</h2>
         
         <div class="wallet-balances">
             <div class="balance-list-item">
@@ -193,70 +171,90 @@
         </div>
 
         <div class="wallet-actions">
-            <button class="wallet-action-btn deposit" onclick="tg.showAlert('Открытие платежки')"><i class="fa-solid fa-arrow-down"></i> Пополнить</button>
-            <button class="wallet-action-btn withdraw" onclick="tg.showAlert('Вывод средств')"><i class="fa-solid fa-arrow-up"></i> Вывести</button>
+            <button class="wallet-action-btn deposit" onclick="tg.showAlert('Deposit')" data-i18n="btn_deposit"><i class="fa-solid fa-arrow-down"></i> Пополнить</button>
+            <button class="wallet-action-btn withdraw" onclick="tg.showAlert('Withdraw')" data-i18n="btn_withdraw"><i class="fa-solid fa-arrow-up"></i> Вывести</button>
         </div>
 
-        <h2 class="section-title" style="margin-top: 25px; font-size: 18px;">История транзакций</h2>
+        <h2 class="section-title" style="margin-top: 25px; font-size: 18px;" data-i18n="tx_history_title">История транзакций</h2>
         <div class="transaction-history">
             <div class="tx-item">
                 <div class="tx-info">
                     <i class="fa-solid fa-arrow-down tx-deposit-icon"></i>
                     <div>
-                        <div class="tx-title">Пополнение RUB</div>
-                        <div class="tx-date">Сегодня, 14:30</div>
+                        <div class="tx-title" data-i18n="tx_deposit_rub">Пополнение RUB</div>
+                        <div class="tx-date" data-i18n="tx_today">Сегодня, 14:30</div>
                     </div>
                 </div>
                 <div class="tx-amount positive">+500.00 RUB</div>
-            </div>
-            <div class="tx-item">
-                <div class="tx-info">
-                    <i class="fa-solid fa-gamepad tx-game-icon"></i>
-                    <div>
-                        <div class="tx-title">Ставка Crush</div>
-                        <div class="tx-date">Вчера, 21:15</div>
-                    </div>
-                </div>
-                <div class="tx-amount negative">-15.00 RUB</div>
             </div>
         </div>
     </main>
 
     <!-- ВКЛАДКА 3: МЕНЮ -->
+<!-- ВКЛАДКА 3: МЕНЮ -->
     <main id="view-menu" class="view-section" style="padding-top: 20px;">
-        <h2 class="section-title" style="margin-top: 0;">Меню</h2>
+        <h2 class="section-title" style="margin-top: 0;" data-i18n="menu_title">Меню</h2>
+        
+        <!-- ВЕРХНИЙ БЛОК: Основные кнопки списком -->
         <div class="menu-list">
             <div class="menu-item" onclick="tg.showAlert('Бонусы в разработке')">
                 <div class="menu-icon"><i class="fa-solid fa-gift"></i></div>
-                <span>Бонусы и промокоды</span>
+                <span data-i18n="menu_bonuses">Бонусы и промокоды</span>
                 <i class="fa-solid fa-chevron-right arrow"></i>
             </div>
             <div class="menu-item" onclick="tg.showAlert('Настройки в разработке')">
                 <div class="menu-icon"><i class="fa-solid fa-gear"></i></div>
-                <span>Настройки аккаунта</span>
+                <span data-i18n="menu_settings">Настройки аккаунта</span>
                 <i class="fa-solid fa-chevron-right arrow"></i>
             </div>
-            <div class="menu-item" onclick="tg.showAlert('Открытие чата с поддержкой')">
+            <div class="menu-item" onclick="tg.showAlert('Support')">
                 <div class="menu-icon"><i class="fa-solid fa-headset"></i></div>
-                <span>Техподдержка</span>
+                <span data-i18n="menu_support">Техподдержка</span>
                 <i class="fa-solid fa-chevron-right arrow"></i>
+            </div>
+            <div class="menu-item" onclick="tg.showAlert('Responsible Gaming Policy')">
+                <div class="menu-icon" style="color: #ff4444; background: rgba(255, 68, 68, 0.15);"><i class="fa-solid fa-shield-heart"></i></div>
+                <span style="color: #ff4444;" data-i18n="menu_responsible">Ответственная игра</span>
+                <i class="fa-solid fa-chevron-right arrow" style="color: #ff4444;"></i>
             </div>
         </div>
+
+        <!-- НИЖНИЙ БЛОК: Маленькие квадратные плитки слева внизу -->
+        <div class="menu-grid">
+            <!-- Канал Telegram -->
+            <div class="menu-square" onclick="tg.openTelegramLink('https://t.me/your_channel')">
+                <i class="fa-brands fa-telegram" style="color: #0088cc;"></i>
+                <span data-i18n="menu_channel_short">Канал</span>
+            </div>
+
+            <!-- Язык -->
+            <div class="menu-square" onclick="toggleLanguage()">
+                <span class="flag-icon" id="language-flag">🇷🇺</span>
+                <span data-i18n="menu_language">Язык</span>
+            </div>
+
+            <!-- Тема -->
+            <div class="menu-square" onclick="toggleTheme()">
+                <i class="fa-solid fa-sun" id="theme-icon-square" style="color: #ffb800;"></i>
+                <span data-i18n="menu_theme_short">Тема</span>
+            </div>
+        </div>
+    </main>
     </main>
 
     <!-- НИЖНЕЕ МЕНЮ НАВИГАЦИИ -->
     <nav class="bottom-nav">
         <a href="#" class="nav-item" id="nav-wallet" onclick="switchTab('wallet')">
             <i class="fa-solid fa-wallet"></i>
-            <span>Кошелек</span>
+            <span data-i18n="nav_wallet">Кошелек</span>
         </a>
         <a href="#" class="nav-item active" id="nav-casino" onclick="switchTab('casino')">
-            <i class="fa-solid fa-layer-group"></i>
-            <span>Главная</span>
+            <i class="fa-solid fa-house"></i>
+            <span data-i18n="nav_main">Главная</span>
         </a>
         <a href="#" class="nav-item" id="nav-menu" onclick="switchTab('menu')">
             <i class="fa-solid fa-bars"></i>
-            <span>Меню</span>
+            <span data-i18n="nav_menu">Меню</span>
         </a>
     </nav>
 
