@@ -51,7 +51,12 @@ body {
     position: sticky; top: 0; z-index: 100;
 }
 .header-left { display: flex; align-items: center; }
-.header-right { display: flex; align-items: center; gap: 10px; }
+.header-right {
+    display: flex !important;
+    flex-direction: row !important; /* Принудительно выстраиваем в линию слева направо */
+    align-items: center !important; /* Центрируем по вертикали */
+    gap: 12px; /* Аккуратный отступ между балансом и аватаркой */
+}
 
 .main-logo-svg { height: 28px; width: auto; display: block; }
 body.theme-light .main-logo-svg text { fill: #1a1a1f; }
@@ -526,4 +531,35 @@ body {
     line-height: 1.5;
     text-align: center;
     margin: 0;
+}
+
+/* === ИСПРАВЛЕНИЕ РАЗМЕРОВ SVG-ИКОНОК ВАЛЮТ === */
+
+/* === ИДЕАЛЬНО РОВНЫЕ ИКОНКИ ВАЛЮТ === */
+
+/* Контейнеры (Кружок рубля и прозрачный фон SVG) */
+.dropdown-icon, .currency-icon {
+    width: 26px !important;
+    height: 26px !important;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 !important;
+    flex-shrink: 0;
+}
+
+/* Размер самого значка ₽ внутри фиолетового кружка */
+.dropdown-icon i, .currency-icon i {
+    font-size: 14px !important;
+    color: #ffffff;
+}
+
+/* Размер SVG-картинок (TON, USDT, STARS) */
+.custom-coin {
+    width: 26px !important;
+    height: 26px !important;
+    object-fit: contain;
+    display: block;
+    border-radius: 50%;
 }

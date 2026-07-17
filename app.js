@@ -167,7 +167,7 @@ window.switchTab = function(tabName) {
     document.getElementById(`nav-${tabName}`).classList.add('active');
 
     const topHeader = document.getElementById('main-top-header');
-    if (tabName === 'wallet' || tabName === 'menu') {
+    if (tabName === 'wallet' || tabName === 'menu' || tabName === 'referral') {
         topHeader.style.display = 'none';
     } else {
         topHeader.style.display = 'flex';
@@ -188,20 +188,30 @@ window.toggleBalanceDropdown = function(event) {
         arrow.classList.toggle('rotated');
     }
 };
-window.selectCurrency = function(currencyName, amount, iconClass, iconBgColor) {
+window.selectCurrency = function(currencyName, amount, iconData, iconBgColor) {
     if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
+    
+    // Меняем текст баланса
     document.getElementById('active-balance-amount').innerText = amount;
     
     const iconContainer = document.getElementById('active-currency-icon');
-    iconContainer.style.background = iconBgColor;
-    iconContainer.innerHTML = `<i class="${iconClass}" style="color: #ffffff;"></i>`;
     
-    // Закрываем меню и возвращаем стрелочку обратно
-    document.getElementById('balance-dropdown').classList.remove('show');
-    const arrow = document.getElementById('balance-arrow');
-    if (arrow) {
-        arrow.classList.remove('rotated');
+    // Меняем цвет фона (фиолетовый для рубля, прозрачный для остальных)
+    iconContainer.style.background = iconBgColor;
+    
+    // Умная проверка: если передана картинка (.svg), вставляем <img>, иначе <i>
+    if (iconData.includes('.svg') || iconData.includes('.png')) {
+        iconContainer.innerHTML = `<img src="${iconData}" alt="${currencyName}" class="custom-coin">`;
+    } else {
+        iconContainer.innerHTML = `<i class="${iconData}" style="color: #ffffff;"></i>`;
     }
+    
+    // Закрываем меню и крутим стрелочку обратно
+    const dropdown = document.getElementById('balance-dropdown');
+    if (dropdown) dropdown.classList.remove('show');
+    
+    const arrow = document.getElementById('balance-arrow');
+    if (arrow) arrow.classList.remove('rotated');
 };
 
 // Закрытие баланса по клику в пустое место
