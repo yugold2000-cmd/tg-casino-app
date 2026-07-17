@@ -9,7 +9,6 @@
 
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
-/* === ШРИФТ SAN FRANCISCO === */
 body {
     background-color: var(--bg-dark); color: var(--text-main);
     margin: 0; 
@@ -43,7 +42,6 @@ body {
 .balance-amount { font-weight: 700; font-size: 15px; margin-right: 4px; }
 .down-arrow { font-size: 10px; color: var(--text-muted); }
 
-/* Новая кнопка пополнения (текстовая) */
 .deposit-btn {
     background: var(--purple-main); color: #fff; border: none;
     height: 38px; padding: 0 14px; border-radius: 10px; font-size: 14px;
@@ -51,7 +49,6 @@ body {
     display: flex; align-items: center; justify-content: center;
 }
 
-/* Выпадающее меню с валютами */
 .balance-dropdown {
     position: absolute; top: 55px; left: 0; background: var(--bg-panel);
     border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px;
@@ -70,7 +67,6 @@ body {
     align-items: center; justify-content: center; font-size: 12px; color: #fff;
 }
 
-/* Аватарка */
 .profile-icon { width: 38px; height: 38px; border-radius: 50%; overflow: hidden; }
 .avatar-placeholder {
     width: 100%; height: 100%; background: linear-gradient(135deg, var(--purple-main), #3c096c);
@@ -78,61 +74,68 @@ body {
     font-weight: bold; font-size: 16px; color: #fff; border: 2px solid var(--purple-light); border-radius: 50%;
 }
 
-/* === ИГРЫ (2 КОЛОНКИ) === */
+/* === РЕКЛАМНЫЙ БАННЕР === */
+.promo-banner {
+    width: 100%; height: 110px; border-radius: 16px; overflow: hidden; 
+    margin: 15px 0 25px 0; border: 1px solid rgba(255,255,255,0.05); cursor: pointer;
+}
+.promo-banner:active { transform: scale(0.98); }
+.promo-banner img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* === ИГРЫ (БЕЗ КНОПОК) === */
 .games-grid-compact { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
 
 .game-card-small {
-    position: relative; height: 140px; border-radius: 16px; overflow: hidden; 
+    position: relative; height: 130px; border-radius: 16px; overflow: hidden; 
     cursor: pointer; border: 1px solid rgba(255, 255, 255, 0.05);
 }
 .game-card-small:active { transform: scale(0.96); }
 
 .game-bg { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 1; }
 .game-overlay {
-    position: absolute; inset: 0; background: linear-gradient(180deg, rgba(11,9,20,0.5) 0%, rgba(11,9,20,0.8) 100%); z-index: 2;
+    position: absolute; inset: 0; background: linear-gradient(180deg, rgba(11,9,20,0.4) 0%, rgba(11,9,20,0.8) 100%); z-index: 2;
 }
 .game-content { position: absolute; inset: 0; z-index: 3; padding: 12px; pointer-events: none; }
 
 .game-title {
     position: absolute; top: 12px; left: 12px;
-    font-size: 16px; font-weight: 800; color: #fff; margin: 0; 
+    font-size: 18px; font-weight: 800; color: #fff; margin: 0; 
     text-shadow: 0 2px 4px rgba(0,0,0,0.8);
 }
 
-/* Увеличенная кнопка играть */
-.play-btn {
-    position: absolute; bottom: 12px; right: 12px;
-    background: linear-gradient(135deg, var(--purple-main), var(--purple-light)); 
-    color: #fff; border: none; border-radius: 10px;
-    padding: 8px 18px; /* Увеличили внутренние отступы */
-    font-size: 14px;   /* Сделали шрифт больше */
-    font-weight: 700;
-    box-shadow: 0 4px 15px rgba(157, 78, 221, 0.4);
-}
-
-/* === ТАБЛИЦА LIVE СТАВОК === */
+/* === ЖЕСТКОЕ ВЫРАВНИВАНИЕ ТАБЛИЦЫ СТАВОК (GRID) === */
 .live-bets-table {
     background: var(--bg-panel); border-radius: 16px; 
     border: 1px solid rgba(255,255,255,0.05); overflow: hidden;
 }
+
+/* Настраиваем 4 колонки: 1. Игра (25%), 2. Игрок (30%), 3. Ставка (20%), 4. Выигрыш (25%) */
+.bet-table-header, .bet-table-row {
+    display: grid;
+    grid-template-columns: 1.2fr 1.5fr 1fr 1.5fr; 
+    align-items: center;
+    padding: 12px 15px;
+}
+
 .bet-table-header {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 12px 15px; background: rgba(0,0,0,0.2);
-    font-size: 11px; color: var(--text-muted); text-transform: uppercase; font-weight: bold;
+    background: rgba(0,0,0,0.2); font-size: 11px; 
+    color: var(--text-muted); text-transform: uppercase; font-weight: bold;
 }
 .bet-table-row {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 12px 15px; border-bottom: 1px solid rgba(255,255,255,0.03);
+    border-bottom: 1px solid rgba(255,255,255,0.03);
     font-size: 13px; font-weight: 600;
 }
 .bet-table-row:last-child { border-bottom: none; }
-.bet-table-row > span { flex: 1; }
-.bet-table-row > span:nth-child(2) { flex: 1.5; } /* Игрок занимает чуть больше места */
+
+.align-right { text-align: right; }
 .bet-game-name { color: var(--text-muted); }
-.bet-table-row > span:last-child { text-align: right; } /* Выигрыш прижат вправо */
+.bet-player { color: #fff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } /* Режет длинные ники */
 
 .bet-win.positive { color: var(--purple-light); }
 .bet-win.negative { color: #fff; opacity: 0.5; }
+
+/* Стиль для множителя (x) */
+.multiplier { font-size: 11px; opacity: 0.8; margin-left: 2px; }
 
 /* === КОШЕЛЕК И АКТИВЫ === */
 .wallet-balances {

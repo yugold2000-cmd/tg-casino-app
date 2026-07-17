@@ -15,7 +15,6 @@
     <!-- ВЕРХНЯЯ ПАНЕЛЬ -->
     <header class="top-header">
         <div class="header-left">
-            <!-- Кнопка баланса -->
             <div class="balance-pill" id="balance-btn" onclick="toggleBalanceDropdown(event)">
                 <div class="currency-icon" id="active-currency-icon">
                     <i class="fa-solid fa-ruble-sign" style="color: #ffffff;"></i>
@@ -24,7 +23,6 @@
                 <i class="fa-solid fa-chevron-down down-arrow"></i>
             </div>
             
-            <!-- Кнопка пополнения (вместо плюса) -->
             <button class="deposit-btn" onclick="switchTab('wallet')">Пополнить</button>
 
             <!-- Выпадающий список -->
@@ -58,103 +56,108 @@
 
     <!-- ВКЛАДКА 1: КАЗИНО (ИГРЫ + СТАВКИ) -->
     <main id="view-casino" class="view-section active">
+        
+        <!-- РЕКЛАМНЫЙ БАННЕР -->
+        <div class="promo-banner" onclick="tg.showAlert('Переход к бонусу!')">
+            <img src="images/promo-banner.png" alt="Promo" onerror="this.src='https://via.placeholder.com/600x200/9d4edd/ffffff?text=Рекламный+Баннер'">
+        </div>
+
         <h2 class="section-title">Игры</h2>
         
+        <!-- СЕТКА ИГР (БЕЗ КНОПОК) -->
         <div class="games-grid-compact">
-            <!-- Crush Game -->
             <div class="game-card-small" onclick="openGame('Crush Game')">
                 <img src="images/crash-bg.png" class="game-bg" alt="Crush">
                 <div class="game-overlay"></div>
                 <div class="game-content">
                     <h3 class="game-title">Crush</h3>
-                    <button class="play-btn">Играть</button>
                 </div>
             </div>
 
-            <!-- Plinko -->
             <div class="game-card-small" onclick="openGame('Plinko')">
                 <img src="images/plinko-bg.png" class="game-bg" alt="Plinko">
                 <div class="game-overlay"></div>
                 <div class="game-content">
                     <h3 class="game-title">Plinko</h3>
-                    <button class="play-btn">Играть</button>
                 </div>
             </div>
 
-            <!-- Roulette -->
             <div class="game-card-small" onclick="openGame('Roulette')">
                 <img src="images/roulette-bg.png" class="game-bg" alt="Roulette">
                 <div class="game-overlay"></div>
                 <div class="game-content">
                     <h3 class="game-title">Roulette</h3>
-                    <button class="play-btn">Играть</button>
                 </div>
             </div>
 
-            <!-- Blackjack -->
             <div class="game-card-small" onclick="openGame('Blackjack')">
                 <img src="images/blackjack-bg.png" class="game-bg" alt="Blackjack">
                 <div class="game-overlay"></div>
                 <div class="game-content">
                     <h3 class="game-title">Blackjack</h3>
-                    <button class="play-btn">Играть</button>
                 </div>
             </div>
 
-            <!-- Dice -->
             <div class="game-card-small" onclick="openGame('Dice')">
                 <img src="images/dice-bg.png" class="game-bg" alt="Dice">
                 <div class="game-overlay"></div>
                 <div class="game-content">
                     <h3 class="game-title">Dice</h3>
-                    <button class="play-btn">Играть</button>
                 </div>
             </div>
 
-            <!-- Tickets -->
             <div class="game-card-small" onclick="openGame('Tickets')">
                 <img src="images/tickets-bg.png" class="game-bg" alt="Tickets">
                 <div class="game-overlay"></div>
                 <div class="game-content">
                     <h3 class="game-title">Tickets</h3>
-                    <button class="play-btn">Играть</button>
                 </div>
             </div>
         </div>
 
-        <!-- ТАБЛИЦА СТАВОК (LIVE) -->
+        <!-- ТАБЛИЦА СТАВОК (РОВНАЯ) -->
         <h2 class="section-title" style="margin-top: 30px;">Live ставки</h2>
         <div class="live-bets-table">
             <div class="bet-table-header">
-                <span style="flex: 1.2;">Игра</span>
-                <span style="flex: 1.5;">Игрок</span>
-                <span style="flex: 1;">Ставка</span>
-                <span style="flex: 1; text-align: right;">Выигрыш</span>
+                <span>Игра</span>
+                <span>Игрок</span>
+                <span class="align-right">Ставка</span>
+                <span class="align-right">Выигрыш</span>
             </div>
             
             <div class="bet-table-row">
                 <span class="bet-game-name">Crush</span>
-                <span>@ivan_pro</span>
-                <span>50 RUB</span>
-                <span class="bet-win positive">120 RUB</span>
+                <span class="bet-player">@ivan_pro</span>
+                <span class="align-right">50 RUB</span>
+                <span class="bet-win positive align-right">120 RUB <span class="multiplier">(x2.4)</span></span>
             </div>
+            
             <div class="bet-table-row">
                 <span class="bet-game-name">Plinko</span>
-                <span>@crypto_god</span>
-                <span>10 TON</span>
-                <span class="bet-win negative">0 TON</span>
+                <span class="bet-player">@crypto_god</span>
+                <span class="align-right">10 TON</span>
+                <span class="bet-win negative align-right">0 TON <span class="multiplier">(x0.0)</span></span>
             </div>
+            
             <div class="bet-table-row">
                 <span class="bet-game-name">Dice</span>
-                <span>@lucky777</span>
-                <span>100 USDT</span>
-                <span class="bet-win positive">200 USDT</span>
+                <span class="bet-player">@lucky777</span>
+                <span class="align-right">100 USDT</span>
+                <span class="bet-win positive align-right">200 USDT <span class="multiplier">(x2.0)</span></span>
             </div>
+            
             <div class="bet-table-row">
                 <span class="bet-game-name">Tickets</span>
-                <span>@anon_user</span>
-                <span>500 STARS</span>
-                <span class="bet-win negative">0 STARS</span>
+                <span class="bet-player">@anon_user</span>
+                <span class="align-right">500 STARS</span>
+                <span class="bet-win negative align-right">0 STARS <span class="multiplier">(x0.0)</span></span>
+            </div>
+            
+            <div class="bet-table-row">
+                <span class="bet-game-name">Roulette</span>
+                <span class="bet-player">@big_win</span>
+                <span class="align-right">250 RUB</span>
+                <span class="bet-win positive align-right">3500 RUB <span class="multiplier">(x14.0)</span></span>
             </div>
         </div>
 
@@ -221,16 +224,6 @@
                     </div>
                 </div>
                 <div class="tx-amount negative">-15.00 RUB</div>
-            </div>
-            <div class="tx-item">
-                <div class="tx-info">
-                    <i class="fa-solid fa-arrow-up tx-withdraw-icon"></i>
-                    <div>
-                        <div class="tx-title">Вывод USDT</div>
-                        <div class="tx-date">10 Окт, 12:00</div>
-                    </div>
-                </div>
-                <div class="tx-amount negative">-50.00 USDT</div>
             </div>
         </div>
     </main>
