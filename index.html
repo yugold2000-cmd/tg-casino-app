@@ -30,7 +30,7 @@
                         <i class="fa-solid fa-ruble-sign" style="color: #ffffff;"></i>
                     </div>
                     <span class="balance-amount" id="active-balance-amount">1.25</span>
-                    <i class="fa-solid fa-chevron-down down-arrow"></i>
+                    <i class="fa-solid fa-chevron-down" id="balance-arrow"></i>
                 </div>
                 
                 <div class="balance-dropdown" id="balance-dropdown">
@@ -187,6 +187,26 @@
                 </div>
                 <div class="tx-amount positive">+500.00 RUB</div>
             </div>
+        </div>
+    </main>
+
+    <!-- СТРАНИЦА РЕФЕРАЛОВ -->
+    <!-- СТРАНИЦА РЕФЕРАЛОВ -->
+    <main id="view-referral" class="view-section" style="display: none;">
+        <h2 class="section-title" data-i18n="ref_title">Приглашай друзей</h2>
+    
+        <div class="ref-card">
+           <h3 data-i18n="ref_your_link">Ваша реферальная ссылка</h3>
+        
+           <div class="ref-link-box">
+                <!-- Здесь пока тестовая ссылка -->
+                <input type="text" id="ref-link-input" value="https://t.me/ТвойКазиноБот?start=ref123" readonly>
+                <button class="copy-btn" onclick="copyRefLink()">
+                   <i class="fa-regular fa-copy"></i>
+                </button>
+            </div>
+        
+            <p class="ref-description" data-i18n="ref_desc">Отправьте эту ссылку друзьям. Когда они зарегистрируются и начнут играть, вы будете получать процент от их ставок прямо на свой баланс!</p>
         </div>
     </main>
 
@@ -360,6 +380,10 @@
             <i class="fa-solid fa-bars"></i>
             <span data-i18n="nav_menu">Меню</span>
         </a>
+        <div class="nav-item" id="nav-referral" onclick="switchTab('referral')">
+            <i class="fa-solid fa-user-plus"></i>
+            <span data-i18n="nav_ref">Рефералы</span>
+        </div>
     </nav>
 
 </div>

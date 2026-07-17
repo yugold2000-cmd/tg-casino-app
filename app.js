@@ -50,7 +50,11 @@ const translations = {
         resp_warning_title: "Азартные игры — это развлечение, а не способ заработка.",
         resp_text_1: "Помните, что казино всегда имеет математическое преимущество. Никогда не играйте на деньги, которые вы не готовы потерять, и не пытайтесь отыграться после проигрыша.",
         resp_text_2: "Если вы чувствуете, что теряете контроль над ситуацией или игра начинает влиять на вашу личную жизнь, пожалуйста, сделайте паузу.",
-        btn_self_exclude: "Заблокировать аккаунт"
+        btn_self_exclude: "Заблокировать аккаунт",
+        nav_ref: "Рефералы",
+        ref_title: "Приглашай друзей",
+        ref_your_link: "Ваша реферальная ссылка",
+        ref_desc: "Отправьте эту ссылку друзьям. Когда они зарегистрируются и начнут играть, вы будете получать процент от их ставок прямо на свой баланс!"
     },
     en: {
         games_title: "Games", live_bets_title: "Live Bets", th_game: "Game", th_player: "Player", th_bet: "Bet", th_win: "Payout",
@@ -67,7 +71,11 @@ const translations = {
         resp_warning_title: "Gambling is entertainment, not a way to make money.",
         resp_text_1: "Remember that the casino always has a mathematical edge. Never gamble with money you cannot afford to lose, and never chase your losses.",
         resp_text_2: "If you feel you are losing control or if gambling is affecting your personal life, please take a break.",
-        btn_self_exclude: "Self-Exclude Account"
+        btn_self_exclude: "Self-Exclude Account",
+        nav_ref: "Referrals",
+        ref_title: "Invite Friends",
+        ref_your_link: "Your referral link",
+        ref_desc: "Send this link to your friends. When they register and start playing, you will receive a percentage of their bets directly to your balance!"
     }
 };
 
@@ -170,9 +178,16 @@ window.switchTab = function(tabName) {
 window.toggleBalanceDropdown = function(event) {
     event.stopPropagation();
     if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('light'); 
+    
+    // Открываем/закрываем меню
     document.getElementById('balance-dropdown').classList.toggle('show');
+    
+    // Крутим стрелочку
+    const arrow = document.getElementById('balance-arrow');
+    if (arrow) {
+        arrow.classList.toggle('rotated');
+    }
 };
-
 window.selectCurrency = function(currencyName, amount, iconClass, iconBgColor) {
     if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
     document.getElementById('active-balance-amount').innerText = amount;
@@ -180,14 +195,26 @@ window.selectCurrency = function(currencyName, amount, iconClass, iconBgColor) {
     const iconContainer = document.getElementById('active-currency-icon');
     iconContainer.style.background = iconBgColor;
     iconContainer.innerHTML = `<i class="${iconClass}" style="color: #ffffff;"></i>`;
+    
+    // Закрываем меню и возвращаем стрелочку обратно
     document.getElementById('balance-dropdown').classList.remove('show');
+    const arrow = document.getElementById('balance-arrow');
+    if (arrow) {
+        arrow.classList.remove('rotated');
+    }
 };
 
 // Закрытие баланса по клику в пустое место
 document.addEventListener('click', function(event) {
     const dropdown = document.getElementById('balance-dropdown');
     if (dropdown && dropdown.classList.contains('show') && !dropdown.contains(event.target)) {
+        
+        // Закрываем меню и возвращаем стрелочку обратно
         dropdown.classList.remove('show');
+        const arrow = document.getElementById('balance-arrow');
+        if (arrow) {
+            arrow.classList.remove('rotated');
+        }
     }
 });
 
@@ -343,4 +370,31 @@ window.saveSettings = function() {
     
     // Возвращаемся в меню
     switchTab('menu');
+};
+
+// Копирование реферальной ссылки
+window.copyRefLink = function() {
+    const linkInput = document.getElementById('ref-link-input');
+    
+    // Выделяем текст (нужно для мобилок)
+    linkInput.select();
+    linkInput.setSelectionRange(0, 99999);
+    
+    // Копируем в буфер обмена
+    navigator.clipboard.writeText(linkInput.value).then(() => {
+        // Выбираем текст алерта в зависимости от языка
+        const msg = currentLang === 'ru' ? 'Ссылка скопирована!' : 'Link copied!';
+        
+        // Показываем сообщение
+        if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.showAlert) {
+            window.Telegram.WebApp.showAlert(msg);
+        } else {
+            alert(msg);
+        }
+        
+        // Вибрация
+        if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
+    }).catch(err => {
+        console.error('Ошибка копирования: ', err);
+    });
 };

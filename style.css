@@ -440,3 +440,90 @@ body.theme-light .main-logo-svg text { fill: #1a1a1f; }
     font-size: 16px;
     font-weight: 700;
 }
+
+/* Анимация стрелочки баланса */
+#balance-arrow {
+    transition: transform 0.3s ease; /* Плавный поворот за 0.3 сек */
+}
+#balance-arrow.rotated {
+    transform: rotate(180deg); /* Переворот вверх ногами */
+}
+
+/* Поднимаем меню и делаем его "парящим" */
+.bottom-nav {
+    position: fixed;
+    bottom: 15px; /* Вот этот отступ поднимает меню от низа экрана */
+    left: 15px;
+    right: 15px;
+    width: calc(100% - 30px);
+    border-radius: 20px; /* Закругляем края */
+    background: #1a1a2e;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5); /* Добавляем тень, чтобы казалось, что оно висит в воздухе */
+    padding: 12px 0;
+    display: flex;
+    justify-content: space-around;
+    z-index: 1000;
+}
+
+/* Чтобы контент не прятался за поднятым меню */
+body {
+    padding-bottom: 100px;
+}
+
+/* === СТИЛИ РЕФЕРАЛЬНОЙ СИСТЕМЫ === */
+.ref-card {
+    background: #1a1a2e;
+    border-radius: 16px;
+    padding: 20px;
+    border: 1px solid #2a2a40;
+    margin-top: 20px;
+}
+.ref-card h3 {
+    margin-bottom: 15px;
+    font-size: 16px;
+    color: #ffffff;
+    text-align: center;
+}
+.ref-link-box {
+    display: flex;
+    background: #121220;
+    border: 1px solid #2a2a40;
+    border-radius: 12px;
+    overflow: hidden;
+    align-items: center;
+    height: 45px;
+    margin-bottom: 20px;
+}
+.ref-link-box input {
+    flex: 1;
+    background: none;
+    border: none;
+    color: #ff9f43; /* Оранжевый цвет для ссылки, чтобы выделялась */
+    padding: 0 15px;
+    font-size: 14px;
+    outline: none;
+    width: 100%;
+}
+.copy-btn {
+    background: #2a2a40;
+    border: none;
+    color: #fff;
+    padding: 0 20px;
+    height: 100%;
+    cursor: pointer;
+    font-size: 18px;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.copy-btn:active {
+    background: #3c40c6; /* Цвет при нажатии */
+}
+.ref-description {
+    color: #888992;
+    font-size: 13px;
+    line-height: 1.5;
+    text-align: center;
+    margin: 0;
+}
