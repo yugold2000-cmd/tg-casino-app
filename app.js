@@ -26,11 +26,21 @@ document.addEventListener('DOMContentLoaded', () => {
     window.switchTab = function(tabName) {
         if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
 
+        // Скрываем все секции и убираем активный цвет у кнопок
         document.querySelectorAll('.view-section').forEach(sec => sec.classList.remove('active'));
         document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
 
+        // Показываем нужную вкладку
         document.getElementById(`view-${tabName}`).classList.add('active');
         document.getElementById(`nav-${tabName}`).classList.add('active');
+
+        // Логика скрытия верхней панели
+        const topHeader = document.getElementById('main-top-header');
+        if (tabName === 'wallet' || tabName === 'menu') {
+            topHeader.style.display = 'none'; // Скрываем верхнюю панель в кошельке и меню
+        } else {
+            topHeader.style.display = 'flex'; // Возвращаем на Главной странице
+        }
     };
 
     // 3. Выпадающее меню баланса

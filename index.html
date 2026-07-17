@@ -12,9 +12,10 @@
 
 <div class="app-container">
     
-    <!-- ВЕРХНЯЯ ПАНЕЛЬ -->
-    <header class="top-header">
+    <!-- ВЕРХНЯЯ ПАНЕЛЬ (Теперь скрывается в кошельке) -->
+    <header class="top-header" id="main-top-header">
         <div class="header-left">
+            <!-- Кнопка баланса -->
             <div class="balance-pill" id="balance-btn" onclick="toggleBalanceDropdown(event)">
                 <div class="currency-icon" id="active-currency-icon">
                     <i class="fa-solid fa-ruble-sign" style="color: #ffffff;"></i>
@@ -23,6 +24,7 @@
                 <i class="fa-solid fa-chevron-down down-arrow"></i>
             </div>
             
+            <!-- Кнопка пополнения -->
             <button class="deposit-btn" onclick="switchTab('wallet')">Пополнить</button>
 
             <!-- Выпадающий список -->
@@ -54,7 +56,7 @@
         </div>
     </header>
 
-    <!-- ВКЛАДКА 1: КАЗИНО (ИГРЫ + СТАВКИ) -->
+    <!-- ВКЛАДКА 1: ГЛАВНАЯ (ИГРЫ + СТАВКИ) -->
     <main id="view-casino" class="view-section active">
         
         <!-- РЕКЛАМНЫЙ БАННЕР -->
@@ -115,7 +117,7 @@
             </div>
         </div>
 
-        <!-- ТАБЛИЦА СТАВОК (РОВНАЯ) -->
+        <!-- ТАБЛИЦА СТАВОК (LIVE) -->
         <h2 class="section-title" style="margin-top: 30px;">Live ставки</h2>
         <div class="live-bets-table">
             <div class="bet-table-header">
@@ -163,9 +165,9 @@
 
     </main>
 
-    <!-- ВКЛАДКА 2: КОШЕЛЕК -->
-    <main id="view-wallet" class="view-section">
-        <h2 class="section-title">Активы</h2>
+    <!-- ВКЛАДКА 2: КОШЕЛЕК (Без верхней плашки) -->
+    <main id="view-wallet" class="view-section" style="padding-top: 20px;">
+        <h2 class="section-title" style="margin-top: 0;">Активы</h2>
         
         <div class="wallet-balances">
             <div class="balance-list-item">
@@ -199,8 +201,8 @@
         </div>
 
         <div class="wallet-actions">
-            <button class="wallet-action-btn deposit"><i class="fa-solid fa-arrow-down"></i> Пополнить</button>
-            <button class="wallet-action-btn withdraw"><i class="fa-solid fa-arrow-up"></i> Вывести</button>
+            <button class="wallet-action-btn deposit" onclick="tg.showAlert('Открытие платежки')"><i class="fa-solid fa-arrow-down"></i> Пополнить</button>
+            <button class="wallet-action-btn withdraw" onclick="tg.showAlert('Вывод средств')"><i class="fa-solid fa-arrow-up"></i> Вывести</button>
         </div>
 
         <h2 class="section-title" style="margin-top: 25px; font-size: 18px;">История транзакций</h2>
@@ -229,8 +231,8 @@
     </main>
 
     <!-- ВКЛАДКА 3: МЕНЮ -->
-    <main id="view-menu" class="view-section">
-        <h2 class="section-title">Меню</h2>
+    <main id="view-menu" class="view-section" style="padding-top: 20px;">
+        <h2 class="section-title" style="margin-top: 0;">Меню</h2>
         <div class="menu-list">
             <div class="menu-item" onclick="tg.showAlert('Бонусы в разработке')">
                 <div class="menu-icon"><i class="fa-solid fa-gift"></i></div>
@@ -240,6 +242,12 @@
             <div class="menu-item" onclick="tg.showAlert('Настройки в разработке')">
                 <div class="menu-icon"><i class="fa-solid fa-gear"></i></div>
                 <span>Настройки аккаунта</span>
+                <i class="fa-solid fa-chevron-right arrow"></i>
+            </div>
+            <!-- Новая кнопка Техподдержка -->
+            <div class="menu-item" onclick="tg.showAlert('Открытие чата с поддержкой')">
+                <div class="menu-icon"><i class="fa-solid fa-headset"></i></div>
+                <span>Техподдержка</span>
                 <i class="fa-solid fa-chevron-right arrow"></i>
             </div>
         </div>
@@ -253,7 +261,7 @@
         </a>
         <a href="#" class="nav-item active" id="nav-casino" onclick="switchTab('casino')">
             <i class="fa-solid fa-layer-group"></i>
-            <span>Казино</span>
+            <span>Главная</span> <!-- Переименовали с Казино на Главная -->
         </a>
         <a href="#" class="nav-item" id="nav-menu" onclick="switchTab('menu')">
             <i class="fa-solid fa-bars"></i>
