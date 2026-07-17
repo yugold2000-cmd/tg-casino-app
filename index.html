@@ -14,8 +14,8 @@
     
     <!-- ВЕРХНЯЯ ПАНЕЛЬ -->
     <header class="top-header">
-        <!-- Слева: Баланс и Плюс -->
         <div class="header-left">
+            <!-- Кнопка баланса -->
             <div class="balance-pill" id="balance-btn" onclick="toggleBalanceDropdown(event)">
                 <div class="currency-icon" id="active-currency-icon">
                     <i class="fa-solid fa-ruble-sign" style="color: #ffffff;"></i>
@@ -24,10 +24,11 @@
                 <i class="fa-solid fa-chevron-down down-arrow"></i>
             </div>
             
-            <button class="deposit-btn" onclick="switchTab('wallet')"><i class="fa-solid fa-plus"></i></button>
+            <!-- Кнопка пополнения (вместо плюса) -->
+            <button class="deposit-btn" onclick="switchTab('wallet')">Пополнить</button>
 
-            <!-- Выпадающий список валют (теперь привязан к левому краю) -->
-            <div class="balance-dropdown hidden" id="balance-dropdown">
+            <!-- Выпадающий список -->
+            <div class="balance-dropdown" id="balance-dropdown">
                 <div class="crypto-item" onclick="selectCurrency('RUB', '1.25', 'fa-solid fa-ruble-sign', '#a855f7')">
                     <div class="dropdown-icon" style="background: #a855f7;"><i class="fa-solid fa-ruble-sign"></i></div> 
                     <span>RUB</span>
@@ -47,123 +48,211 @@
             </div>
         </div>
         
-        <!-- Справа: Аватарка профиля -->
+        <!-- Аватарка -->
         <div class="header-right">
-            <div class="profile-icon">
+            <div class="profile-icon" id="user-avatar-container">
                 <div class="avatar-placeholder" id="user-avatar">?</div>
             </div>
         </div>
     </header>
 
-    <!-- Вкладка 1: КАЗИНО (ИГРЫ) -->
+    <!-- ВКЛАДКА 1: КАЗИНО (ИГРЫ + СТАВКИ) -->
     <main id="view-casino" class="view-section active">
         <h2 class="section-title">Игры</h2>
-        <div class="games-layout">
-            
+        
+        <div class="games-grid-compact">
             <!-- Crush Game -->
-            <div class="game-banner-card" onclick="openGame('Crush Game')">
-                <img src="images/crash-bg.png" class="banner-bg" alt="Crush">
-                <div class="banner-overlay"></div>
-                <div class="banner-content">
-                    <h3 class="banner-title">Crush game</h3>
-                    <button class="play-banner-btn">Играть <i class="fa-solid fa-arrow-right"></i></button>
+            <div class="game-card-small" onclick="openGame('Crush Game')">
+                <img src="images/crash-bg.png" class="game-bg" alt="Crush">
+                <div class="game-overlay"></div>
+                <div class="game-content">
+                    <h3 class="game-title">Crush</h3>
+                    <button class="play-btn">Играть</button>
                 </div>
             </div>
 
             <!-- Plinko -->
-            <div class="game-banner-card" onclick="openGame('Plinko')">
-                <img src="images/plinko-bg.png" class="banner-bg" alt="Plinko">
-                <div class="banner-overlay"></div>
-                <div class="banner-content">
-                    <h3 class="banner-title">Plinko</h3>
-                    <button class="play-banner-btn">Играть <i class="fa-solid fa-arrow-right"></i></button>
+            <div class="game-card-small" onclick="openGame('Plinko')">
+                <img src="images/plinko-bg.png" class="game-bg" alt="Plinko">
+                <div class="game-overlay"></div>
+                <div class="game-content">
+                    <h3 class="game-title">Plinko</h3>
+                    <button class="play-btn">Играть</button>
                 </div>
             </div>
 
             <!-- Roulette -->
-            <div class="game-banner-card" onclick="openGame('Roulette')">
-                <img src="images/roulette-bg.png" class="banner-bg" alt="Roulette">
-                <div class="banner-overlay"></div>
-                <div class="banner-content">
-                    <h3 class="banner-title">Roulette</h3>
-                    <button class="play-banner-btn">Играть <i class="fa-solid fa-arrow-right"></i></button>
+            <div class="game-card-small" onclick="openGame('Roulette')">
+                <img src="images/roulette-bg.png" class="game-bg" alt="Roulette">
+                <div class="game-overlay"></div>
+                <div class="game-content">
+                    <h3 class="game-title">Roulette</h3>
+                    <button class="play-btn">Играть</button>
                 </div>
             </div>
 
             <!-- Blackjack -->
-            <div class="game-banner-card" onclick="openGame('Blackjack')">
-                <img src="images/blackjack-bg.png" class="banner-bg" alt="Blackjack">
-                <div class="banner-overlay"></div>
-                <div class="banner-content">
-                    <h3 class="banner-title">Blackjack</h3>
-                    <button class="play-banner-btn">Играть <i class="fa-solid fa-arrow-right"></i></button>
+            <div class="game-card-small" onclick="openGame('Blackjack')">
+                <img src="images/blackjack-bg.png" class="game-bg" alt="Blackjack">
+                <div class="game-overlay"></div>
+                <div class="game-content">
+                    <h3 class="game-title">Blackjack</h3>
+                    <button class="play-btn">Играть</button>
                 </div>
             </div>
 
             <!-- Dice -->
-            <div class="game-banner-card" onclick="openGame('Dice')">
-                <img src="images/dice-bg.png" class="banner-bg" alt="Dice">
-                <div class="banner-overlay"></div>
-                <div class="banner-content">
-                    <h3 class="banner-title">Dice</h3>
-                    <button class="play-banner-btn">Играть <i class="fa-solid fa-arrow-right"></i></button>
+            <div class="game-card-small" onclick="openGame('Dice')">
+                <img src="images/dice-bg.png" class="game-bg" alt="Dice">
+                <div class="game-overlay"></div>
+                <div class="game-content">
+                    <h3 class="game-title">Dice</h3>
+                    <button class="play-btn">Играть</button>
                 </div>
             </div>
 
             <!-- Tickets -->
-            <div class="game-banner-card" onclick="openGame('Tickets')">
-                <img src="images/tickets-bg.png" class="banner-bg" alt="Tickets">
-                <div class="banner-overlay"></div>
-                <div class="banner-content">
-                    <h3 class="banner-title">Tickets</h3>
-                    <button class="play-banner-btn">Играть <i class="fa-solid fa-arrow-right"></i></button>
+            <div class="game-card-small" onclick="openGame('Tickets')">
+                <img src="images/tickets-bg.png" class="game-bg" alt="Tickets">
+                <div class="game-overlay"></div>
+                <div class="game-content">
+                    <h3 class="game-title">Tickets</h3>
+                    <button class="play-btn">Играть</button>
                 </div>
             </div>
-
         </div>
+
+        <!-- ТАБЛИЦА СТАВОК (LIVE) -->
+        <h2 class="section-title" style="margin-top: 30px;">Live ставки</h2>
+        <div class="live-bets-table">
+            <div class="bet-table-header">
+                <span style="flex: 1.2;">Игра</span>
+                <span style="flex: 1.5;">Игрок</span>
+                <span style="flex: 1;">Ставка</span>
+                <span style="flex: 1; text-align: right;">Выигрыш</span>
+            </div>
+            
+            <div class="bet-table-row">
+                <span class="bet-game-name">Crush</span>
+                <span>@ivan_pro</span>
+                <span>50 RUB</span>
+                <span class="bet-win positive">120 RUB</span>
+            </div>
+            <div class="bet-table-row">
+                <span class="bet-game-name">Plinko</span>
+                <span>@crypto_god</span>
+                <span>10 TON</span>
+                <span class="bet-win negative">0 TON</span>
+            </div>
+            <div class="bet-table-row">
+                <span class="bet-game-name">Dice</span>
+                <span>@lucky777</span>
+                <span>100 USDT</span>
+                <span class="bet-win positive">200 USDT</span>
+            </div>
+            <div class="bet-table-row">
+                <span class="bet-game-name">Tickets</span>
+                <span>@anon_user</span>
+                <span>500 STARS</span>
+                <span class="bet-win negative">0 STARS</span>
+            </div>
+        </div>
+
     </main>
 
-    <!-- Вкладка 2: КОШЕЛЕК -->
+    <!-- ВКЛАДКА 2: КОШЕЛЕК -->
     <main id="view-wallet" class="view-section">
-        <h2 class="section-title">Кошелек</h2>
-        <div class="wallet-card">
-            <p>Текущий баланс</p>
-            <h1 class="wallet-balance-big" id="wallet-balance-big">1.25 RUB</h1>
-            <div class="wallet-actions">
-                <button class="wallet-btn deposit"><i class="fa-solid fa-arrow-down"></i> Пополнить</button>
-                <button class="wallet-btn withdraw"><i class="fa-solid fa-arrow-up"></i> Вывести</button>
+        <h2 class="section-title">Активы</h2>
+        
+        <div class="wallet-balances">
+            <div class="balance-list-item">
+                <div class="balance-left">
+                    <div class="dropdown-icon" style="background: #a855f7;"><i class="fa-solid fa-ruble-sign"></i></div>
+                    <span>RUB</span>
+                </div>
+                <div class="balance-right">1.25</div>
+            </div>
+            <div class="balance-list-item">
+                <div class="balance-left">
+                    <div class="dropdown-icon" style="background: #0088cc;"><i class="fa-regular fa-gem"></i></div>
+                    <span>Toncoin</span>
+                </div>
+                <div class="balance-right">14.50</div>
+            </div>
+            <div class="balance-list-item">
+                <div class="balance-left">
+                    <div class="dropdown-icon" style="background: #26a69a;"><i class="fa-solid fa-dollar-sign"></i></div>
+                    <span>USDT</span>
+                </div>
+                <div class="balance-right">150.00</div>
+            </div>
+            <div class="balance-list-item">
+                <div class="balance-left">
+                    <div class="dropdown-icon" style="background: #ffb800;"><i class="fa-solid fa-star"></i></div>
+                    <span>Telegram Stars</span>
+                </div>
+                <div class="balance-right">500</div>
+            </div>
+        </div>
+
+        <div class="wallet-actions">
+            <button class="wallet-action-btn deposit"><i class="fa-solid fa-arrow-down"></i> Пополнить</button>
+            <button class="wallet-action-btn withdraw"><i class="fa-solid fa-arrow-up"></i> Вывести</button>
+        </div>
+
+        <h2 class="section-title" style="margin-top: 25px; font-size: 18px;">История транзакций</h2>
+        <div class="transaction-history">
+            <div class="tx-item">
+                <div class="tx-info">
+                    <i class="fa-solid fa-arrow-down tx-deposit-icon"></i>
+                    <div>
+                        <div class="tx-title">Пополнение RUB</div>
+                        <div class="tx-date">Сегодня, 14:30</div>
+                    </div>
+                </div>
+                <div class="tx-amount positive">+500.00 RUB</div>
+            </div>
+            <div class="tx-item">
+                <div class="tx-info">
+                    <i class="fa-solid fa-gamepad tx-game-icon"></i>
+                    <div>
+                        <div class="tx-title">Ставка Crush</div>
+                        <div class="tx-date">Вчера, 21:15</div>
+                    </div>
+                </div>
+                <div class="tx-amount negative">-15.00 RUB</div>
+            </div>
+            <div class="tx-item">
+                <div class="tx-info">
+                    <i class="fa-solid fa-arrow-up tx-withdraw-icon"></i>
+                    <div>
+                        <div class="tx-title">Вывод USDT</div>
+                        <div class="tx-date">10 Окт, 12:00</div>
+                    </div>
+                </div>
+                <div class="tx-amount negative">-50.00 USDT</div>
             </div>
         </div>
     </main>
 
-    <!-- Вкладка 3: МЕНЮ -->
+    <!-- ВКЛАДКА 3: МЕНЮ -->
     <main id="view-menu" class="view-section">
         <h2 class="section-title">Меню</h2>
         <div class="menu-list">
             <div class="menu-item" onclick="tg.showAlert('Бонусы в разработке')">
-                <i class="fa-solid fa-gift"></i>
+                <div class="menu-icon"><i class="fa-solid fa-gift"></i></div>
                 <span>Бонусы и промокоды</span>
                 <i class="fa-solid fa-chevron-right arrow"></i>
             </div>
-            <div class="menu-item" onclick="tg.showAlert('История в разработке')">
-                <i class="fa-solid fa-clock-rotate-left"></i>
-                <span>История ставок</span>
-                <i class="fa-solid fa-chevron-right arrow"></i>
-            </div>
             <div class="menu-item" onclick="tg.showAlert('Настройки в разработке')">
-                <i class="fa-solid fa-gear"></i>
+                <div class="menu-icon"><i class="fa-solid fa-gear"></i></div>
                 <span>Настройки аккаунта</span>
                 <i class="fa-solid fa-chevron-right arrow"></i>
             </div>
         </div>
     </main>
 
-    <!-- ПЛАВАЮЩАЯ КНОПКА ПОДДЕРЖКИ -->
-    <button class="support-fab" onclick="tg.showAlert('Служба поддержки откроется здесь')">
-        <i class="fa-solid fa-headset"></i>
-    </button>
-
-    <!-- НИЖНЕЕ МЕНЮ (Переключает вкладки) -->
+    <!-- НИЖНЕЕ МЕНЮ НАВИГАЦИИ -->
     <nav class="bottom-nav">
         <a href="#" class="nav-item" id="nav-wallet" onclick="switchTab('wallet')">
             <i class="fa-solid fa-wallet"></i>
