@@ -257,9 +257,16 @@ window.toggleTheme = function() {
 // Запуск игры
 window.openGame = function(gameName) {
     if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
-    tg.showAlert(`Запуск игры: ${gameName}`);
+    
+    // Если нажали на Crash - переходим по ссылке
+    if (gameName === 'crash' || gameName === 'Crush' || gameName === 'Crush Game') {
+        window.location.href = 'games/crash/index.html';
+    } else if (gameName === 'plinko' || gameName === 'Plinko') {
+        window.location.href = 'games/plinko/index.html';
+    } else {
+        tg.showAlert(`Игра ${gameName} в разработке`);
+    }
 };
-
 // ==========================================
 // 5. ЛОГИКА ВЛОЖЕННЫХ СТРАНИЦ
 // ==========================================
