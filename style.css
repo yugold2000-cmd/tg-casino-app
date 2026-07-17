@@ -288,3 +288,155 @@ body.theme-light .main-logo-svg text { fill: #1a1a1f; }
 .menu-square > * {
     pointer-events: none; 
 }
+
+/* === ВЛОЖЕННЫЕ СТРАНИЦЫ (САБ-ПЕЙДЖИ) === */
+.subpage-header {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 15px 10px 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--purple-light);
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+.subpage-header:active { opacity: 0.6; }
+
+/* === БОНУСЫ И ПРОМОКОДЫ === */
+.sub-section-title {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.promo-input-group {
+    display: flex;
+    gap: 10px;
+}
+
+.promo-input {
+    flex: 1;
+    background: var(--bg-panel);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 14px 15px;
+    color: var(--text-main);
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s;
+    font-family: inherit;
+}
+.promo-input:focus { border-color: var(--purple-main); }
+.promo-input::placeholder { color: rgba(136, 137, 146, 0.6); }
+
+.promo-btn {
+    background: var(--purple-main);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 0 20px;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    transition: transform 0.1s, background 0.2s;
+}
+.promo-btn:active { transform: scale(0.95); }
+
+.empty-state {
+    background: var(--bg-panel);
+    border: 1px dashed var(--border-color);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    gap: 12px;
+    color: var(--text-muted);
+}
+.empty-state i {
+    font-size: 32px;
+    opacity: 0.5;
+}
+.empty-state span {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+/* === НАСТРОЙКИ АККАУНТА === */
+.settings-avatar-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+.settings-avatar-wrapper {
+    width: 86px;
+    height: 86px;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 10px;
+    border: 2px solid var(--purple-main);
+}
+.avatar-edit-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 35%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 13px;
+    transition: background 0.2s;
+}
+.settings-avatar-wrapper:active .avatar-edit-overlay { background: rgba(157, 78, 221, 0.8); }
+
+.avatar-change-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--purple-light);
+}
+
+.settings-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.input-group label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-muted);
+    margin-left: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* === ОТВЕТСТВЕННАЯ ИГРА === */
+.info-card {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.info-card h3 {
+    font-size: 16px;
+    font-weight: 700;
+}

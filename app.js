@@ -33,62 +33,41 @@ let currentTheme = 'dark';
 
 // Словарь переводов для локализации (RU / EN)
 // Словарь переводов для локализации (RU / EN)
+// Словарь переводов для локализации (RU / EN)
 const translations = {
     ru: {
-        games_title: "Игры",
-        live_bets_title: "Live ставки",
-        th_game: "Игра",
-        th_player: "Игрок",
-        th_bet: "Ставка",
-        th_win: "Выигрыш",
-        assets_title: "Активы",
-        btn_deposit: "Пополнить",
-        btn_withdraw: "Вывести",
-        tx_history_title: "История транзакций",
-        tx_deposit_rub: "Пополнение RUB",
-        tx_today: "Сегодня, 14:30",
-        menu_title: "Меню",
-        menu_bonuses: "Бонусы и промокоды",
-        menu_settings: "Настройки аккаунта",
-        menu_support: "Техподдержка",
-        
-        menu_fairness: "Проверка честности", // <-- ВОТ ЭТУ СТРОЧКУ ДОБАВЬ
-        
-        menu_responsible: "Ответственная игра",
-        menu_channel_short: "Канал",
-        menu_language: "Язык",
-        menu_theme_short: "Тема",
-        nav_wallet: "Кошелек",
-        nav_main: "Главная",
-        nav_menu: "Menu"
+        games_title: "Игры", live_bets_title: "Live ставки", th_game: "Игра", th_player: "Игрок", th_bet: "Ставка", th_win: "Выигрыш",
+        assets_title: "Активы", btn_deposit: "Пополнить", btn_withdraw: "Вывести",
+        tx_history_title: "История транзакций", tx_deposit_rub: "Пополнение RUB", tx_today: "Сегодня, 14:30",
+        menu_title: "Меню", menu_bonuses: "Бонусы и промокоды", menu_settings: "Настройки аккаунта",
+        menu_support: "Техподдержка", menu_fairness: "Проверка честности", menu_responsible: "Ответственная игра",
+        menu_channel_short: "Канал", menu_language: "Язык", menu_theme_short: "Тема",
+        nav_wallet: "Кошелек", nav_main: "Главная", nav_menu: "Меню",
+        promo_title: "Промокоды", promo_placeholder: "Введите промокод...", btn_apply: "Применить",
+        bonuses_title: "Мои бонусы", bonuses_empty: "Пока пусто", btn_back: "Назад",
+        avatar_change: "Изменить фото", nickname_label: "Никнейм", email_label: "E-mail адрес", 
+        email_placeholder: "Ваша почта...", btn_save: "Сохранить изменения",
+        resp_warning_title: "Азартные игры — это развлечение, а не способ заработка.",
+        resp_text_1: "Помните, что казино всегда имеет математическое преимущество. Никогда не играйте на деньги, которые вы не готовы потерять, и не пытайтесь отыграться после проигрыша.",
+        resp_text_2: "Если вы чувствуете, что теряете контроль над ситуацией или игра начинает влиять на вашу личную жизнь, пожалуйста, сделайте паузу.",
+        btn_self_exclude: "Заблокировать аккаунт"
     },
     en: {
-        games_title: "Games",
-        live_bets_title: "Live Bets",
-        th_game: "Game",
-        th_player: "Player",
-        th_bet: "Bet",
-        th_win: "Payout",
-        assets_title: "Assets",
-        btn_deposit: "Deposit",
-        btn_withdraw: "Withdraw",
-        tx_history_title: "Transaction History",
-        tx_deposit_rub: "RUB Top-up",
-        tx_today: "Today, 14:30",
-        menu_title: "Menu",
-        menu_bonuses: "Bonuses & Promos",
-        menu_settings: "Account Settings",
-        menu_support: "Support Chat",
-        
-        menu_fairness: "Provably Fair",     // <-- И ВОТ ЭТУ СТРОЧКУ ДОБАВЬ
-        
-        menu_responsible: "Responsible Gaming",
-        menu_channel_short: "Channel",
-        menu_language: "Language",
-        menu_theme_short: "Theme",
-        nav_wallet: "Wallet",
-        nav_main: "Main",
-        nav_menu: "Menu"
+        games_title: "Games", live_bets_title: "Live Bets", th_game: "Game", th_player: "Player", th_bet: "Bet", th_win: "Payout",
+        assets_title: "Assets", btn_deposit: "Deposit", btn_withdraw: "Withdraw",
+        tx_history_title: "Transaction History", tx_deposit_rub: "RUB Top-up", tx_today: "Today, 14:30",
+        menu_title: "Menu", menu_bonuses: "Bonuses & Promos", menu_settings: "Account Settings",
+        menu_support: "Support Chat", menu_fairness: "Provably Fair", menu_responsible: "Responsible Gaming",
+        menu_channel_short: "Channel", menu_language: "Language", menu_theme_short: "Theme",
+        nav_wallet: "Wallet", nav_main: "Main", nav_menu: "Menu",
+        promo_title: "Promo Codes", promo_placeholder: "Enter promo code...", btn_apply: "Apply",
+        bonuses_title: "My Bonuses", bonuses_empty: "Currently empty", btn_back: "Back",
+        avatar_change: "Change Photo", nickname_label: "Nickname", email_label: "E-mail Address", 
+        email_placeholder: "Your email...", btn_save: "Save Changes",
+        resp_warning_title: "Gambling is entertainment, not a way to make money.",
+        resp_text_1: "Remember that the casino always has a mathematical edge. Never gamble with money you cannot afford to lose, and never chase your losses.",
+        resp_text_2: "If you feel you are losing control or if gambling is affecting your personal life, please take a break.",
+        btn_self_exclude: "Self-Exclude Account"
     }
 };
 
@@ -134,24 +113,30 @@ document.addEventListener('DOMContentLoaded', () => {
     tg.setBackgroundColor('#0f0f13');
 
     // Автоопределение языка Telegram-клиента пользователя
-    try {
-        const userLanguage = tg.initDataUnsafe?.user?.language_code;
-        currentLang = (userLanguage === 'ru') ? 'ru' : 'en';
-        applyLanguage(currentLang);
-    } catch (e) {
-        applyLanguage('en');
-    }
-
-    // Загрузка аватарки профиля
+    // Загрузка профиля (Аватарка и Никнейм)
     try {
         const user = tg.initDataUnsafe?.user;
-        const avatarContainer = document.getElementById('user-avatar-container');
+        const mainAvatar = document.getElementById('user-avatar');
+        const mainAvatarContainer = document.getElementById('user-avatar-container');
+        const settingsAvatar = document.getElementById('settings-avatar');
+        const settingsNickname = document.getElementById('setting-nickname');
+
         if (user) {
+            // Если есть фото в Телеграме
             if (user.photo_url) {
-                avatarContainer.innerHTML = `<img src="${user.photo_url}" style="width:100%; height:100%; border-radius:50%; object-fit:cover;">`;
+                const imgTag = `<img src="${user.photo_url}" style="width:100%; height:100%; object-fit:cover;">`;
+                mainAvatarContainer.innerHTML = imgTag;
+                settingsAvatar.innerHTML = imgTag;
             } else {
+                // Если фото нет, ставим первую букву имени
                 const firstLetter = (user.first_name || user.username || 'U').charAt(0).toUpperCase();
-                document.getElementById('user-avatar').innerText = firstLetter;
+                if (mainAvatar) mainAvatar.innerText = firstLetter;
+                if (settingsAvatar) settingsAvatar.innerText = firstLetter;
+            }
+
+            // Ставим никнейм в настройки по умолчанию
+            if (settingsNickname) {
+                settingsNickname.value = user.username ? `@${user.username}` : user.first_name;
             }
         }
     } catch (e) {
@@ -214,10 +199,19 @@ window.toggleLanguage = function() {
 };
 
 function applyLanguage(lang) {
+    // Перевод обычного текста
     document.querySelectorAll('[data-i18n]').forEach(element => {
         const key = element.getAttribute('data-i18n');
         if (translations[lang] && translations[lang][key]) {
             element.innerText = translations[lang][key];
+        }
+    });
+
+    // Перевод placeholder-ов (текст внутри инпутов)
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+        const key = element.getAttribute('data-i18n-placeholder');
+        if (translations[lang] && translations[lang][key]) {
+            element.placeholder = translations[lang][key];
         }
     });
 
@@ -264,4 +258,82 @@ window.toggleTheme = function() {
 window.openGame = function(gameName) {
     if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
     tg.showAlert(`Запуск игры: ${gameName}`);
+};
+
+// ==========================================
+// 5. ЛОГИКА ВЛОЖЕННЫХ СТРАНИЦ
+// ==========================================
+
+// Открытие вложенной страницы (скрывает нижнее меню)
+window.openSubPage = function(pageId) {
+    if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
+
+    document.querySelectorAll('.view-section').forEach(sec => sec.classList.remove('active'));
+    document.getElementById(`view-${pageId}`).classList.add('active');
+
+    // Скрываем верхнюю шапку и нижнее меню навигации
+    document.getElementById('main-top-header').style.display = 'none';
+    document.querySelector('.bottom-nav').style.display = 'none';
+};
+
+// Изменим немного switchTab, чтобы он всегда возвращал нижнее меню, если мы вернулись из SubPage
+const originalSwitchTab = window.switchTab;
+window.switchTab = function(tabName) {
+    originalSwitchTab(tabName);
+    // Принудительно показываем нижнее меню на главных вкладках
+    document.querySelector('.bottom-nav').style.display = 'flex';
+};
+
+// Функция активации промокода
+window.applyPromo = function() {
+    if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
+    const input = document.getElementById('promo-input');
+    
+    if (input.value.trim() === '') {
+        tg.showAlert(currentLang === 'ru' ? 'Введите промокод!' : 'Enter a promo code!');
+        return;
+    }
+
+    // Имитация загрузки
+    tg.showAlert(currentLang === 'ru' ? 'Промокод не найден или уже использован.' : 'Promo code not found or already used.');
+    input.value = ''; // Очищаем поле
+};
+
+// ==========================================
+// 6. ЛОГИКА НАСТРОЕК АККАУНТА
+// ==========================================
+
+// Функция предпросмотра новой аватарки
+window.previewAvatar = function(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            // Меняем картинку и в настройках, и в главной шапке приложения!
+            const imgHtml = `<img src="${e.target.result}" style="width:100%; height:100%; object-fit:cover;">`;
+            document.getElementById('settings-avatar').innerHTML = imgHtml;
+            document.getElementById('user-avatar-container').innerHTML = imgHtml;
+        }
+        reader.readAsDataURL(file);
+    }
+};
+
+// Функция сохранения настроек
+window.saveSettings = function() {
+    if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
+    
+    const nickname = document.getElementById('setting-nickname').value.trim();
+    const email = document.getElementById('setting-email').value.trim();
+
+    if (nickname === '') {
+        tg.showAlert(currentLang === 'ru' ? 'Никнейм не может быть пустым!' : 'Nickname cannot be empty!');
+        return;
+    }
+
+    // Здесь в будущем будет отправка данных на твой сервер
+    // Имитируем успешное сохранение:
+    tg.showAlert(currentLang === 'ru' ? 'Настройки успешно сохранены!' : 'Settings saved successfully!');
+    
+    // Возвращаемся в меню
+    switchTab('menu');
 };
