@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="theme-dark">
+    <div id="global-loader" class="global-loader">
+        <div class="loader-spinner"></div>
+        <div class="loader-text" id="loader-text">Загрузка...</div>
+    </div>
+    
 
 <div class="app-container">
     
@@ -68,9 +73,32 @@
 
     <!-- ВКЛАДКА 1: ГЛАВНАЯ (ИГРЫ) -->
     <main id="view-casino" class="view-section active">
-        <div class="promo-banner" onclick="tg.showAlert('Promo!')">
-            <img src="images/promo-banner.png" alt="Promo" onerror="this.src='https://via.placeholder.com/600x200/9d4edd/ffffff?text=Рекламный+Баннер'">
-        </div>
+        <div class="promo-banner slider-container" id="promo-slider">
+            <!-- Лента со слайдами -->
+            <div class="slider-track" id="slider-track">
+        
+                <!-- Слайд 1: Картинка -->
+                <div class="slide">
+                    <img src="images/promo-banner.png" alt="Promo 1">
+                </div>
+
+                <!-- Слайд 2: Картинка -->
+                <div class="slide">
+                    <img src="images/promo-banner1.png" alt="Promo 2">
+                </div>
+
+                <!-- Слайд 3: ВИДЕО -->
+                <!-- ВАЖНО: атрибуты muted и playsinline обязательны, иначе видео не запустится в Telegram -->
+                <div class="slide">
+                    <video autoplay loop muted playsinline>
+                        <source src="images/banner3.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+    
+    <!-- Точечки навигации (сгенерируются через JavaScript) -->
+    <div class="slider-dots" id="slider-dots"></div>
+</div>
 
         <h2 class="section-title" data-i18n="games_title">Игры</h2>
         

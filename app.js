@@ -120,6 +120,12 @@ document.addEventListener('DOMContentLoaded', () => {
     tg.setHeaderColor('#0f0f13');
     tg.setBackgroundColor('#0f0f13');
 
+    // Прячем экран загрузки через 1 секунду после входа
+    setTimeout(() => {
+        const loader = document.getElementById('global-loader');
+        if (loader) loader.classList.add('hidden');
+    }, 1000);
+
     // Автоопределение языка Telegram-клиента пользователя
     // Загрузка профиля (Аватарка и Никнейм)
     try {
@@ -408,3 +414,90 @@ window.copyRefLink = function() {
         console.error('Ошибка копирования: ', err);
     });
 };
+
+// =========================================================================
+// 7. ЛОГИКА СЛАЙДЕРА-БАННЕРА
+// =========================================================================
+document.addEventListener('DOMContentLoaded', () => {
+    const track = document.getElementById('slider-track');
+    const dotsContainer = document.getElementById('slider-dots');
+    
+    // Если слайдера нет на странице, прерываем функцию
+    if (!track) return; 
+
+    const slides = track.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    let currentIndex = 0;
+    let slideInterval;
+
+    // 1. Создаем точечки в зависимости от количества слайдов
+    for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement('div');
+        dot.classList.add('dot');
+        if (i === 0) dot.classList.add('active');
+        dotsContainer.appendChild(dot);
+    }
+    const dots = dotsContainer.querySelectorAll('.dot');
+
+    // 2. Функция переключения на конкретный слайд
+    function goToSlide(index) {
+        if (index < 0) index = totalSlides - 1;
+        if (index >= totalSlides) index = 0;
+        
+        currentIndex = index;
+        // Сдвигаем ленту (например, на -100%, -200%)
+        track.style.transform = `translateX(-${currentIndex * 100}%)`;
+        
+        // Обновляем точечки
+        dots.forEach(d => d.classList.remove('active'));
+        dots[currentIndex].classList.add('active');
+    }
+
+    // 3. Автопрокрутка (каждые 7 секунд)
+    function startAutoSlide() {
+        slideInterval = setInterval(() => {
+            goToSlide(currentIndex + 1);
+        }, 7000); 
+    }
+
+    function resetAutoSlide() {
+        clearInterval(slideInterval);
+        startAutoSlide();
+    }
+
+    // Запускаем таймер
+    startAutoSlide();
+
+    // 4. Логика свайпа пальцем (Touch Events)
+    let startX = 0;
+    let endX = 0;
+
+    track.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        clearInterval(slideInterval); // Останавливаем автопрокрутку, пока держим палец
+    }, { passive: true });
+
+    track.addEventListener('touchmove', (e) => {
+        endX = e.touches[0].clientX;
+    }, { passive: true });
+
+    track.addEventListener('touchend', () => {
+        if (!endX) return; // Если был просто клик без движения
+
+        const diffX = startX - endX;
+        
+        // Если свайпнули больше чем на 40px влево
+        if (diffX > 40) {
+            goToSlide(currentIndex + 1);
+        } 
+        // Если свайпнули больше чем на 40px вправо
+        else if (diffX < -40) {
+            goToSlide(currentIndex - 1);
+        }
+
+        // Сбрасываем значения и запускаем таймер заново
+        startX = 0;
+        endX = 0;
+        resetAutoSlide();
+    });
+});
