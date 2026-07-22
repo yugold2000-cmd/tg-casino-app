@@ -8,23 +8,27 @@
 }
 
 html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
+    /* Разрешаем жест скролла пальцем по вертикали */
+    touch-action: pan-y !important;
     
+    /* Явно разрешаем прокрутку по оси Y */
+    overflow-y: auto !important;
+    overflow-x: hidden;
+
+    /* Включаем плавную инерцию скролла на iOS */
+    -webkit-overflow-scrolling: touch;
+
     -webkit-user-select: none;
     user-select: none;
-    
-    touch-action: pan-y;
 }
 
 body {
     padding-top: var(--tg-safe-area-inset-top, 0px);
     padding-bottom: var(--tg-safe-area-inset-bottom, 0px);
     
-    -webkit-overflow-scrolling: touch;
-    
-    background-color: #000; 
+    /* Задаем минимальную высоту, чтобы контент мог спокойно растягиваться вниз */
+    min-height: 100vh;
+    min-height: 100dvh;
 }
 
 .bet-menu {
