@@ -37,6 +37,7 @@ body {
 
 
 
+
 .bet-menu {
     width: 100%;
     display: flex;
@@ -150,7 +151,7 @@ body {
 /* Styling */
 
 .header-tg {
-    background-color: black;
+    background-color: #12132b;
 }
 
 .header-main {
@@ -196,6 +197,7 @@ body {
     font-size: 12px;
     line-height: normal;
     color: #8b8fad;
+    transition: 0;
 }
 
 .allbtn {
@@ -298,10 +300,6 @@ input[type="checkbox"].btn-checkbox:checked::after {
     line-height: normal;
     text-align: center;
     color: #ffffff;
-}
-
-.header-tg {
-    background-color: black;
 }
 
 .footerdiv {
