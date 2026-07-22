@@ -297,7 +297,11 @@ input[type="checkbox"].btn-checkbox:checked::after {
 }
 
 
-
+.footerdiv {
+    width: 100%;
+    height: 250px;
+    background-color: red;
+}
 
 
 
