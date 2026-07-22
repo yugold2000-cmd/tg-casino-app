@@ -9,10 +9,21 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-        <script src="https://telegram.org/js/telegram-web-app.js">
-            window.Telegram.WebApp.ready();
-            window.Telegram.WebApp.expand(); // Разворачиваем
+        <script src="https://telegram.org/js/telegram-web-app.js"></script>
+        <script>
+            const tg = window.Telegram.WebApp;
+
+                tg.ready();
+                tg.expand();
+
+ 
+                tg.enableClosingConfirmation();
+
+                if (tg.isVersionAtLeast('7.7')) {
+                    tg.disableVerticalSwipes();
+                }
         </script>
+        
     </head>
     <body>
         <header class="header-main" style="color: white;">

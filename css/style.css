@@ -12,6 +12,13 @@ body {
     padding-bottom: var(--tg-safe-area-inset-bottom, 0px);
 }
 
+html, body {
+    touch-action: manipulation;
+    
+    -webkit-user-select: none;
+    user-select: none;
+}
+
 .bet-menu {
     width: 100%;
     display: flex;
