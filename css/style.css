@@ -32,10 +32,53 @@ body {
     user-select: none;
 
     padding-top: var(--tg-safe-area-inset-top, 0px);
-    padding-bottom: var(--tg-safe-area-inset-bottom, 0px);
 }
 
+body::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
 
+.header-tg {
+    width: 100%;
+    
+    /* Добавляем внутренний отступ сверху под "челку"/статус-бар Telegram */
+    padding-top: var(--tg-safe-area-inset-top, 0px);
+    
+    /* Базовая высота самого блока (например, 50px) + отступ сверху */
+    min-height: calc(50px + var(--tg-safe-area-inset-top, 0px));
+
+    /* Задаем цвет фона, который должен заливать верх */
+    background-color: #111122; /* Поставь свой точный HEX цвет */
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-multi {
+    width: 100%;
+    height: 50px;
+}
+
+.header-main {
+    width: 100%;
+    min-height: 8%; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.crashhistory {
+    width: 100%;
+    min-height: 50px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
 
 
 .bet-menu {
@@ -132,28 +175,7 @@ body {
     height: 315px;
 }
 
-.header-multi {
-    width: 100%;
-    height: 50px;
-}
 
-.header-main {
-    width: 100%;
-    min-height: 8%; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-}
-
-.crashhistory, .header-tg {
-    width: 100%;
-    min-height: 50px; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-}
 
 
 
@@ -200,6 +222,11 @@ body {
     color: #ffffff;
 }
 
+.btn-bet {
+    font-weight: 500;
+    font-size: 12px;
+}
+
 .sum-bet-text {
     font-family: Inter;
     font-weight: 700;
@@ -220,16 +247,6 @@ body {
 
 }
 
-.btn-bet {
-    font-weight: 500;
-    font-size: 12px;
-}
-
-.btn-autocashout {
-    font-weight: 700;
-    font-size: 18px;
-}
-
 .allinput {
     background-color: #0C0D20;
     border: 1px solid #2E3158;
@@ -241,6 +258,11 @@ body {
 input::placeholder {
   color: rgba(255, 255, 255, 0.5); /* Цвет вашей подсказки */
   opacity: 1;    /* Обязательно для iOS Safari и некоторых других браузеров */
+}
+
+.btn-autocashout {
+    font-weight: 700;
+    font-size: 18px;
 }
 
 .autocashout-text {
@@ -259,7 +281,7 @@ input::placeholder {
     user-select: none; 
 }
 
-/* 2. Базовый кастомный чекбокс */
+/* checkbox */
 input[type="checkbox"].btn-checkbox {
     appearance: none;
     -webkit-appearance: none; 
@@ -296,6 +318,7 @@ input[type="checkbox"].btn-checkbox:checked::after {
     transform: translate(-50%, -50%) rotate(45deg);
 }
 
+/* manual or auto*/
 
 .game-mode-menu {
     background-color: #0c0d20;
@@ -310,6 +333,8 @@ input[type="checkbox"].btn-checkbox:checked::after {
     text-align: center;
     color: #ffffff;
 }
+
+/* footer (all bets) */
 
 .footerdiv {
     width: 100%;
