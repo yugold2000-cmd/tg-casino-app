@@ -4,7 +4,7 @@
 
 * {
     font-family: "Inter";
-    background-color: #0f1027;
+    background-color: #12132b;
 }
 
 html {
@@ -42,10 +42,10 @@ body::-webkit-scrollbar {
 
 .header-tg {
     width: 100%;
-    height: 5%;
+    height: 3%;
 
-    /* Задаем цвет фона, который должен заливать верх */
-    background-color: #0f1027;; /* Поставь свой точный HEX цвет */
+    
+    background-color: #12132b;
 
     display: flex;
     align-items: center;
@@ -71,7 +71,49 @@ body::-webkit-scrollbar {
 }
 
 
+.btn-makebet-block,
+.field-group,
+.bet-input-menu,
+.autocashout-menu,
+.game-mode-menu {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+
+.sum-bet-text,
+.autocashout-text {
+    background: transparent !important;
+}
+
+.sum-bet-text,
+.autocashout-text,
+.auto-text-checkbox {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+.bet-multipliers,
+.autocashout-plus-minus {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+.bet-menu label,
+.bet-menu span,
+.bet-menu p,
+.bet-menu h1, .bet-menu h2, .bet-menu h3, .bet-menu h4 {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+
+
+
+
+
 .bet-menu {
+    background-color: #0f1027;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -170,6 +212,7 @@ body::-webkit-scrollbar {
 
 
 /* Styling */
+
 
 .header-main {
     background-color: #12132b;
