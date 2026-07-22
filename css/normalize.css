@@ -1,0 +1,39 @@
+/* 1. Меняем математику размеров и обнуляем все отступы */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* 2. Настраиваем корневые элементы (очень важно для игр) */
+html, body {
+    height: 100%;
+    width: 100%;
+    /* Запрещаем странице скроллиться и прыгать, как обычный сайт */
+    overflow: hidden; 
+    /* Отключаем выделение текста тапом, чтобы интерфейс казался "нативным" */
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* 3. Убиваем дефолтный дизайн инпутов и кнопок */
+button, input, textarea {
+    font-family: inherit; /* Наследуют шрифт приложения, а не используют системный */
+    font-size: inherit;
+    border: none;
+    outline: none;
+    background: transparent;
+}
+
+/* 4. Выключаем специфичные стили iOS (критично для Telegram Mini Apps на айфонах) */
+button {
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+}
+
+/* 5. Убираем стандартное поведение ссылок, если они будут */
+a {
+    text-decoration: none;
+    color: inherit;
+}

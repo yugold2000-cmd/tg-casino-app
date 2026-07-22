@@ -1,0 +1,276 @@
+@import 'normalize.css'; 
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
+
+* {
+    font-family: "Inter";
+    background-color: #0f1027;
+}
+
+.bet-menu {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    gap: 24px;          
+    padding: 0 15px;    
+}
+
+.field-group {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;          
+}
+
+.btn-makebet-block,
+.sum-bet-text,
+.bet-input-menu,
+.autocashout-text,
+.autocashout-menu,
+.game-mode-menu {
+    width: 100%;
+}
+
+.btn-makebet {
+    margin-top:15px ;
+    width: 100%;         
+    height: 40px;
+}
+
+
+
+.bet-input-menu, 
+.autocashout-menu {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;      
+}
+
+
+.bet-input-num, 
+.autocashout-input-num {
+    padding: 0 10px;
+    flex-grow: 1;         
+    min-width: 0;
+
+    height: 40px; 
+    line-height: 40px;
+
+}
+
+.bet-multipliers, 
+.autocashout-plus-minus {
+    flex-shrink: 0;
+    display: flex;
+    gap: 15px;
+
+}
+
+
+.btn-bet, 
+.btn-autocashout {
+    width: 55px;          
+    height: 40px; 
+
+    
+}
+
+.sum-bet-text, 
+.autocashout-text {            
+    display: flex;
+    justify-content: flex-start; 
+    align-items: center;    
+}
+
+.game-mode-menu {
+    display: flex;
+    gap: 15px;
+}
+
+.mode-btn {
+    flex: 1 1 0; 
+    min-width: 0; 
+    height: 40px;
+}
+
+/* game */
+
+.game-window {
+    width: 100%;
+    height: 300px;
+}
+
+.header-multi {
+    width: 100%;
+    height: 50px;
+}
+
+.header-main {
+    width: 100%;
+    height: 50px;
+}
+
+
+
+/* Styling */
+
+.header-main {
+    background-color: #12132b;
+}
+
+.header-multi {
+    background-color: #0c0d20;
+}
+
+.game-window {
+    background-color: #0c0d20;
+}
+
+.line-menu {
+    
+    width: 100%;             
+    height: 4px;             
+    background-color: #1a1b35; 
+    border: none;            
+    margin: 0;               
+}
+
+.btn-makebet {
+    box-shadow: 0px 4px 4px 0 rgb(0 0 0 / 0.25);
+    background-color: #8500cd;
+    border-radius: 10px;
+    font-family: Inter;
+    font-weight: 800;
+    font-size: 12px;
+    line-height: normal;
+    text-align: center;
+    color: #ffffff;
+}
+
+.sum-bet-text {
+    font-family: Inter;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: normal;
+    color: #8b8fad;
+}
+
+.allbtn {
+    background-color: #1E2040;
+    border: 1px solid #2E3158;
+    border-radius: 10px;
+
+    
+
+    color: rgba(255, 255, 255, 0.5);
+
+}
+
+.btn-bet {
+    font-weight: 500;
+    font-size: 12px;
+}
+
+.btn-autocashout {
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.allinput {
+    background-color: #0C0D20;
+    border: 1px solid #2E3158;
+    border-radius: 10px;
+
+    color: rgba(255, 255, 255);
+}
+
+input::placeholder {
+  color: rgba(255, 255, 255, 0.5); /* Цвет вашей подсказки */
+  opacity: 1;    /* Обязательно для iOS Safari и некоторых других браузеров */
+}
+
+.autocashout-text {
+    font-family: Inter;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: normal;
+    color: #8b8fad;
+}
+
+.auto-text-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    user-select: none; 
+}
+
+/* 2. Базовый кастомный чекбокс */
+input[type="checkbox"].btn-checkbox {
+    appearance: none;
+    -webkit-appearance: none; 
+    
+    position: relative !important; 
+    width: 20px;
+    height: 20px;
+    background-color: #1A1B35;
+    border: 1px solid #2E3158;
+    border-radius: 6px;
+    
+    margin: 0;
+    padding: 0;
+    flex-shrink: 0;
+    cursor: pointer;
+    outline: none;
+}
+
+input[type="checkbox"].btn-checkbox:checked::after {
+    content: '';
+    position: absolute;
+    
+
+    top: 45%;
+    left: 50%;
+    
+    width: 4px;
+    height: 9px;
+    
+    border: solid #ffffff;
+    border-width: 0 2px 2px 0; 
+    
+
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+
+.game-mode-menu {
+    background-color: #0c0d20;
+    border-radius: 10px;
+}
+
+.mode-btn {
+    font-family: Inter;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: normal;
+    text-align: center;
+    color: #ffffff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
