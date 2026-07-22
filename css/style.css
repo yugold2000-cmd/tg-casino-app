@@ -42,13 +42,10 @@ body::-webkit-scrollbar {
 
 .header-tg {
     width: 100%;
-    
-    padding-top: var(--tg-safe-area-inset-top, 0px);
-    
-    min-height: calc(50px + var(--tg-safe-area-inset-top, 0px));
+    height: 5%;
 
     /* Задаем цвет фона, который должен заливать верх */
-    background-color: #111122; /* Поставь свой точный HEX цвет */
+    background-color: #0f1027;; /* Поставь свой точный HEX цвет */
 
     display: flex;
     align-items: center;
@@ -173,10 +170,6 @@ body::-webkit-scrollbar {
 
 
 /* Styling */
-
-.header-tg {
-    background-color: #12132b;
-}
 
 .header-main {
     background-color: #12132b;
