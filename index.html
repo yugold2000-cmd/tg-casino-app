@@ -4,10 +4,10 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title></title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-        <link rel="stylesheet" href="css/style.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/home.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
         <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
         <script src="https://telegram.org/js/telegram-web-app.js"></script>
         <script>
@@ -23,80 +23,49 @@
                     tg.disableVerticalSwipes();
                 }
         </script>
-        
     </head>
     <body>
-        <header class="header-tg" style="color: white;">
-                Отступ!
-        </header >
 
-        <header class="header-main" style="color: white;">
-                Шапка  
-        </header >
-                
-        <section class="crashhistory" style="color: white;">
-            иксы!
-            <!-- <div class="btn-bet-history"><button></button></div> -->
+        <header class="header-main" style="color: white">
+            Шапка
+        </header>
+
+        <section class="header-player" style="color: white">
+            Ава и баланс
         </section>
 
-        <main>
-            <div class="game-window" style="color: white;">
-                <div id="pixi-canvas"></div>
-                Игра
-            </div>
+        <div class="promo-img">
+            <img >
+        </div>
+        <span class="text-allgames">Все игры</span>
+        <div class="grid-games">
+            <img src="path/to/image.jpg"
+                alt="Игра" 
+                class="original"
+                onclick="window.location.href = 'pages/games/crash/index.html';">
+            <div class="crash"></div>
+            <div class="plinko"></div>
+            <div class="blackjack"></div>
+        </div>
 
-            <hr class="line-menu ">
-            
-            <div class="bet-menu">
-                <div class="btn-makebet-block">
-                    <button class="btn-makebet">Сделать ставку</button>
-                </div>
-
-                <!-- Bet -->
-                <div class="field-group">
-                    <div class="sum-bet-text">
-                        <span>Сумма ставки</span>
-                    </div>
-                    <div class="bet-input-menu">            
-                        <input type="number" placeholder="0.00" class="allinput bet-input-num"  required>
-                        <div class="bet-multipliers">
-                            <button class="allbtn btn-bet">1/2</button>
-                            <button class="allbtn btn-bet">2x</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- auto cashout (checkbox and buttons) -->
-                <div class="field-group">
-                    <div class="autocashout-text">
-                        <label class="auto-text-checkbox">
-                            <input type="checkbox" class="btn-checkbox">
-                            <span >Автовывод</span>
-                        </label>
-                    </div>
-                    <div class="autocashout-menu">      
-                        <input type="number" placeholder="2.0x" class="allinput autocashout-input-num" disabled>
-                        <div class="autocashout-plus-minus">
-                            <button class="allbtn btn-autocashout" disabled>-</button>
-                            <button class="allbtn btn-autocashout" disabled>+</button>
-                        </div>
-                    </div>
-                </div>
- 
-                <!-- mode (manual or auto mode) -->
-                <div class="game-mode-menu">
-                    <button class="mode-btn">Ручной режим</button>
-                    <button class="mode-btn">Автоматический</button>
-                </div>      
-            </div>
-
-        </main>   
-        
-        <footer>
-            <div class="footerdiv">
-                <p>Футер</p>
-            </div>
-        </footer>
+        <nav class="bottom-nav">
+            <a href="wallet.html" class="nav-item">
+              <i class="fa-solid fa-wallet"></i>
+            </a>
+            <a href="chat.html" class="nav-item">
+              <i class="fa-solid fa-comment-dots"></i>
+            </a>
+            <a href="index.html" class="nav-item">
+              <i class="fa-solid fa-house"></i>
+            </a>
+            <a href="notifications.html" class="nav-item">
+              <i class="fa-solid fa-bell"></i>
+            </a>
+            <a href="menu.html" class="nav-item">
+              <i class="fa-solid fa-bars"></i>
+            </a>
+        </nav>
 
     </body>
 </html>
+
