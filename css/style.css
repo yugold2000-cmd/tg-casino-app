@@ -4,7 +4,7 @@
 
 * {
     font-family: "Inter";
-    background-color: #12132b;
+    background-color: #12132B;
 }
 
 html {
@@ -34,6 +34,8 @@ body {
     padding-top: var(--tg-safe-area-inset-top, 0px);
 }
 
+/* disable scroll */
+
 body::-webkit-scrollbar {
     display: none !important;
     width: 0 !important;
@@ -42,10 +44,9 @@ body::-webkit-scrollbar {
 
 .header-tg {
     width: 100%;
-    height: 3%;
-
+    height: 5%;
     
-    background-color: #12132b;
+    background-color: #0C0A33;
 
     display: flex;
     align-items: center;
@@ -70,6 +71,8 @@ body::-webkit-scrollbar {
     box-sizing: border-box;
 }
 
+
+/* transparency */
 
 .btn-makebet-block,
 .field-group,
@@ -107,13 +110,10 @@ body::-webkit-scrollbar {
     background-color: transparent !important;
 }
 
-
-
-
-
+/* ---- */
 
 .bet-menu {
-    background-color: #0f1027;
+    background-color: #03002A;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -215,33 +215,31 @@ body::-webkit-scrollbar {
 
 
 .header-main {
-    background-color: #12132b;
+    background-color: #0C0A33;
 }
 
 .crashhistory {
-    background-color: #0c0d20;
-}
-
-.header-multi {
-    background-color: #0c0d20;
+    background-color: #070526;
 }
 
 .game-window {
-    background-color: #0c0d20;
+    background-color: #070526;
 }
+
+/* bet menu */
 
 .line-menu {
     
     width: 100%;             
     height: 4px;             
-    background-color: #1a1b35; 
+    background-color: #1C1A42; 
     border: none;            
     margin: 0;               
 }
 
 .btn-makebet {
     box-shadow: 0px 4px 4px 0 rgb(0 0 0 / 0.25);
-    background-color: #8500cd;
+    background-color: #841ABD;
     border-radius: 10px;
     font-family: Inter;
     font-weight: 800;
@@ -261,13 +259,12 @@ body::-webkit-scrollbar {
     font-weight: 700;
     font-size: 12px;
     line-height: normal;
-    color: #8b8fad;
+    color: rgba(255, 255, 255, 0.55);
     transition: 0;
 }
 
 .allbtn {
     background-color: #1E2040;
-    border: 1px solid #2E3158;
     border-radius: 10px;
 
     
@@ -277,16 +274,16 @@ body::-webkit-scrollbar {
 }
 
 .allinput {
-    background-color: #0C0D20;
-    border: 1px solid #2E3158;
+    background-color: #0C0A33;
     border-radius: 10px;
 
     color: rgba(255, 255, 255);
 }
 
 input::placeholder {
-  color: rgba(255, 255, 255, 0.5); /* Цвет вашей подсказки */
-  opacity: 1;    /* Обязательно для iOS Safari и некоторых других браузеров */
+  color: rgba(255, 255, 255, 0.3); 
+  font-weight: 400;
+  opacity: 1;    
 }
 
 .btn-autocashout {
@@ -299,7 +296,7 @@ input::placeholder {
     font-weight: 700;
     font-size: 12px;
     line-height: normal;
-    color: #8b8fad;
+    color: rgba(255, 255, 255, 0.55);
 }
 
 .auto-text-checkbox {
@@ -319,7 +316,6 @@ input[type="checkbox"].btn-checkbox {
     width: 24px;
     height: 24px;
     background-color: #1A1B35;
-    border: 1px solid #2E3158;
     border-radius: 6px;
     
     margin: 0;
